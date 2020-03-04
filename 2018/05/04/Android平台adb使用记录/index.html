@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="常用命令安装&amp;amp;卸载 设备列表 db devices 安装apk adb install xxxx.apk 指定模拟器安装apk adb -s 79e4d661 install  app/build/outputs/apk/app-release.apk 卸载包 adb uninstall com.codepushexample  模拟器截图12adb shell /system/bin/s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android平台adb工具使用记录">
+<meta property="og:url" content="http://yoursite.com/2018/05/04/Android平台adb使用记录/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="常用命令安装&amp;amp;卸载 设备列表 db devices 安装apk adb install xxxx.apk 指定模拟器安装apk adb -s 79e4d661 install  app/build/outputs/apk/app-release.apk 卸载包 adb uninstall com.codepushexample  模拟器截图12adb shell /system/bin/s">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-01T14:25:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android平台adb工具使用记录">
+<meta name="twitter:description" content="常用命令安装&amp;amp;卸载 设备列表 db devices 安装apk adb install xxxx.apk 指定模拟器安装apk adb -s 79e4d661 install  app/build/outputs/apk/app-release.apk 卸载包 adb uninstall com.codepushexample  模拟器截图12adb shell /system/bin/s">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/04/Android平台adb使用记录/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Android平台adb工具使用记录 | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/04/Android平台adb使用记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android平台adb工具使用记录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-04 00:00:00" itemprop="dateCreated datePublished" datetime="2018-05-04T00:00:00+08:00">2018-05-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-01 22:25:45" itemprop="dateModified" datetime="2018-09-01T22:25:45+08:00">2018-09-01</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="安装-amp-卸载"><a href="#安装-amp-卸载" class="headerlink" title="安装&amp;卸载"></a>安装&amp;卸载</h2><ul>
+<li>设备列表 <code>db devices</code></li>
+<li>安装apk <code>adb install xxxx.apk</code></li>
+<li>指定模拟器安装apk <code>adb -s 79e4d661 install  app/build/outputs/apk/app-release.apk</code></li>
+<li>卸载包 <code>adb uninstall com.codepushexample</code></li>
+</ul>
+<h2 id="模拟器截图"><a href="#模拟器截图" class="headerlink" title="模拟器截图"></a>模拟器截图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell /system/bin/screencap -p /sdcard/screenshot.png</span><br><span class="line">adb pull /sdcard/screenshot.png /Users/xx/Desktop</span><br></pre></td></tr></table></figure>
+<h1 id="附属完整帮助"><a href="#附属完整帮助" class="headerlink" title="附属完整帮助"></a>附属完整帮助</h1><p>adb命令非常强大，完整的命令帮助信息如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line">didi@bogon:~/Code/App/code-push-example/android » adb --help                                                                                                                                     1 ↵</span><br><span class="line">Android Debug Bridge version 1.0.39</span><br><span class="line">Version 0.0.1-4500957</span><br><span class="line">Installed as /Users/didi/Library/Android/sdk/platform-tools/adb</span><br><span class="line"></span><br><span class="line">global options:</span><br><span class="line"> -a         listen on all network interfaces, not just localhost</span><br><span class="line"> -d         use USB device (error if multiple devices connected)</span><br><span class="line"> -e         use TCP/IP device (error if multiple TCP/IP devices available)</span><br><span class="line"> -s SERIAL  use device with given serial (overrides $ANDROID_SERIAL)</span><br><span class="line"> -t ID      use device with given transport id</span><br><span class="line"> -H         name of adb server host [default=localhost]</span><br><span class="line"> -P         port of adb server [default=5037]</span><br><span class="line"> -L SOCKET  listen on given socket for adb server [default=tcp:localhost:5037]</span><br><span class="line"></span><br><span class="line">general commands:</span><br><span class="line"> devices [-l]             list connected devices (-l for long output)</span><br><span class="line"> help                     show this help message</span><br><span class="line"> version                  show version num</span><br><span class="line"></span><br><span class="line">networking:</span><br><span class="line"> connect HOST[:PORT]      connect to a device via TCP/IP [default port=5555]</span><br><span class="line"> disconnect [HOST[:PORT]]</span><br><span class="line">     disconnect from given TCP/IP device [default port=5555], or all</span><br><span class="line"> forward --list           list all forward socket connections</span><br><span class="line"> forward [--no-rebind] LOCAL REMOTE</span><br><span class="line">     forward socket connection using:</span><br><span class="line">       tcp:&lt;port&gt; (&lt;local&gt; may be &quot;tcp:0&quot; to pick any open port)</span><br><span class="line">       localabstract:&lt;unix domain socket name&gt;</span><br><span class="line">       localreserved:&lt;unix domain socket name&gt;</span><br><span class="line">       localfilesystem:&lt;unix domain socket name&gt;</span><br><span class="line">       dev:&lt;character device name&gt;</span><br><span class="line">       jdwp:&lt;process pid&gt; (remote only)</span><br><span class="line"> forward --remove LOCAL   remove specific forward socket connection</span><br><span class="line"> forward --remove-all     remove all forward socket connections</span><br><span class="line"> ppp TTY [PARAMETER...]   run PPP over USB</span><br><span class="line"> reverse --list           list all reverse socket connections from device</span><br><span class="line"> reverse [--no-rebind] REMOTE LOCAL</span><br><span class="line">     reverse socket connection using:</span><br><span class="line">       tcp:&lt;port&gt; (&lt;remote&gt; may be &quot;tcp:0&quot; to pick any open port)</span><br><span class="line">       localabstract:&lt;unix domain socket name&gt;</span><br><span class="line">       localreserved:&lt;unix domain socket name&gt;</span><br><span class="line">       localfilesystem:&lt;unix domain socket name&gt;</span><br><span class="line"> reverse --remove REMOTE  remove specific reverse socket connection</span><br><span class="line"> reverse --remove-all     remove all reverse socket connections from device</span><br><span class="line"></span><br><span class="line">file transfer:</span><br><span class="line"> push [--sync] LOCAL... REMOTE</span><br><span class="line">     copy local files/directories to device</span><br><span class="line">     --sync: only push files that are newer on the host than the device</span><br><span class="line"> pull [-a] REMOTE... LOCAL</span><br><span class="line">     copy files/dirs from device</span><br><span class="line">     -a: preserve file timestamp and mode</span><br><span class="line"> sync [system|vendor|oem|data|all]</span><br><span class="line">     sync a local build from $ANDROID_PRODUCT_OUT to the device (default all)</span><br><span class="line">     -l: list but don&apos;t copy</span><br><span class="line"></span><br><span class="line">shell:</span><br><span class="line"> shell [-e ESCAPE] [-n] [-Tt] [-x] [COMMAND...]</span><br><span class="line">     run remote shell command (interactive shell if no command given)</span><br><span class="line">     -e: choose escape character, or &quot;none&quot;; default &apos;~&apos;</span><br><span class="line">     -n: don&apos;t read from stdin</span><br><span class="line">     -T: disable PTY allocation</span><br><span class="line">     -t: force PTY allocation</span><br><span class="line">     -x: disable remote exit codes and stdout/stderr separation</span><br><span class="line"> emu COMMAND              run emulator console command</span><br><span class="line"></span><br><span class="line">app installation:</span><br><span class="line"> install [-lrtsdg] PACKAGE</span><br><span class="line"> install-multiple [-lrtsdpg] PACKAGE...</span><br><span class="line">     push package(s) to the device and install them</span><br><span class="line">     -l: forward lock application</span><br><span class="line">     -r: replace existing application</span><br><span class="line">     -t: allow test packages</span><br><span class="line">     -s: install application on sdcard</span><br><span class="line">     -d: allow version code downgrade (debuggable packages only)</span><br><span class="line">     -p: partial application install (install-multiple only)</span><br><span class="line">     -g: grant all runtime permissions</span><br><span class="line"> uninstall [-k] PACKAGE</span><br><span class="line">     remove this app package from the device</span><br><span class="line">     &apos;-k&apos;: keep the data and cache directories</span><br><span class="line"></span><br><span class="line">backup/restore:</span><br><span class="line">   to show usage run &quot;adb shell bu help&quot;</span><br><span class="line"></span><br><span class="line">debugging:</span><br><span class="line"> bugreport [PATH]</span><br><span class="line">     write bugreport to given PATH [default=bugreport.zip];</span><br><span class="line">     if PATH is a directory, the bug report is saved in that directory.</span><br><span class="line">     devices that don&apos;t support zipped bug reports output to stdout.</span><br><span class="line"> jdwp                     list pids of processes hosting a JDWP transport</span><br><span class="line"> logcat                   show device log (logcat --help for more)</span><br><span class="line"></span><br><span class="line">security:</span><br><span class="line"> disable-verity           disable dm-verity checking on userdebug builds</span><br><span class="line"> enable-verity            re-enable dm-verity checking on userdebug builds</span><br><span class="line"> keygen FILE</span><br><span class="line">     generate adb public/private key; private key stored in FILE,</span><br><span class="line">     public key stored in FILE.pub (existing files overwritten)</span><br><span class="line"></span><br><span class="line">scripting:</span><br><span class="line"> wait-for[-TRANSPORT]-STATE</span><br><span class="line">     wait for device to be in the given state</span><br><span class="line">     State: device, recovery, sideload, or bootloader</span><br><span class="line">     Transport: usb, local, or any [default=any]</span><br><span class="line"> get-state                print offline | bootloader | device</span><br><span class="line"> get-serialno             print &lt;serial-number&gt;</span><br><span class="line"> get-devpath              print &lt;device-path&gt;</span><br><span class="line"> remount</span><br><span class="line">     remount /system, /vendor, and /oem partitions read-write</span><br><span class="line"> reboot [bootloader|recovery|sideload|sideload-auto-reboot]</span><br><span class="line">     reboot the device; defaults to booting system image but</span><br><span class="line">     supports bootloader and recovery too. sideload reboots</span><br><span class="line">     into recovery and automatically starts sideload mode,</span><br><span class="line">     sideload-auto-reboot is the same but reboots after sideloading.</span><br><span class="line"> sideload OTAPACKAGE      sideload the given full OTA package</span><br><span class="line"> root                     restart adbd with root permissions</span><br><span class="line"> unroot                   restart adbd without root permissions</span><br><span class="line"> usb                      restart adb server listening on USB</span><br><span class="line"> tcpip PORT               restart adb server listening on TCP on PORT</span><br><span class="line"></span><br><span class="line">internal debugging:</span><br><span class="line"> start-server             ensure that there is a server running</span><br><span class="line"> kill-server              kill the server if it is running</span><br><span class="line"> reconnect                kick connection from host side to force reconnect</span><br><span class="line"> reconnect device         kick connection from device side to force reconnect</span><br><span class="line"> reconnect offline        reset offline/unauthorized devices to force reconnect</span><br><span class="line"></span><br><span class="line">environment variables:</span><br><span class="line"> $ADB_TRACE</span><br><span class="line">     comma-separated list of debug info to log:</span><br><span class="line">     all,adb,sockets,packets,rwx,usb,sync,sysdeps,transport,jdwp</span><br><span class="line"> $ADB_VENDOR_KEYS         colon-separated list of keys (files or directories)</span><br><span class="line"> $ANDROID_SERIAL          serial number to connect to (see -s)</span><br><span class="line"> $ANDROID_LOG_TAGS        tags to be used by logcat (see logcat --help)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/04/ReactNative安卓构建Release包/" rel="next" title="ReactNative安卓构建Release包">
+                <i class="fa fa-chevron-left"></i> ReactNative安卓构建Release包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/08/VSCode调试Typescript项目/" rel="prev" title="VSCode调试Typescript项目">
+                VSCode调试Typescript项目 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">186</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-amp-卸载"><span class="nav-number">1.1.</span> <span class="nav-text">安装&amp;卸载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟器截图"><span class="nav-number">1.2.</span> <span class="nav-text">模拟器截图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附属完整帮助"><span class="nav-number">2.</span> <span class="nav-text">附属完整帮助</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Javascript-compiler-introductionJavascript编译器1. Closure CompilerWhat are the benefits of using Closure Compiler? Efficiency. The Closure Compiler reduces the size of your JavaScript files and makes th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript-compiler-introduction">
+<meta property="og:url" content="http://yoursite.com/2016/01/20/Javascript-compiler-introduction/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="Javascript-compiler-introductionJavascript编译器1. Closure CompilerWhat are the benefits of using Closure Compiler? Efficiency. The Closure Compiler reduces the size of your JavaScript files and makes th">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-30T03:35:08.302Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript-compiler-introduction">
+<meta name="twitter:description" content="Javascript-compiler-introductionJavascript编译器1. Closure CompilerWhat are the benefits of using Closure Compiler? Efficiency. The Closure Compiler reduces the size of your JavaScript files and makes th">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/01/20/Javascript-compiler-introduction/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Javascript-compiler-introduction | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Javascript-compiler-introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Javascript-compiler-introduction
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-30 11:35:08" itemprop="dateModified" datetime="2018-08-30T11:35:08+08:00">2018-08-30</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Javascript-compiler-introduction"><a href="#Javascript-compiler-introduction" class="headerlink" title="Javascript-compiler-introduction"></a>Javascript-compiler-introduction</h1><h3 id="Javascript编译器"><a href="#Javascript编译器" class="headerlink" title="Javascript编译器"></a>Javascript编译器</h3><h4 id="1-Closure-Compiler"><a href="#1-Closure-Compiler" class="headerlink" title="1. Closure Compiler"></a>1. <a href="https://developers.google.com/closure/compiler/?csw=1" target="_blank" rel="noopener">Closure Compiler</a></h4><h5 id="What-are-the-benefits-of-using-Closure-Compiler"><a href="#What-are-the-benefits-of-using-Closure-Compiler" class="headerlink" title="What are the benefits of using Closure Compiler?"></a>What are the benefits of using Closure Compiler?</h5><ul>
+<li><p>Efficiency. The Closure Compiler reduces the size of your JavaScript files and makes them more efficient, helping your application to load faster and reducing your bandwidth needs.</p>
+</li>
+<li><p>Code checking. The Closure Compiler provides warnings for illegal JavaScript and warnings for potentially dangerous operations, helping you to produce JavaScript that is less buggy and easier to maintain.</p>
+</li>
+</ul>
+<h5 id="How-can-I-use-the-Closure-Compiler"><a href="#How-can-I-use-the-Closure-Compiler" class="headerlink" title="How can I use the Closure Compiler?"></a>How can I use the Closure Compiler?</h5><ul>
+<li>An open source Java application that you can run from the command line.</li>
+<li>A simple web application.</li>
+<li>A RESTful API.</li>
+</ul>
+<h5 id="How-do-I-start"><a href="#How-do-I-start" class="headerlink" title="How do I start"></a>How do I start</h5><ul>
+<li>Work through the <a href="https://developers.google.com/closure/compiler/docs/gettingstarted_ui" target="_blank" rel="noopener">UI Compiler Introduce</a> ＝》<a href="http://closure-compiler.appspot.com/home" target="_blank" rel="noopener">UI Compiler</a></li>
+<li>Work through the <a href="https://developers.google.com/closure/compiler/docs/gettingstarted_api" target="_blank" rel="noopener">API Hello World</a> ＝》<a href="https://developers.google.com/closure/compiler/docs/api-tutorial1" target="_blank" rel="noopener">Closure Compiler API Config</a></li>
+<li><a href="https://dl.google.com/closure-compiler/compiler-latest.zip" target="_blank" rel="noopener">Download the appliction</a></li>
+<li><a href="https://developers.google.com/closure/compiler/docs/gettingstarted_app" target="_blank" rel="noopener">Getting Started with the Closure Compiler Application</a></li>
+<li><a href="https://developers.google.com/closure/compiler/docs/api-tutorial3" target="_blank" rel="noopener">Advanced Compilation and Externs</a></li>
+</ul>
+<h4 id="2-YUI-Compressor"><a href="#2-YUI-Compressor" class="headerlink" title="2. YUI Compressor"></a>2. <a href="https://github.com/yui" target="_blank" rel="noopener">YUI Compressor</a></h4><ol>
+<li><a href="https://github.com/yui/yuicompressor/blob/master/README.md" target="_blank" rel="noopener">Download YUI Compressor</a></li>
+<li><a href="https://github.com/yui/yuicompressor/blob/master/README.md" target="_blank" rel="noopener">Documents</a></li>
+<li><code>java -jar yuicompressor-x.y.z.jar myfile.js -o myfile-min.js</code> </li>
+<li><code>java -jar yuicompressor-x.y.z.jar myfile.js -o myfile-min.js --charset utf-8</code></li>
+</ol>
+<p><a href="http://yui.github.io/yuicompressor/" target="_blank" rel="noopener">yuicompressor</a></p>
+<h4 id="options"><a href="#options" class="headerlink" title="options"></a>options</h4><pre><code>java -jar yuicompressor-x.y.z.jar
+Usage: java -jar yuicompressor-x.y.z.jar [options] [input file]
+
+  Global Options
+    -h, --help                Displays this information
+    --type &amp;lt;js|css&amp;gt;           Specifies the type of the input file
+    --charset &amp;lt;charset&amp;gt;       Read the input file using &amp;lt;charset&amp;gt;
+    --line-break &amp;lt;column&amp;gt;     Insert a line break after the specified column number
+    -v, --verbose             Display informational messages and warnings
+    -o &amp;lt;file&amp;gt;                 Place the output into &lt;file&gt; or a file pattern.
+                              Defaults to stdout.
+
+  JavaScript Options
+    --nomunge                 Minify only, do not obfuscate
+    --preserve-semi           Preserve all semicolons
+    --disable-optimizations   Disable all micro optimizations
+
+GLOBAL OPTIONS
+
+  -h, --help
+      Prints help on how to use the YUI Compressor
+
+  --line-break
+      Some source control tools don&apos;t like files containing lines longer than,
+      say 8000 characters. The linebreak option is used in that case to split
+      long lines after a specific column. It can also be used to make the code
+      more readable, easier to debug (especially with the MS Script Debugger)
+      Specify 0 to get a line break after each semi-colon in JavaScript, and
+      after each rule in CSS.
+
+  --type js|css
+      The type of compressor (JavaScript or CSS) is chosen based on the
+      extension of the input file name (.js or .css) This option is required
+      if no input file has been specified. Otherwise, this option is only
+      required if the input file extension is neither &apos;js&apos; nor &apos;css&apos;.
+
+  --charset character-set
+      If a supported character set is specified, the YUI Compressor will use it
+      to read the input file. Otherwise, it will assume that the platform&apos;s
+      default character set is being used. The output file is encoded using
+      the same character set.
+
+  -o outfile
+
+      Place output in file outfile. If not specified, the YUI Compressor will
+      default to the standard output, which you can redirect to a file.
+      Supports a filter syntax for expressing the output pattern when there are
+      multiple input files.  ex:
+          java -jar yuicompressor.jar -o &apos;.css$:-min.css&apos; *.css
+      ... will minify all .css files and save them as -min.css
+
+  -v, --verbose
+      Display informational messages and warnings.
+
+JAVASCRIPT ONLY OPTIONS
+
+  --nomunge
+      Minify only. Do not obfuscate local symbols.
+
+  --preserve-semi
+      Preserve unnecessary semicolons (such as right before a &apos;}&apos;) This option
+      is useful when compressed code has to be run through JSLint (which is the
+      case of YUI for example)
+
+  --disable-optimizations
+      Disable all the built-in micro optimizations.
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/20/Webapp-development-summary/" rel="next" title="Webapp-development-summary">
+                <i class="fa fa-chevron-left"></i> Webapp-development-summary
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/20/Homebrew-using-record/" rel="prev" title="Homebrew-using-record">
+                Homebrew-using-record <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">218</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Javascript-compiler-introduction"><span class="nav-number">1.</span> <span class="nav-text">Javascript-compiler-introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Javascript编译器"><span class="nav-number">1.0.1.</span> <span class="nav-text">Javascript编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Closure-Compiler"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">1. Closure Compiler</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#What-are-the-benefits-of-using-Closure-Compiler"><span class="nav-number">1.0.1.1.1.</span> <span class="nav-text">What are the benefits of using Closure Compiler?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#How-can-I-use-the-Closure-Compiler"><span class="nav-number">1.0.1.1.2.</span> <span class="nav-text">How can I use the Closure Compiler?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#How-do-I-start"><span class="nav-number">1.0.1.1.3.</span> <span class="nav-text">How do I start</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-YUI-Compressor"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">2. YUI Compressor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#options"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">options</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

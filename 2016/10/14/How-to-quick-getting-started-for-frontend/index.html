@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="How-to-quick-getting-started-for-frontend 不经意已一年多不专注前端方面的开发工作，这一年前端方面的技术又是新天地，偶然接到内部团队邀请我给他们做一个前端的讲座，希望能帮助他们快速、且深刻了解前端这个行业以及行业内的知识，这可真有点让我为难，由于不爱写PPT，遂成此文。 [toc] 乱花渐欲迷人眼2015年前端界可谓热闹非凡  Google的Angularj">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How-to-quick-getting-started-for-frontend">
+<meta property="og:url" content="http://yoursite.com/2016/10/14/How-to-quick-getting-started-for-frontend/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="How-to-quick-getting-started-for-frontend 不经意已一年多不专注前端方面的开发工作，这一年前端方面的技术又是新天地，偶然接到内部团队邀请我给他们做一个前端的讲座，希望能帮助他们快速、且深刻了解前端这个行业以及行业内的知识，这可真有点让我为难，由于不爱写PPT，遂成此文。 [toc] 乱花渐欲迷人眼2015年前端界可谓热闹非凡  Google的Angularj">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FsbBgHxrPIBGLIdlz8ltcAPdPAR2">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FtaTfNQWaur21stvB_CtHDQlFIWz">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FlmWlAxHPDC9EqrbLUekg65DeTAM">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FvJ8YUD663sR-hwOhY2Bfxu1i0pt">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FhZN0uT-Vl6epNzMQ22dD5SE2Afz">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FjecujBYDUoyjKZyVUZufTw1rp4r">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FmnKHGCJQh5uEeRV-NMq13WjF7Y0">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FhpHTud0-z3kItPl-UscHdda_rEw">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/Fnh1WKOvGubNiOYJltXjL70BnyGw">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FuUWRJUAWWrQr49mSjCI2grED2og">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/Fl-bMAQaUuAImzqQSwKrDv6Hl2tR">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FtQkXXldTvtAr3WUp_WBlI5EeoCQ">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FpAEWWc40kOtoZmfEWum-Orbn39r">
+<meta property="og:updated_time" content="2018-08-30T03:35:08.288Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How-to-quick-getting-started-for-frontend">
+<meta name="twitter:description" content="How-to-quick-getting-started-for-frontend 不经意已一年多不专注前端方面的开发工作，这一年前端方面的技术又是新天地，偶然接到内部团队邀请我给他们做一个前端的讲座，希望能帮助他们快速、且深刻了解前端这个行业以及行业内的知识，这可真有点让我为难，由于不爱写PPT，遂成此文。 [toc] 乱花渐欲迷人眼2015年前端界可谓热闹非凡  Google的Angularj">
+<meta name="twitter:image" content="http://7xp4um.com1.z0.glb.clouddn.com/FsbBgHxrPIBGLIdlz8ltcAPdPAR2">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/14/How-to-quick-getting-started-for-frontend/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>How-to-quick-getting-started-for-frontend | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/14/How-to-quick-getting-started-for-frontend/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">How-to-quick-getting-started-for-frontend
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-10-14 00:00:00" itemprop="dateCreated datePublished" datetime="2016-10-14T00:00:00+08:00">2016-10-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-30 11:35:08" itemprop="dateModified" datetime="2018-08-30T11:35:08+08:00">2018-08-30</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>How-to-quick-getting-started-for-frontend</p>
+<p>不经意已一年多不专注前端方面的开发工作，这一年前端方面的技术又是新天地，偶然接到内部团队邀请我给他们做一个前端的讲座，希望能帮助他们快速、且深刻了解前端这个行业以及行业内的知识，这可真有点让我为难，由于不爱写PPT，遂成此文。</p>
+<p>[toc]</p>
+<h1 id="乱花渐欲迷人眼"><a href="#乱花渐欲迷人眼" class="headerlink" title="乱花渐欲迷人眼"></a>乱花渐欲迷人眼</h1><p>2015年前端界可谓热闹非凡</p>
+<ol>
+<li>Google的<code>Angularjs2</code>正式版迟迟未出，牵动着无数前端工程师的心。</li>
+<li>Facebook的<code>Reactjs</code>像一记猛药，让前端工程师High得不能自已。</li>
+<li>同时Facebook的<code>ReactNative</code>让众多<code>iOS</code>，<code>Android</code>工程师畏惧。</li>
+<li><a href="http://webcomponents.org/" target="_blank" rel="noopener">Web Components</a> 也要跟前面两位一争高下。</li>
+<li>国内的<code>Vue.js</code> 这颗新星也是袅袅升起。</li>
+</ol>
+<p>微信也在最近强势推出<code>应用号</code>，种种迹象表明，Web前端，特别是移动端的Web前端开发将迎来另一番天地。</p>
+<p><a href="http://www.imooc.com/article/3840" target="_blank" rel="noopener">近几年前端发展概况</a></p>
+<p><strong>2015年</strong></p>
+<ol>
+<li>Ecma国际大会宣布正式批准<code>ECMA-262第6版</code>，即<code>ECMAScript 2015</code>。<a href="https://www.zhihu.com/question/31403339" target="_blank" rel="noopener">ECMAScript6对Web开发的影响</a></li>
+<li>随着HTML5的标准在14年10月由W3C发布为正式推荐标准，15年HTML5的发展也是飞速向前，<a href="http://games.qq.com/a/20150921/050870.htm" target="_blank" rel="noopener">2015年有80%的App基于HTML5</a></li>
+<li><code>Flash</code>在HTML5的冲击下，各大厂商和浏览器商都陆续声明不再使用这一技术。<a href="http://www.html5china.com/news/201110302301.html" target="_blank" rel="noopener">参考</a></li>
+<li><code>Nodejs</code>和<code>io.js</code>正式合并。</li>
+</ol>
+<p>多年前的<code>JQuery</code>，<code>Extjs</code>，<code>Dojo</code>，<code>Requirejs</code>，<code>Seajs</code>如火如荼，现如今也是不温不火，技术迭代如此之快，一不小心就迷失了。</p>
+<h1 id="万变不离其中"><a href="#万变不离其中" class="headerlink" title="万变不离其中"></a>万变不离其中</h1><p>不论这个行业发展有多迷人，新出的技术又是多么的牛逼，三板斧<code>CSS+HTML+Javascript</code>永远是铁打的基石，当然随着行业发展，三板斧本身也是在发展中，所以对前端新技术的追求基本上都是在这三者身上，像如日中天的HTML5，CSS3以及JS语言本身的发展。还有<code>浏览器</code>以及<code>Webview</code>这两个也非常重要，他们就好比后端工程师要熟悉<code>Unix环境</code>一个道理。当然大部分前端工程师在还不需要过多去琢磨这两者。</p>
+<p>其他的各种吊炸天的技术框架都是浅尝，尝多了发现他们要解决的核心问题是</p>
+<ol>
+<li>前后端分离</li>
+<li>Web工程化</li>
+<li>Web性能</li>
+</ol>
+<p>再抽象就是两个问题</p>
+<ol>
+<li>工程化</li>
+<li>产品性能</li>
+</ol>
+<p>因为前后端分离的目的是为了提升开发效率和维护效率这应该属于工程的范畴，而引入工程化的概念核心目的就是提升效率，为达目的过程中会去解耦合，减依赖，管理依赖，组件化，即插即用等概念。</p>
+<p>当然这类问题不仅仅是前端，很大程度上后端很多技术做很多工作都是致力于去解决这两类问题。</p>
+<p>所以当你对这三板斧非常熟悉的时候，就能很好的去驾驭前端的<code>乱花渐欲迷人眼</code>，否则就是空谈。</p>
+<h1 id="三板斧"><a href="#三板斧" class="headerlink" title="三板斧"></a>三板斧</h1><ol>
+<li>HTML：网页的骨架。</li>
+<li>CSS：网页多彩的源泉。</li>
+<li>Javascript：灵魂，没有他只是一副空皮囊</li>
+</ol>
+<p>下面就简单的来介绍这三板斧</p>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p>超文本标记语言（英文：HyperText Markup Language，HTML）是为“网页创建和其它可在网页浏览器中看到的信息”设计的一种标记语言。HTML被用来结构化信息——例如标题、段落和列表等等，也可用来在一定程度上描述文档的外观和语义。1982年由蒂姆·伯纳斯-李创建，由IETF用简化的SGML（标准通用标记语言）语法进行进一步发展的HTML，后来成为国际标准，由万维网联盟（W3C）维护。</p>
+<p>1980年起源于一个物理学家的项目，当时只有少量的标签，直到1993年的时候还是大学生马克·安德森在他的Mosaic浏览器加入<code>&lt;img&gt;</code>标记，至此HTML添加了越来越多的标签。更加丰富起来。</p>
+<p><a href="https://zh.wikipedia.org/wiki/HTML#.E5.8F.91.E5.B1.95.E5.8E.86.E5.8F.B2" target="_blank" rel="noopener">维基百科-HTML</a></p>
+<h3 id="HTML到底是什么"><a href="#HTML到底是什么" class="headerlink" title="HTML到底是什么"></a>HTML到底是什么</h3><p>HTML就是标记语言，换句话说就是 <strong>普通</strong> 文本，只不过 <strong>浏览器</strong> 赋予了它神奇力量。</p>
+<p>就像<code>Markdown</code>一样，也是标记语言，他会被Markdown编辑器赋予优美的样式，同时在特定网页或者编辑器上打开的时候展示出来而已。</p>
+<h3 id="浏览器如何解析HTML"><a href="#浏览器如何解析HTML" class="headerlink" title="浏览器如何解析HTML"></a>浏览器如何解析HTML</h3><p>当我们在浏览器地址栏输入网址按下<code>Enter</code>时候，浏览器会发出一个<code>HTTP</code>请求，然后DNS解析找到对应的服务器IP地址，等一系列过程，最终这个请求会响应带有标记语言的文档，可能是<code>.html</code>后缀，也可能是其他，反正在<code>Respoonse</code>的头部会是<code>content-type:text/html; charset=UTF-8</code></p>
+<p>这个过程还可以很细化，也有很多策略。<a href="http://aosabook.org/en/posa/high-performance-networking-in-chrome.html" target="_blank" rel="noopener">感兴趣戳这里</a></p>
+<p>然后浏览器会解析该<code>特定文本内的</code>内容，第一句话是类似<code>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</code>这句话是告诉浏览器该文档使用的<code>HTML</code>是哪个版本，浏览器会用对应的方式来渲染，这就是过去IE等浏览器会有诸如</p>
+<ol>
+<li>标准模式</li>
+<li>怪异模式</li>
+<li>准标准模式</li>
+<li>…</li>
+</ol>
+<p>现代浏览器都采用HTML5的标准头部<code>&lt;!DOCTYPE html&gt;&lt;html lang=&quot;zh&quot;&gt;</code>就这一步省去了好多浏览器兼容的麻烦。当然了，互联网产品目前Web前端在PC端的兼容性少很多了，我们可以很大胆的说不兼容IE8及以下，传统的企业Web产品就不评论，很多还在支持陈旧的IE6等，这类不与时俱进的暂不讨论。</p>
+<p>然后遇到<code>script</code>标签会再次发起<code>HTTP</code>下载对应的<code>Javascript</code>，遇到<code>link</code>会再次发起<code>http</code>请求<code>css</code>文件，最终将这三者水乳交融的产物呈现给大家就是非常nice的页面。</p>
+<p>这个过程可能涉及到浏览器重绘和重新渲染。<a href="http://coolshell.cn/articles/9666.html" target="_blank" rel="noopener">感兴趣戳这里</a></p>
+<h3 id="HTML核心"><a href="#HTML核心" class="headerlink" title="HTML核心"></a>HTML核心</h3><p>HTML核心就是各类<code>TAG</code>俗称标签或者元素，HTML5的标签总览</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>标签</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文档类型宣告</td>
+<td>&lt;!DOCTYPE html&gt;</td>
+</tr>
+<tr>
+<td>根元素元素</td>
+<td>html</td>
+</tr>
+<tr>
+<td>META元素</td>
+<td>head、 title、base、link、meta、style</td>
+</tr>
+<tr>
+<td>部件元素</td>
+<td>body、section、nav、article、aside、h1、 h2、 h3、h4、 h5、 h6、hgroup、header、footer、address</td>
+</tr>
+<tr>
+<td>分组内容元素</td>
+<td>p、hr、br、pre、blockquote、ol、ul、li、dl、dt、dd、figure、figcaption、div</td>
+</tr>
+<tr>
+<td>文本层次语义元素</td>
+<td>a、em、strong、small、cite、q、dfn、abbr、time、code、var、samp、kbd、sub、sups、i、b、mark、ruby、rt、rp、bdo、span</td>
+</tr>
+<tr>
+<td>编辑元素</td>
+<td>ins、del</td>
+</tr>
+<tr>
+<td>嵌入内容元素</td>
+<td>img、iframe、embed、object、param、video、audio、source、canvas、map、area</td>
+</tr>
+<tr>
+<td>表格元素</td>
+<td>table、caption、colgroup、col、tbody、thread、tfoot、tr、td、th</td>
+</tr>
+<tr>
+<td>表单元素</td>
+<td>form、fieldset、legend、label、button、select、datalist、optgroup、option、textarea、keygen、output、progress、meter</td>
+</tr>
+<tr>
+<td>互动元素</td>
+<td>details、summary、command、menu</td>
+</tr>
+<tr>
+<td>脚本元素</td>
+<td>script、noscript</td>
+</tr>
+</tbody>
+</table>
+<p><a href="http://www.metsky.com/archives/413.html" target="_blank" rel="noopener">参考文章</a></p>
+<p>HTML很多新的标签以及标签属性比如<code>audio</code>，<code>vedio</code>，<code>nav</code>，<code>footer</code>等元素都能极大的加快开发效率。<br><a href="http://www.daqianduan.com/2857.html" target="_blank" rel="noopener">参考文章</a></p>
+<h3 id="HTML展现分类"><a href="#HTML展现分类" class="headerlink" title="HTML展现分类"></a>HTML展现分类</h3><p>HTML元素按照展现分为块元素(block element)和内联元素(inline element)也叫行内元素。当然还有<code>inline-block</code></p>
+<h4 id="块级元素"><a href="#块级元素" class="headerlink" title="块级元素"></a>块级元素</h4><p>一般是其他元素的容器，能容纳其他块元素和行内元素，块元素好比个四方块，里边用来放其他元素，默认情况下</p>
+<p>主要特点</p>
+<ol>
+<li>独占浏览器一行</li>
+<li>总是在新行上开始</li>
+<li>高度、行高以及内外边距都是可控制的。</li>
+<li>宽度默认100%，除非设定宽度。</li>
+<li>它可以容纳内联元素和其他块元素</li>
+</ol>
+<p>常见的块级元素有</p>
+<ol>
+<li><code>div</code></li>
+<li><code>p</code></li>
+<li><code>h1~h6</code></li>
+<li><code>hr</code></li>
+<li><code>form</code></li>
+<li>…</li>
+</ol>
+<h4 id="行内元素"><a href="#行内元素" class="headerlink" title="行内元素"></a>行内元素</h4><p>一般都是基于语义级(semantic)的基本元素。内联元素只能容纳文本或者其他内联元素，常见内联元素有a和span。 </p>
+<p>主要特点</p>
+<ol>
+<li>和其他元素都在一行上</li>
+<li>高，行高及外边距和内边距不可改变</li>
+<li>宽度就是它的文字或图片的宽度，不可改变</li>
+<li>内联元素只能容纳文本或者其他内联元素</li>
+</ol>
+<blockquote>
+<p>元素类型可以通过<code>display</code>属性指定。</p>
+</blockquote>
+<h4 id="inline-block"><a href="#inline-block" class="headerlink" title="inline-block"></a>inline-block</h4><p><code>inline-block</code> 的元素既具有 <code>block</code> 元素可以设置宽高的特性，同时又具有 inline 元素默认不换行的特性。当然不仅仅是这些特性，比如 inline-block 元素也可以设置 vertical-align 属性。</p>
+<p>简而言之：inline-block 后的元素就是一个格式化为行内元素的块容器( Block container )</p>
+<p><a href="http://ued.taobao.org/blog/2012/08/inline-block/" target="_blank" rel="noopener">inline-block前世今生</a></p>
+<h3 id="文档流和浮动"><a href="#文档流和浮动" class="headerlink" title="文档流和浮动"></a>文档流和浮动</h3><p>浏览器窗体自上而下分成一行行每行按照从左到右的顺序排放，这就是文档流的排列形式。</p>
+<ol>
+<li>如果不对元素做任何定位相关的样式，非浮动块级元素会按照从上而下，行内元素从左到右排列，很显然我们需要去改变它们，这就需要利用浮动或者定位</li>
+<li>浮动块级元素则按规定浮在行的一端。 若当前行容不下， 则另起新行再浮动。</li>
+<li>内联元素也不会独占一行。 几乎所有元素(包括块级，内联和列表元素）均可生成子行， 用于摆放子元素。</li>
+</ol>
+<p>有三种情况将使得元素脱离文档流而存在</p>
+<ol>
+<li>浮动（IE中浮动元素也存在于文档流）</li>
+<li>绝对定位</li>
+<li>固定定位。 </li>
+</ol>
+<p>浮动元素不占任何正常文档流空间，而浮动元素的定位还是基于正常的文档流，然后从文档流中抽出并尽可能远的移动至左侧或者右侧。文字内容会围绕在浮动元素周围。当一个元素从正常文档流中抽出后，仍然在文档流中的其他元素将忽略该元素并填补他原先的空间。</p>
+<p>基于文档流，有以下定位模式</p>
+<ol>
+<li>相对定位，即相对于元素在文档流中位置进行偏移，但保留原占位。</li>
+<li>绝对定位，即完全脱离文档流，相对于position属性非static值的最近父级元素进行偏移。</li>
+<li>固定定位，即完全脱离文档流，相对于视区进行偏移。</li>
+</ol>
+<h3 id="HTML和CSS以及Javascript的关系"><a href="#HTML和CSS以及Javascript的关系" class="headerlink" title="HTML和CSS以及Javascript的关系"></a>HTML和CSS以及Javascript的关系</h3><p>HTML就是web页面的骨架结构，<code>CSS</code>层级表赋予其多彩的样式，<code>Javascript</code>赋予其丰富行为能力，让其能动起来。</p>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="CSS是什么"><a href="#CSS是什么" class="headerlink" title="CSS是什么"></a>CSS是什么</h3><p>层叠样式表（英语：Cascading Style Sheets，简写CSS），又称串样式列表、级联样式表、串接样式表、层叠样式表、階層式樣式表，一种用来为结构化文档（如HTML文档或XML应用）添加样式（字体、间距和颜色等）的计算机语言，由W3C定义和维护。目前最新版本是CSS2.1，为W3C的推荐标准。CSS3现在已被大部分现代浏览器支持，而下一版的CSS4仍在开发过程中</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E8%A1%A8" target="_blank" rel="noopener">来自维基百科</a></p>
+<h3 id="CSS核心"><a href="#CSS核心" class="headerlink" title="CSS核心"></a>CSS核心</h3><p>CSS核心由多组规则组成，每组规则由<code>selector</code>，<code>property</code>，<code>value</code>即选择器、属性、值三者组成 如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p.tips &#123; // 选择器</span><br><span class="line">	font-size: 12px; // property: value</span><br><span class="line">	font-family: sans-serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这句话的意思就是所有<code>class</code>为<code>tips</code>的<code>p</code>元素，即<code>&lt;p class=&quot;tips&quot;&gt;Hello&lt;/p&gt;</code>，应用字体为<code>sans-serif</code>，字体大小为<code>12px</code>。</p>
+<blockquote>
+<p>其中<code>class</code>属性是html元素应用css样式链接属性。</p>
+</blockquote>
+<h4 id="selector"><a href="#selector" class="headerlink" title="selector"></a>selector</h4><p>CSS的选择器类型非常多，共分为以下几类</p>
+<h5 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h5><ol start="3">
+<li>ID选择器</li>
+<li>类选择器</li>
+<li>元素类型选择器</li>
+<li>万用选择器</li>
+<li>属性选择器</li>
+</ol>
+<p>其中属性选择器又有</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[attribute]</code></td>
+<td>元素有<code>attribute</code>的属性</td>
+</tr>
+<tr>
+<td><code>[attribute=&quot;value&quot;</code>]</td>
+<td>属性<code>attribute</code>里是<code>value</code></td>
+</tr>
+<tr>
+<td><code>[attribute~=&quot;value&quot;</code>]</td>
+<td>属性<code>attribute</code>里使用空白分开的字符串里其中一个是<code>value</code></td>
+</tr>
+<tr>
+<td>`[attribute</td>
+<td>=”value”]`</td>
+<td>属性<code>attribute</code>里是<code>value</code>或者以<code>value-</code>开头的字符串</td>
+</tr>
+<tr>
+<td><code>[attribute^=&quot;value&quot;]</code></td>
+<td>属性<code>attribute</code>里最前的是<code>value</code></td>
+</tr>
+<tr>
+<td><code>[attribute$=&quot;value&quot;]</code></td>
+<td>属性<code>attribute</code>里最后的是<code>value</code></td>
+</tr>
+<tr>
+<td><code>[attribute*=&quot;value&quot;]</code></td>
+<td>属性attribute里有value出现过至少一次</td>
+</tr>
+</tbody>
+</table>
+<p>基本选择器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#btnSave &#123;</span><br><span class="line">	font-size: 14px;</span><br><span class="line">	color: #ff8a01;</span><br><span class="line">&#125;</span><br><span class="line">.btnSave &#123;</span><br><span class="line">	font-size: 14px;</span><br><span class="line">&#125;</span><br><span class="line">button &#123;</span><br><span class="line">	font-size: 14px;</span><br><span class="line">&#125;</span><br><span class="line">* &#123;</span><br><span class="line">	font-size: 12px;</span><br><span class="line">&#125;</span><br><span class="line">a[class=&quot;button&quot;] &#123;</span><br><span class="line">	color: #ff8a01;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="伪元素选择器"><a href="#伪元素选择器" class="headerlink" title="伪元素选择器"></a>伪元素选择器</h5><blockquote>
+<p>伪元素可以选择不在Document结构中的信息。</p>
+</blockquote>
+<ol>
+<li><code>:after</code>或者<code>::after</code> 元素之后［常用］</li>
+<li><code>:before</code>或者<code>::before</code> 元素之前［常用］</li>
+<li><code>:first-letter</code> 或 <code>::first-letter</code>［不常用］</li>
+<li><code>:first-line</code> 或 <code>::first-line</code>［不常用］</li>
+</ol>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p::after &#123; </span><br><span class="line">	content:&quot; &quot;;</span><br><span class="line">	background-color:yellow;</span><br><span class="line">	color:red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h5><p>虚拟类选择器指的是为不同的状态、性质的元素。</p>
+<p>主要有以下几类</p>
+<ol>
+<li><code>:link</code> 超链接未被访问［常用］</li>
+<li><code>:visited</code> 超链接被访问过［常用］</li>
+<li><code>:hover</code> 鼠标（鼠标）在元素上面［常用］</li>
+<li><code>:active</code> 鼠标（鼠标）在元素上按着［常用］</li>
+<li><code>:focus</code> 焦点在元素上［常用］</li>
+<li><code>:target</code> 元素被URL标记（CSS 3新增的类）［不常用］</li>
+<li><code>:lang</code> 向带有指定lang属性的元素添加样式。［不常用］</li>
+</ol>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a:hover &#123;</span><br><span class="line">	backgroud-color: #ff8a01;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="组合选择器"><a href="#组合选择器" class="headerlink" title="组合选择器"></a>组合选择器</h5><ol>
+<li><code>A &gt; B</code> 选择A下一层的元素B</li>
+<li><code>A ~ B</code> 选择与A同父层的元素B</li>
+<li><code>A + B</code> 选择与A相邻的元素B（不能被任何元素相隔）</li>
+<li><code>A B</code> 包含选择符</li>
+</ol>
+<blockquote>
+<p>还有常见的逗号<code>,</code> 逗号作用是将多个选择器应用同一组属性和值，</p>
+</blockquote>
+<p>比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p, a, span &#123;</span><br><span class="line">	font-size: 12px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>新的CSS3新支持的选择器可以戳<a href="http://www.w3cplus.com/css3/pseudo-class-selector" target="_blank" rel="noopener">这里</a></p>
+<h4 id="CSS的选择器优先级"><a href="#CSS的选择器优先级" class="headerlink" title="CSS的选择器优先级"></a>CSS的选择器优先级</h4><p>当同一元素匹配多个选择器的时候，那么该元素应该应用哪一个样式呢？优先级如下</p>
+<ol>
+<li>通用选择器（*）</li>
+<li>元素(类型)选择器</li>
+<li>类选择器</li>
+<li>属性选择器</li>
+<li>伪类</li>
+<li>ID 选择器</li>
+<li>内联样式</li>
+<li>!important 规则例外</li>
+</ol>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Specificity" target="_blank" rel="noopener">来自MDN</a></p>
+<h3 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h3><p><img src="http://7xp4um.com1.z0.glb.clouddn.com/FsbBgHxrPIBGLIdlz8ltcAPdPAR2" alt="20094219263340677801"><br><img src="http://7xp4um.com1.z0.glb.clouddn.com/FtaTfNQWaur21stvB_CtHDQlFIWz" alt="20094219263343777802"></p>
+<blockquote>
+<p>区别就在于计算<code>width</code>和<code>height</code>的时候是否加上了<code>padding</code>和<code>border</code>.</p>
+</blockquote>
+<h3 id="CSS支持的属性"><a href="#CSS支持的属性" class="headerlink" title="CSS支持的属性"></a>CSS支持的属性</h3><p>CSS支持的属性很多，包括背景、颜色、字体、定位、动画等属性</p>
+<p><a href="http://overapi.com/css/" target="_blank" rel="noopener">详情参考</a></p>
+<h2 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h2><p>1995年出生的Javascript最初只用在浏览器上做简单的表单验证，能在客户端把不符合规范的逻辑去掉，节省网络请求和用户等待时间一下子就广为流行，与此同时微软推出<code>JScript</code>，当时的管理者希望这门语言跟同年出来的的<code>Java</code>一样火，所以取名为<code>Javascript</code>，直到今日还真不负所望，几乎跟Java一样火，甚至有过之。</p>
+<h3 id="Javascript到底是什么"><a href="#Javascript到底是什么" class="headerlink" title="Javascript到底是什么"></a>Javascript到底是什么</h3><p>尽管对这门语言我有着比较深入的琢磨，可想了好久还是不知道该如何向未接触过它的人来介绍它，想了想还是分两种人尽量来解释清楚</p>
+<ul>
+<li><p>无编程经验</p>
+<ol>
+<li>脚本语言，可以运行在服务器端和浏览器端。</li>
+<li>能做网页动画效果。</li>
+</ol>
+</li>
+<li><p>有编程经验</p>
+<ol>
+<li>类C语言</li>
+<li>弱类型</li>
+<li>面向对象</li>
+<li>无所不能</li>
+</ol>
+</li>
+</ul>
+<h3 id="Javascript语言特色"><a href="#Javascript语言特色" class="headerlink" title="Javascript语言特色"></a>Javascript语言特色</h3><h4 id="纯粹的面向对象"><a href="#纯粹的面向对象" class="headerlink" title="纯粹的面向对象"></a>纯粹的面向对象</h4><p>javascript一切皆对象，哪怕</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(true.toString()); // true</span><br><span class="line">console.log(&quot;2&quot;.length); // 1</span><br></pre></td></tr></table></figure>
+<p>你可以直接创建一个对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">	name: &quot;liujiangbei&quot;,</span><br><span class="line">	sayHi: function(name) &#123;</span><br><span class="line">		console.log(&quot;Hello, &quot; + name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_encapsulation.html" target="_blank" rel="noopener">值得一读</a></p>
+<h4 id="弱类型"><a href="#弱类型" class="headerlink" title="弱类型"></a>弱类型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log([] == ![]); // true</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>[]==![]</code>相当于<code>[]==false</code>(没有异议了吧因为![]就是false)<br>     <img src="http://7xp4um.com1.z0.glb.clouddn.com/FlmWlAxHPDC9EqrbLUekg65DeTAM" alt=""><br><code>[]==false</code>又是怎么转化的呢，对于Object类型先转化成基础类型<code>Number</code> 0<br><code>0==false</code>又将false转化为Number也是为0</p>
+</blockquote>
+<p>概括就是</p>
+<ul>
+<li>对于基本类型Boolean，Number，String，三者之间做比较时，总是向 Number进行类型转换，然后再比较；</li>
+<li>如果有Object，那么将Object转化成这三种基本类型（PS：到底转换成哪一种呢？我猜测会转化成Number），再进行基本类型比较；</li>
+<li>对于null和undefined，只有 x，y分别是它们时才相同，其他都为false。</li>
+</ul>
+<blockquote>
+<p>对于类型相同那么<code>==</code>操作符就会直接比较值，不会再进行转换了！<br>建议总是使用<code>===</code>而不是用<code>==</code></p>
+</blockquote>
+<h4 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var testFn = function() &#123;</span><br><span class="line">  var abc = &quot;abc&quot;;</span><br><span class="line">  if (abc) &#123;</span><br><span class="line">    var str = &quot;hello&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testFn();</span><br></pre></td></tr></table></figure>
+<p>运行完输出<code>hello</code>。</p>
+<p>说明Javascript是函数级作用域名，跟<code>php</code>一样，而静态语言如<code>Java</code>，<code>Golang</code>，<code>C</code>，<code>C++</code>都是块级作用域。</p>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 闭包：是指有权访问另一个函数作用域中的变量的【函数！！！】</span><br><span class="line"> * 创建闭包的常见方式就是在一个函数内部创建另一个函数（通常是匿名函数）</span><br><span class="line"> */</span><br><span class="line"> function createComparisonFun(propertyName)&#123;</span><br><span class="line">    return function(object1,object2)&#123;</span><br><span class="line">        //这两行代码是匿名函数的内部代码，却访问了外部函数中的变量propertyName</span><br><span class="line">        //即使这个内部函数被返回了，而且是在其他地方被调用了，但它仍然可以访问变量propertyName</span><br><span class="line">        //之所以还能访问这个变量，是因为内部函数的作用域链包含外部函数如createComparisonFun()的作用域链</span><br><span class="line">        var value1 = object1[propertyName];</span><br><span class="line">        var value2 = object2[propertyName];</span><br><span class="line">        if(value1&lt;value2)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;else if(value1&gt;value2)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="基于prototype继承"><a href="#基于prototype继承" class="headerlink" title="基于prototype继承"></a>基于prototype继承</h4><p><img src="http://7xp4um.com1.z0.glb.clouddn.com/FvJ8YUD663sR-hwOhY2Bfxu1i0pt" alt="constructor-proto-chain"></p>
+<p><a href="https://msdn.microsoft.com/zh-cn/library/hh924508(v=vs.94" target="_blank" rel="noopener">原型和原型继承</a>.aspx)</p>
+<h4 id="多变的上下文对象"><a href="#多变的上下文对象" class="headerlink" title="多变的上下文对象"></a>多变的上下文对象</h4><p>上下文this是初阶javascript程序员最容易混淆的地方，总结下来</p>
+<h5 id="方法调用模式"><a href="#方法调用模式" class="headerlink" title="方法调用模式"></a>方法调用模式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 方法调用Function</span><br><span class="line"> * 1、当一个function被保存为一个对象的属性时，我们称为method</span><br><span class="line"> * 2、this绑定到该对象</span><br><span class="line"> */</span><br><span class="line">var obj = &#123;</span><br><span class="line">    val: 0,</span><br><span class="line">    getVal: function() &#123;</span><br><span class="line">        console.log(this); //&#123; value: 0, getVal: [Function] &#125;，充分体现this指的就是obj这个对象</span><br><span class="line">        console.log(this.toString()); //[object Object]</span><br><span class="line">        return this.val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">console.log(obj.getVal());</span><br><span class="line">// prototype只能用在类型上！！！不能用于对象上！！！</span><br></pre></td></tr></table></figure>
+<h5 id="函数调用模式"><a href="#函数调用模式" class="headerlink" title="函数调用模式"></a>函数调用模式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 函数调用模式</span><br><span class="line"> * 1、当一个函数并非一个对象的属性时，那么就是当一个函数来调用的</span><br><span class="line"> * 2、this指向全局对象（大胆猜想这种方案是错的）</span><br><span class="line"> * 3、解决此方法的方案就是定义一个变量存储this对象</span><br><span class="line"> */</span><br><span class="line">var add = function(a, b) &#123;</span><br><span class="line">    console.log(this.toString()); //[object global]全局变量啊</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;;</span><br><span class="line">console.log(add(2, 4));</span><br></pre></td></tr></table></figure>
+<h5 id="解决函数调用模式中this会指向全局变量的方法"><a href="#解决函数调用模式中this会指向全局变量的方法" class="headerlink" title="解决函数调用模式中this会指向全局变量的方法"></a>解决函数调用模式中this会指向全局变量的方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 解决函数调用模式中this会指向全局变量的方法</span><br><span class="line"> */</span><br><span class="line">var obj = &#123;</span><br><span class="line">    val: 4,</span><br><span class="line">    getVal: function() &#123;</span><br><span class="line">        return this.val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.double = function() &#123; //方法模式，double是obj对象的方法</span><br><span class="line">    var that = this; //this指的就是obj对象</span><br><span class="line">    var helper = function() &#123; //函数模式</span><br><span class="line">        that.val = that.val * 2;</span><br><span class="line">    &#125;;</span><br><span class="line">    helper();</span><br><span class="line">&#125;;</span><br><span class="line">obj.double(); //方法模式调用double</span><br><span class="line">console.log(obj.val); //</span><br></pre></td></tr></table></figure>
+<h5 id="构造器调用模式"><a href="#构造器调用模式" class="headerlink" title="构造器调用模式"></a>构造器调用模式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 构造器调用模式</span><br><span class="line"> * 1、如果一个函数前面带上一个new来调用，那么就是构造器调用模式</span><br><span class="line"> */</span><br><span class="line">var Person = function(name) &#123;</span><br><span class="line">    console.log(this.constructor);</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype.getName = function() &#123;</span><br><span class="line">    return this.name;</span><br><span class="line">&#125;;</span><br><span class="line">var person = new Person(&apos;ALLEN&apos;);</span><br><span class="line">console.log(person.getName());</span><br></pre></td></tr></table></figure>
+<h5 id="apply-call调用模式"><a href="#apply-call调用模式" class="headerlink" title="apply/call调用模式"></a>apply/call调用模式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Apply调用模式(apply/call)</span><br><span class="line"> * 1、apply让我们构建一个参数数组传递给调用函数，也允许我们选择this的值</span><br><span class="line"> */</span><br><span class="line">var func = function() &#123;</span><br><span class="line">    console.log(Object.prototype.toString.apply(this));</span><br><span class="line">    console.log(this.value); //this本来指向全局变量，因为是函数调用模式</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var obj1 = &#123;</span><br><span class="line">    value: &apos;This is the first object\&apos;s value&apos;</span><br><span class="line">&#125;;</span><br><span class="line">var obj2 = &#123;</span><br><span class="line">    value: &apos;This is the second object\&apos;s value&apos;</span><br><span class="line">&#125;;</span><br><span class="line">func.apply(obj1); //This is the first object&apos;s value</span><br><span class="line">func.apply(obj2); //This is the second object&apos;s value</span><br></pre></td></tr></table></figure>
+<h4 id="Function也是普通类型"><a href="#Function也是普通类型" class="headerlink" title="Function也是普通类型"></a>Function也是普通类型</h4><p>Javascript中function也是一个普通数据类型，支持</p>
+<ol>
+<li>作为参数传递给另一个函数。</li>
+<li>作为函数的返回值。</li>
+</ol>
+<h4 id="参数传递方式"><a href="#参数传递方式" class="headerlink" title="参数传递方式"></a>参数传递方式</h4><p>Javascript中参数的传递是值传递。</p>
+<p>对于基本类型<code>string</code>, <code>boolean</code>, <code>number</code>, <code>undefied</code>, <code>null</code>一眼就看出是安置传递</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function test(num) &#123;</span><br><span class="line">    num += 10;</span><br><span class="line">    return num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var num = 10;</span><br><span class="line">console.log(num); //10 外部变量并未受到影响</span><br><span class="line">console.log(test(num)); //20</span><br></pre></td></tr></table></figure>
+<p>而对于<code>object</code>, <code>array</code>, <code>function</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var testFn = function(abc) &#123;</span><br><span class="line"></span><br><span class="line">  if (typeof abc === &quot;object&quot;) &#123;</span><br><span class="line">    abc.name = &quot;liujiangbei&quot;;</span><br><span class="line">    abc.age = 26;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var obj = &#123;</span><br><span class="line">  name: &quot;liujb&quot;,</span><br><span class="line">  age: 25</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">testFn(obj);</span><br><span class="line">console.log(obj) // &#123; name: &apos;liujiangbei&apos;, age: 26 &#125;</span><br></pre></td></tr></table></figure>
+<p>乍一看，怎么变了？难道是引用传递？请看下边</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function setName(obj) &#123;</span><br><span class="line">    obj.name = &quot;James&quot;;</span><br><span class="line">    obj = new Object();</span><br><span class="line">    obj.name = &quot;Leon&quot;</span><br><span class="line">&#125;</span><br><span class="line">var person = new Object();</span><br><span class="line">person.name = &quot;Jeremy&quot;;</span><br><span class="line">setName(person);</span><br><span class="line">console.log(person.name);//James</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以上代码输出的是James，如果是按引用传递，那么以上代码输出的是Leon。实际上，当执行obj.name = “James”的时候，引用所指向的对象的值已经发生了改变，当在对obj进行覆盖的时候，obj的值是一个指向局部对象的引用，而这个引用无法对外部的对象产生影响，并且此对象会在函数执行结束之后销毁。</p>
+</blockquote>
+<p> 通俗地理解，传递不是引用，而是引用的副本。</p>
+<h3 id="Javascript最佳实践"><a href="#Javascript最佳实践" class="headerlink" title="Javascript最佳实践"></a>Javascript最佳实践</h3><p><a href="http://blog.jobbole.com/53199/" target="_blank" rel="noopener">最佳实践</a></p>
+<h1 id="一个好汉三个帮"><a href="#一个好汉三个帮" class="headerlink" title="一个好汉三个帮"></a>一个好汉三个帮</h1><p>HTML是页面的骨架，CSS赋予页面姿彩，JS给页面注入灵魂。但是她们具体是如何协作的呢？比如最常见的功能，点击加载更多。</p>
+<p>要实现该功能的主要步骤有</p>
+<ol>
+<li>JS获取用户点击事件</li>
+<li>夹杂着动画效果</li>
+<li>JS发送http请求到对应的server端</li>
+<li>JS接收HTTP请求返回的数据（json、txt、xml等格式）</li>
+<li>将数据展现</li>
+<li>…</li>
+</ol>
+<p>那么问题来了</p>
+<h2 id="JS如何获取用户点击事件？"><a href="#JS如何获取用户点击事件？" class="headerlink" title="JS如何获取用户点击事件？"></a>JS如何获取用户点击事件？</h2><p>用户点击的是一个按钮，翻译过来就是<code>HTML元素</code>，JS是如何跟<code>HTML</code>他的大哥沟通的呢？这里要接住它们共同的温床(浏览器)提供的一个叫做<code>DOM</code>的东西</p>
+<h3 id="什么是DOM？"><a href="#什么是DOM？" class="headerlink" title="什么是DOM？"></a>什么是DOM？</h3><p>Document Object Model的历史可以追溯至1990年代后期微软与Netscape的“浏览器大战”（browser wars），双方为了在JavaScript与JScript一决生死，于是大规模的赋予浏览器强大的功能。微软在网页技术上加入了不少专属事物，既有VBScript、ActiveX、以及微软自家的DHTML格式等，使不少网页使用非微软平台及浏览器无法正常显示。DOM即是当时蕴酿出来的杰作。</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B" target="_blank" rel="noopener">维基百科</a></p>
+<p>The Document Object Model (DOM) is a programming interface for HTML, XML and SVG documents. It provides a structured representation of the document (a tree) and it defines a way that the structure can be accessed from programs so that they can change the document structure, style and content. The DOM provides a representation of the document as a structured group of nodes and objects that have properties and methods. Nodes can also have event handlers attached to them, and once that event is triggered the event handlers get executed. Essentially, it connects web pages to scripts or programming languages.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model" target="_blank" rel="noopener">Document Object Model (DOM)</a></p>
+<ol>
+<li>通俗理解，就是浏览器给JS提供了获取HTML元素的功能，获取到的DOM元素跟HTML元素能”对应”起来</li>
+<li>再通俗一点，DOM元素就是HTML元素（虽不对，但无妨）</li>
+<li><code>HTML DOM</code>定义了所有 <code>HTML元素</code>的对象和属性，以及访问它们的方法。</li>
+</ol>
+<p>DOM节点包括<code>XML DOM</code>、<code>HTML DOM</code>、<code>核心DOM</code></p>
+<h3 id="DOM树如下"><a href="#DOM树如下" class="headerlink" title="DOM树如下"></a>DOM树如下</h3><p><img src="http://7xp4um.com1.z0.glb.clouddn.com/FhZN0uT-Vl6epNzMQ22dD5SE2Afz" alt="ct_htmltree"></p>
+<h3 id="DOM具备的属性和能力"><a href="#DOM具备的属性和能力" class="headerlink" title="DOM具备的属性和能力"></a>DOM具备的属性和能力</h3><p><a href="http://www.w3school.com.cn/htmldom/dom_nodes.asp" target="_blank" rel="noopener">HTML DOM节点</a><br><a href="http://www.w3school.com.cn/htmldom/dom_methods.asp" target="_blank" rel="noopener">HTML DOM方法</a><br><a href="http://www.w3school.com.cn/htmldom/dom_properties.asp" target="_blank" rel="noopener">HTML DOM访问</a><br><a href="http://www.w3school.com.cn/htmldom/dom_events.asp" target="_blank" rel="noopener">HTML DOM Event</a></p>
+<p><img src="http://7xp4um.com1.z0.glb.clouddn.com/FjecujBYDUoyjKZyVUZufTw1rp4r" alt=""></p>
+<p>其中左边菜单的内容都需要看一看！</p>
+<h3 id="JS获取按钮并提前给按钮绑定单击事件的代码如下"><a href="#JS获取按钮并提前给按钮绑定单击事件的代码如下" class="headerlink" title="JS获取按钮并提前给按钮绑定单击事件的代码如下"></a>JS获取按钮并提前给按钮绑定单击事件的代码如下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var btnLoadMore = document.getElementById(&quot;btnLoadMore&quot;);</span><br><span class="line"></span><br><span class="line">btnLoadMore.addEventListen(&quot;click&quot;, function(e) &#123;</span><br><span class="line">	// do somethings..</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>JS通过获取HTML DOM元素，可以对HTML DOM元素进行属性的访问和更改（CSS样式只是HTML元素的属性之一），同时还可以对元素本身作各种更改。还可以提前监听某DOM元素的各类事件，如</p>
+</blockquote>
+<ol>
+<li><code>click</code> </li>
+<li><code>dbclick</code></li>
+<li><code>mouseover</code></li>
+<li>…</li>
+</ol>
+<h2 id="JS如何发起HTTP请求并处理响应数据？"><a href="#JS如何发起HTTP请求并处理响应数据？" class="headerlink" title="JS如何发起HTTP请求并处理响应数据？"></a>JS如何发起HTTP请求并处理响应数据？</h2><p>答案就是传说中的Ajax。</p>
+<h3 id="XMLHttpRequest对象"><a href="#XMLHttpRequest对象" class="headerlink" title="XMLHttpRequest对象"></a>XMLHttpRequest对象</h3><p>XMLHTTPRequest是一组API函数集，可被JavaScript、JScript、VBScript以及其它web浏览器内嵌的脚本语言调用，通过HTTP在浏览器和web服务器之间收发XML或其它数据。XMLHTTP最大的好处在于可以动态地更新网页，它无需重新从服务器读取整个网页，也不需要安装额外的插件。该技术被许多网站使用，以实现快速响应的动态网页应用。例如：Google的Gmail服务、Google Suggest动态查找界面以及Google Map地理信息服务。</p>
+<p>特意查了一下，以前都只知道用这个对象，但是没有分清这到底是javascript对象还是浏览器接口，现在看来很清晰了，这就是一个浏览器接口，用于跟后台交换数据。</p>
+<h3 id="发起请求和处理请求数据"><a href="#发起请求和处理请求数据" class="headerlink" title="发起请求和处理请求数据"></a>发起请求和处理请求数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var xhr = createXHR();</span><br><span class="line">if (!xhr) &#123;</span><br><span class="line"> return &quot;create XMLHttpRequest failed.&quot;;</span><br><span class="line">&#125;</span><br><span class="line">xhr.open(obj.method, obj.url, true); //true表示异步</span><br><span class="line"></span><br><span class="line">// 监听statechange事件</span><br><span class="line">xhr.onreadystatechange = function() &#123;</span><br><span class="line"> if (xhr.readyState === 4) &#123;</span><br><span class="line">   if (xhr.status === 200) &#123;</span><br><span class="line">     obj.succFn(xhr.responseText);</span><br><span class="line">   &#125; else &#123;</span><br><span class="line">     obj.failFn(xhr.responseText);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125; else if (xhr.readyState === 3) &#123;&#125; else &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// send request</span><br><span class="line">if (obj.method.toUpperCase() === &apos;GET&apos;) &#123;</span><br><span class="line"> xhr.send(null);</span><br><span class="line">&#125; else if (method.toUpperCase() === &apos;POST&apos;) &#123;</span><br><span class="line"> var body = objToBody(obj.data);</span><br><span class="line"> xhr.setRequestHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);</span><br><span class="line"> xhr.send(body);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="XMLHttpRequest状态值"><a href="#XMLHttpRequest状态值" class="headerlink" title="XMLHttpRequest状态值"></a>XMLHttpRequest状态值</h3><ol>
+<li>0: 请求未初始化 create</li>
+<li>1: 服务器连接已建立 open</li>
+<li>2: 请求已接收 send</li>
+<li>3: 请求处理中 比如数据比较大，这个时候就可以开始提示用户</li>
+<li>4: 请求已完成，且响应已就绪</li>
+</ol>
+<p><a href="http://www.w3school.com.cn/ajax/ajax_xmlhttprequest_send.asp" target="_blank" rel="noopener">Ajax入门推荐</a></p>
+<h2 id="常见的动画又是如何实现的"><a href="#常见的动画又是如何实现的" class="headerlink" title="常见的动画又是如何实现的?"></a>常见的动画又是如何实现的?</h2><p>动画实现的本质在于不断的变化元素的属性，1000ms内变化60次肉眼基本就看不出卡顿，大概一帧16.6ms</p>
+<p>基于此前端动画的实质都是通过</p>
+<ol>
+<li>Javascript本身或</li>
+<li>CSS3本身带的属性去</li>
+</ol>
+<p>更改DOM元素的属性来达到<strong>动画</strong>的目的。当然了还有一些动画是通过动态的<code>gif</code>图实现的。</p>
+<h3 id="通过JS去改变按钮的颜色"><a href="#通过JS去改变按钮的颜色" class="headerlink" title="通过JS去改变按钮的颜色"></a>通过JS去改变按钮的颜色</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var btnMore = document.getElementById(&apos;btnMore&apos;);</span><br><span class="line">var colorNum = 0;</span><br><span class="line"></span><br><span class="line">setInterval(function()&#123;</span><br><span class="line">	btnMore.style.backgroundColor = &quot;#ff8a0&quot; + colorNum;</span><br><span class="line">&#125;, 16);</span><br></pre></td></tr></table></figure>
+<p>这部分代码只是伪代码</p>
+<p>或者还可以把<code>setInterval</code>改成<code>setTimeout</code>里边嵌套<code>setTimeout</code> <a href="http://www.cnblogs.com/tuyile006/archive/2008/02/18/1072748.html" target="_blank" rel="noopener">两者区别</a></p>
+<h3 id="通过CSS3去改变属性"><a href="#通过CSS3去改变属性" class="headerlink" title="通过CSS3去改变属性"></a>通过CSS3去改变属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">	width: 100px;</span><br><span class="line">	height: 100px;</span><br><span class="line">	background: yellow;</span><br><span class="line">	transition: width 2s;</span><br><span class="line">	-moz-transition: width 2s; /* Firefox 4 */</span><br><span class="line">	-webkit-transition: width 2s; /* Safari and Chrome */</span><br><span class="line">	-o-transition: width 2s; /* Opera */</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div:hover &#123;</span><br><span class="line">	width: 300px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该样式就是当鼠标放到div上的时候，在两秒内宽度增长到<code>300px</code></p>
+<p>建议使用CSS3的动画属性来实现动画，因为CSS3本身对GPU加速做了很多优化，比原生JS使用最质朴的方式实现效果要佳一些。当然这只是相对而言。</p>
+<h2 id="如何实现跟跟浏览器交互呢？"><a href="#如何实现跟跟浏览器交互呢？" class="headerlink" title="如何实现跟跟浏览器交互呢？"></a>如何实现跟跟浏览器交互呢？</h2><p>比如做完某某操作之后要关闭浏览器或者实现<code>后退功能</code>呢？这个时候又该如何？</p>
+<h3 id="BOM对象隆重登场"><a href="#BOM对象隆重登场" class="headerlink" title="BOM对象隆重登场"></a>BOM对象隆重登场</h3><blockquote>
+<p>BOM是browser object model的缩写，简称浏览器对象模型<br>BOM提供了独立于内容而与浏览器窗口进行交互的对象<br>由于BOM主要用于管理窗口与窗口之间的通讯，因此其核心对象是window<br>BOM由一系列相关的对象构成，并且每个对象都提供了很多方法与属性<br>BOM缺乏标准，JavaScript语法的标准化组织是ECMA，DOM的标准化组织是W3C<br>BOM最初是Netscape浏览器标准的一部分</p>
+</blockquote>
+<p>通俗理解就是提供JS访问浏览器对象的能力，跟XMLHttpRequest类似。</p>
+<p><img src="http://7xp4um.com1.z0.glb.clouddn.com/FmnKHGCJQh5uEeRV-NMq13WjF7Y0" alt="browser_objects"></p>
+<p>其中</p>
+<ol>
+<li>frames就是常见的iframe嵌套别的网页的</li>
+<li>history有返回上一页功能</li>
+<li>location获得网页URL</li>
+<li>navigator访问者浏览器信息</li>
+<li>screen屏幕相关信息</li>
+</ol>
+<p><a href="http://www.w3school.com.cn/js/js_window.asp" target="_blank" rel="noopener">推荐阅读</a></p>
+<blockquote>
+<p>至此这三者是如何协作的就大概讲了一下。</p>
+</blockquote>
+<h1 id="H5和CSS3粉墨登场"><a href="#H5和CSS3粉墨登场" class="headerlink" title="H5和CSS3粉墨登场"></a>H5和CSS3粉墨登场</h1><p>再来简单的讲讲如日中天的HTML5和CSS3，这两个东西出来后整个前端界就注入了新鲜的血液。</p>
+<h2 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h2><p>CSS3的核心在我的理解中就是提供了</p>
+<ol>
+<li>多样化的css选择器，代码编写起来更方便了。</li>
+<li>支持动画的能力</li>
+</ol>
+<p>说起来虽然容易，但是其实还是很实用，也不是那么容易掌握的。</p>
+<h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><p>HTML5提供的核心功能非常实用，主要有</p>
+<ol>
+<li>新的语义化的标签和属性并且淘汰过时和冗余的元素和属性</li>
+<li>Geolocation</li>
+<li>localStorage</li>
+<li>FileApi</li>
+<li>Canvas</li>
+<li>离线存储Mainfest</li>
+<li>本地数据库</li>
+<li>多媒体av</li>
+<li>XMLHttpRequest2</li>
+<li>…</li>
+</ol>
+<p><a href="http://caniuse.com/" target="_blank" rel="noopener">Can-I-use-html5-css3</a></p>
+<h3 id="Geolocation"><a href="#Geolocation" class="headerlink" title="Geolocation"></a>Geolocation</h3><p>就是网页定位，通过Geolocation提供的功能，使得H5页面可以跟Native功能一样的定位。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * H5定位</span><br><span class="line"> */</span><br><span class="line">geo.h5 = function(opt) &#123;</span><br><span class="line">   if (!opt) return;</span><br><span class="line">   var timeObj = opt.timeout || &#123;&#125;;</span><br><span class="line">   </span><br><span class="line">   //H5定位成功回调函数</span><br><span class="line">   var succ = function(pos) &#123;</span><br><span class="line">       var d = &#123;</span><br><span class="line">           lat: pos.coords.latitude,</span><br><span class="line">           lng: pos.coords.longitude,</span><br><span class="line">           maptype: opt.maptype || &quot;wgs&quot;</span><br><span class="line">       &#125;;</span><br><span class="line">       if (isFunc(opt.success)) opt.success(d);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   //h5定位失败回调--失败包括超时、或者用户不允许</span><br><span class="line">   var error = function(err) &#123;</span><br><span class="line">       var st = &quot;&quot;;</span><br><span class="line">       switch (err.code) &#123;</span><br><span class="line">           case err.TIMEOUT:</span><br><span class="line">               st = &quot;timeout&quot;;</span><br><span class="line">               if (isFunc(timeObj.CB)) timeObj.CB(geoFailObj.timeout);</span><br><span class="line">               break;</span><br><span class="line">           case err.POSITION_UNAVAILABLE:</span><br><span class="line">               if (isFunc(opt.error)) opt.error(geoFailObj.position_unavailable);</span><br><span class="line">               st = &quot;position_unavailable&quot;;</span><br><span class="line">               break;</span><br><span class="line">           case err.PERMISSION_DENIED:</span><br><span class="line">               if (isFunc(opt.denied)) opt.denied(geoFailObj.permission_denied);</span><br><span class="line">               st = &apos;permission_denied&apos;;</span><br><span class="line">               break;</span><br><span class="line">           case err.UNKNOWN_ERROR:</span><br><span class="line">               if (isFunc(opt.error)) opt.error(geoFailObj.unknow_error);</span><br><span class="line">               st = &quot;unknow_error&quot;;</span><br><span class="line">               break;</span><br><span class="line">           default:</span><br><span class="line">               break;</span><br><span class="line">       &#125;;</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   if (navigator.geolocation) &#123;</span><br><span class="line">       navigator.geolocation.getCurrentPosition(succ, error, &#123;</span><br><span class="line">           enableHighAccuracy: true,</span><br><span class="line">           timeout: timeObj.cnt || 5000,</span><br><span class="line">           maximumAge: 2000</span><br><span class="line">       &#125;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>公司的webapp第一版就是我做的，当时用的就是H5定位，微信的定位接口开放还在这之后。</p>
+<h3 id="LocalStorage"><a href="#LocalStorage" class="headerlink" title="LocalStorage"></a>LocalStorage</h3><p>LocalStorage经常会使用，说白了就是在本地存储一些字符串，用于在不同的网页之间共享数据，相比cookie没有时间限制，大小限制在每个域4M左右，完全沟通。另外cookies会在每次发出HTTP请求的时候带在header上，不仅影响性能，严重的有些server端会限制cookie的大小。LocalStorage简直就是救命稻草</p>
+<p><a href="http://www.cnblogs.com/xiaowei0705/archive/2011/04/19/2021372.html" target="_blank" rel="noopener">具体使用</a></p>
+<h3 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h3><p>动画工程师和网页游戏工程师的救命稻草。能够通过JS画出流畅和高清的动画效果，不再需要去学习陈旧的flash或者还不成熟的<code>webgl</code></p>
+<h3 id="Avdio和Vedio"><a href="#Avdio和Vedio" class="headerlink" title="Avdio和Vedio"></a>Avdio和Vedio</h3><p>一个在网页上放视频一个放音乐，目前市面上吊炸天的H5页面哪个不得来点音乐和视频。</p>
+<p>以上几个H5新功能是实际产品中运用过并且表现良好。</p>
+<h1 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h1><h2 id="Sublime-text-3"><a href="#Sublime-text-3" class="headerlink" title="Sublime text 3"></a>Sublime text 3</h2><p>Sublime text 是一款轻量级的全平台文本编辑器，突出的功能就是支持海量插件</p>
+<p><a href="http://www.sublimetext.com/3" target="_blank" rel="noopener">官方网站</a></p>
+<h3 id="Sublime-Plugins"><a href="#Sublime-Plugins" class="headerlink" title="Sublime Plugins"></a>Sublime Plugins</h3><ol>
+<li>安装<code>Package Control</code> Sublime的包管理器［必装］</li>
+<li><code>HTML-CSS-JS Prettify</code> 代码格式化工具［必装］</li>
+<li><code>Trimmer</code> 移除代码中的空格［必装］</li>
+<li><p><code>Emmet</code> html代码利器，比如在<code>Mac</code>输入<code>html:5</code>然后按<code>ctrl+E</code>就会出现［必装］</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></li>
+<li><code>JSLint</code> 静态JS代码检测［必装］</li>
+<li><code>CssLint</code> CSS样式检测［必装］</li>
+<li><code>MarkdownEditing</code> Markdown编辑工具</li>
+<li><code>MarkdownPreview</code> Markdown文档预览工具</li>
+<li><code>CSS3</code> 写CSS3属性时提示功能</li>
+<li><code>DocBlockr</code> 添加XML形式的备注信息</li>
+</ol>
+<p><a href="http://www.cnblogs.com/hykun/p/sublimeText3.html" target="_blank" rel="noopener">好文推荐</a></p>
+<h3 id="Sublime-快捷键"><a href="#Sublime-快捷键" class="headerlink" title="Sublime 快捷键"></a>Sublime 快捷键</h3><ol>
+<li><code>Command+D</code> 选词</li>
+<li><code>Command+L</code> 选中一行</li>
+<li><code>Command+Shift+P</code> 进入控制中心</li>
+<li><code>Command+P</code> 搜索页面和页面中的方法</li>
+<li>…</li>
+</ol>
+<h2 id="其他编辑器如"><a href="#其他编辑器如" class="headerlink" title="其他编辑器如"></a>其他编辑器如</h2><ol>
+<li><a href="https://atom.io/" target="_blank" rel="noopener">Atom</a></li>
+<li><a href="https://www.jetbrains.com/webstorm/" target="_blank" rel="noopener">Webstrom</a></li>
+<li><a href="https://code.visualstudio.com/c?utm_expid=101350005-28.R1T8FshdTBWEfZjY0s7XKQ.2&amp;utm_referrer=https%3A%2F%2Fcode.visualstudio.com%2Fc" target="_blank" rel="noopener">Visual studio Code</a></li>
+<li>VIM/Emacs流请自行查询</li>
+</ol>
+<p>都是非常优秀的前端编辑器和IDE</p>
+<h2 id="Chrome-Devtools"><a href="#Chrome-Devtools" class="headerlink" title="Chrome Devtools"></a>Chrome Devtools</h2><p>最强大的网页调试工具 <code>Chrome Developer Tools</code>，诸君一定要好好琢磨</p>
+<p><img src="http://7xp4um.com1.z0.glb.clouddn.com/FhpHTud0-z3kItPl-UscHdda_rEw" alt=""><br><img src="http://7xp4um.com1.z0.glb.clouddn.com/Fnh1WKOvGubNiOYJltXjL70BnyGw" alt=""></p>
+<p>同时Chrome还支持移动端调试，有很多模拟器，包括屏幕类型，等。</p>
+<h1 id="调试和调试工具"><a href="#调试和调试工具" class="headerlink" title="调试和调试工具"></a>调试和调试工具</h1><h2 id="Charles"><a href="#Charles" class="headerlink" title="Charles"></a>Charles</h2><h3 id="主界面"><a href="#主界面" class="headerlink" title="主界面"></a>主界面</h3><p><img src="http://7xp4um.com1.z0.glb.clouddn.com/FuUWRJUAWWrQr49mSjCI2grED2og" alt=""></p>
+<h3 id="主要设置和注意项目"><a href="#主要设置和注意项目" class="headerlink" title="主要设置和注意项目"></a>主要设置和注意项目</h3><ol>
+<li>保证手机和电脑在同一局域网内。</li>
+<li>设置<code>Charles</code>的代理端口为<code>8888</code>或者其他都可以。</li>
+<li>查看本机IP地址<code>ifconfig en0</code>找到IP地址</li>
+</ol>
+<p>在iOS手机的设置界面如<br><img src="http://7xp4um.com1.z0.glb.clouddn.com/Fl-bMAQaUuAImzqQSwKrDv6Hl2tR" alt="1.pi"></p>
+<p>设置完了之后点左上角的WiFi返回，然后Charles会弹出是否允许你的手机IP访问的窗口，然后点击允许，这样Charles就能抓包了。</p>
+<p><a href="http://www.infoq.com/cn/articles/network-packet-analysis-tool-charles" target="_blank" rel="noopener">详细设置参考</a></p>
+<p>支持的主要功能</p>
+<ol>
+<li>抓包 – 看HTTP请求的明细，如果是HTTPS需要导入密钥也是可以的，自行折腾。</li>
+<li>DNS反向解析 – 支持从特定域名出发，将请求跳转到特定IP的机器，Pre上线使用以及当时微信支付使用。</li>
+<li>代理本地文件 – 支持某个请求响应到本地文件。</li>
+<li>Charles是抓包工具，不支持像Chrome那样子实时选中元素。</li>
+</ol>
+<h2 id="Fiddler"><a href="#Fiddler" class="headerlink" title="Fiddler"></a>Fiddler</h2><p>Filder设置和Charles有类似的地方，<a href="http://my.oschina.net/liujiangbei/blog/607143" target="_blank" rel="noopener">请点这里</a></p>
+<h3 id="Mac电脑和iPhone手机"><a href="#Mac电脑和iPhone手机" class="headerlink" title="Mac电脑和iPhone手机"></a>Mac电脑和iPhone手机</h3><ol>
+<li>iPhone手机一部</li>
+<li>Mac电脑一台</li>
+</ol>
+<h3 id="请看神图"><a href="#请看神图" class="headerlink" title="请看神图"></a>请看神图</h3><p>设置<code>Safari</code>的Develop属性可见，然后用USB连接线链接iPhone手机，然后在手机上打开你的站点，然后点击一下<code>Develop-&gt;iPhone6-&gt;www.baidu.com</code>就会出现Safari的开发者工具面板</p>
+<p><img src="http://7xp4um.com1.z0.glb.clouddn.com/FtQkXXldTvtAr3WUp_WBlI5EeoCQ" alt=""></p>
+<p>而此时，你的iPhone上的页面就变成了</p>
+<p><img src="http://7xp4um.com1.z0.glb.clouddn.com/FpAEWWc40kOtoZmfEWum-Orbn39r" alt="2.pi"></p>
+<p>就像你用Chrome浏览器调试PC端网页一样。</p>
+<h2 id="神器weire"><a href="#神器weire" class="headerlink" title="神器weire"></a>神器weire</h2><p>有人说了我没有Mac和iPhone怎么办，不用着急，我已经为你准备好一切，<a href="http://my.oschina.net/liujiangbei/blog/607145" target="_blank" rel="noopener">请戳这里</a></p>
+<h1 id="工程和性能"><a href="#工程和性能" class="headerlink" title="工程和性能"></a>工程和性能</h1><p>洋洋洒洒写了好大一篇，为了本文能够首尾呼应，让我们还是专注到Web最核心的两个问题上</p>
+<ol>
+<li>工程化</li>
+<li>产品性能</li>
+</ol>
+<h2 id="工程化"><a href="#工程化" class="headerlink" title="工程化"></a>工程化</h2><p>前端开发的工程化要解决的几个问题</p>
+<h3 id="开发阶段前后端分离"><a href="#开发阶段前后端分离" class="headerlink" title="开发阶段前后端分离"></a>开发阶段前后端分离</h3><p>目前国内在前后端协作上主要的几类方式</p>
+<ul>
+<li><p>前端工程师切好页面，交给所谓的后端工程师（其实是业务逻辑处理层并非后端服务）然后这些工程师将HTML标签和样式要么换成对应的web框架所需要的模版，要么就直接输出，再结合html中的样式和js达到想要的效果。</p>
+<blockquote>
+<p>在整个页面出来之前需要双方不停的沟通协作，才能完成。</p>
+</blockquote>
+</li>
+<li><p>前后端工程师完全通过resetful接口形式进行对接，前端工程师访问静态页面，然后通过ajax去请求resetful接口解析json，然后展现看起来这种方式前后端分离做得比较干净，但是这种方式弊端也不少</p>
+<blockquote>
+<p>会无端增加比较多的请求，本来原来有很多数据可以直接输出到html页面上，或者使用模版而现在需要通过http请求后再次处理。</p>
+</blockquote>
+</li>
+<li><p>前后端工程师在完成静态部分开发工作后，将page放到web项目的views下，第一页数据通过业务逻辑处理层将数据通过模版形式输出到页面，而后在页面中的操作如果有跳页面的话过程如第一页，否则都是通过ajax来交互。</p>
+<blockquote>
+<p>虽然这种方式耦合还是没完全解开。沟通成本上较第一种少性能上较第二种好，“后端工程师”可以专注写他们的逻辑，多数交互都是通过resetful接口进行，少部分需要加载模版和页面的请求另外沟通一下，需要组织哪些数据需要哪些逻辑沟通成本不大，前端工程师也可以focus在前端工作上。性能也不知发起很多无谓的请求。属于在目前的方式下比较理性的方式。</p>
+</blockquote>
+</li>
+<li><p>在第三种的基础上，将业务逻辑处理成这部分的工作都交给“前端工程师”来做，这部分工程师需要掌握<code>Nodejs</code>开发，<code>HTML5+CSS3+Javascript</code>常规前端开发，可以简单地理解为全栈工程师，这样前端（主要是指业务逻辑层面目前的API）可以实现大部分功能，只需要跟真正的后端服务去做通信即可。</p>
+<blockquote>
+<p>这是最理想的前后端分离方式，目前阿里巴巴有技术团队在尝试，沟通成本低，开发统一，都是Javascript为主，唯一的缺陷就是这类人才太少。</p>
+</blockquote>
+</li>
+</ul>
+<p>综合看来，目前第三种方案是比较常规的方案。</p>
+<h3 id="前端分离"><a href="#前端分离" class="headerlink" title="前端分离"></a>前端分离</h3><p>前面讲到前后端分离，其实就是在想各种办法去提升开发效率，而前端本身的一些分离原则则主要是为了后续的维护性着想。</p>
+<h4 id="表现和结构分离"><a href="#表现和结构分离" class="headerlink" title="表现和结构分离"></a>表现和结构分离</h4><p>意思就是不要再<code>html</code>中使用内嵌样式<code>&lt;div style=&quot;backgroud-color: #ff8a01&quot;&gt;&lt;/div&gt;</code>这是一个bad case，因为这会给后续维护带来不便，为什么呢？因为假如这是一个很多地方都用到的样式，那么后续如果相统一变更一些样式的时候需要单独找到这一行，而且在html中夹杂css代码的整体美感也会打折扣。</p>
+<h4 id="行为和表现分离"><a href="#行为和表现分离" class="headerlink" title="行为和表现分离"></a>行为和表现分离</h4><p>尽量不要用Javascript去控制元素的样式，这会导致用户在修改的时候，通过样式表无法找到对应的属性，这样的话就需要去人肉review你的Javascript代码来更改。</p>
+<h4 id="CSS的编程"><a href="#CSS的编程" class="headerlink" title="CSS的编程"></a>CSS的编程</h4><p>传统的如果页面有一个统一的桔色按钮，我们都是通过class来控制，让所有的地方的button都是用这一种样式从而来统一控制样式，每当这个时候你都在想这需要一个<strong>变量</strong>啊，很遗憾CSS本身并不提供这种编程能力。</p>
+<p>那么</p>
+<blockquote>
+<p><a href="https://github.com/sass/sass" target="_blank" rel="noopener">sass</a><br><a href="http://less.bootcss.com/" target="_blank" rel="noopener">less</a></p>
+</blockquote>
+<p>边应运而生了，他让css代码的维护性也变成可能。</p>
+<h3 id="Javascript包管理"><a href="#Javascript包管理" class="headerlink" title="Javascript包管理"></a>Javascript包管理</h3><p>传统的Javascript并没有包管理的概念，所有的js文件都是放在服务器上某个文件夹，然后通过人肉引入到html之后，所以的依赖其实是认为在维护。</p>
+<blockquote>
+<p><a href="http://bower.io/" target="_blank" rel="noopener">bower</a><br><a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm</a><br><a href="http://requirejs.org/" target="_blank" rel="noopener">requirejs</a><br><a href="http://seajs.org/docs/" target="_blank" rel="noopener">seajs</a></p>
+</blockquote>
+<p>等包管理器以及模块化管理工具都出现了，以及AMD和CMD规范都出来了。</p>
+<h2 id="前端构建"><a href="#前端构建" class="headerlink" title="前端构建"></a>前端构建</h2><h3 id="前端构建的工作主要包括"><a href="#前端构建的工作主要包括" class="headerlink" title="前端构建的工作主要包括"></a>前端构建的工作主要包括</h3><ol>
+<li>压缩代码<ol start="2">
+<li>css+js+html代码压缩</li>
+<li>图片压缩</li>
+<li>字体压缩</li>
+</ol>
+</li>
+<li>代码编译如less，sass之类的或者typescript＋coffeescript</li>
+<li>合并代码</li>
+<li>环境替换</li>
+</ol>
+<h3 id="主流的构建工具"><a href="#主流的构建工具" class="headerlink" title="主流的构建工具"></a>主流的构建工具</h3><ol>
+<li><a href="http://gulpjs.com/" target="_blank" rel="noopener">gulp</a></li>
+<li><a href="http://gruntjs.com/" target="_blank" rel="noopener">grunt</a></li>
+<li><a href="http://fex.baidu.com/fis3/" target="_blank" rel="noopener">fis</a></li>
+</ol>
+<blockquote>
+<p>gulp基于流式的构建工具，构建过程中支持效率快，同时<br>grunt老牌的构建工具，<br>fis百度fex团队出品，文档比较齐全且是中文，国内很多人在使用。</p>
+</blockquote>
+<p>推荐使用gulp，本人写的对static项目进行的构建库<a href="https://github.com/liujb/static-gulp" target="_blank" rel="noopener">static-gulp</a>，配对的还有对web项目进行的<a href="https://github.com/liujb/views-gulp" target="_blank" rel="noopener">views-gulp</a> 这两个项目目前可用。</p>
+<h2 id="产品性能"><a href="#产品性能" class="headerlink" title="产品性能"></a>产品性能</h2><p>web产品的性能集中体现在三个方面</p>
+<ol>
+<li>网络开销方面</li>
+<li>浏览器渲染DOM</li>
+<li>代码执行效率</li>
+</ol>
+<p>传统前端优化大部分的工作还是集中在网络开销上边，比如 <a href="https://developer.yahoo.com/performance/rules.html" target="_blank" rel="noopener">Yahoo</a> 第一条规则就是减少网络请求。而后起之秀们如<code>Reactjs</code>，<code>Angularjs2</code>，<code>WebComponents</code>等都加入了<code>虚拟DOM</code>的概念，试图让Webapp具备媲美原生native应用的体验。而代码执行效率方面有大量的最佳实践，无时无刻不在进行中，但是这个方面除非前人犯错，否则对一个产品很难一下子明显优化，另一方面硬件设备在不断变好。</p>
+<p>根据当年的Yahoo性能优化黄金法则</p>
+<h3 id="网络方面"><a href="#网络方面" class="headerlink" title="网络方面"></a>网络方面</h3><h4 id="减少请求个数"><a href="#减少请求个数" class="headerlink" title="减少请求个数"></a>减少请求个数</h4><ol>
+<li>代码合并</li>
+<li>图片sprite</li>
+<li>字体合并</li>
+<li>icon少用图片，多用矢量图组合字体</li>
+</ol>
+<h4 id="减少请求过程中传输的"><a href="#减少请求过程中传输的" class="headerlink" title="减少请求过程中传输的"></a>减少请求过程中传输的</h4><ol>
+<li>代码压缩</li>
+<li>图片压缩</li>
+<li>字体压缩</li>
+<li>启用gzip</li>
+<li>减少cookie大小</li>
+</ol>
+<h4 id="提升响应速度"><a href="#提升响应速度" class="headerlink" title="提升响应速度"></a>提升响应速度</h4><ol>
+<li>使用CDN</li>
+<li>添加expire</li>
+<li>添加Etag</li>
+<li>Ajax缓存</li>
+<li>Ajax用GET</li>
+</ol>
+<h4 id="请求策略"><a href="#请求策略" class="headerlink" title="请求策略"></a>请求策略</h4><ol>
+<li>组件预加载（提前加载）</li>
+<li>延迟加载（纯粹的懒加载，条件加载）</li>
+</ol>
+<blockquote>
+<p>在网页全部加在之前，把图片等资源通过指定src或者backgroud或者<img><br>这两个策略在做SPA的时候经常用到。</p>
+</blockquote>
+<p>网络方面还有诸如避免404，减少DNS查询，浏览器HTTP请求并发限制等</p>
+<h3 id="内容和代码经验方面"><a href="#内容和代码经验方面" class="headerlink" title="内容和代码经验方面"></a>内容和代码经验方面</h3><ol>
+<li>减少DOM元素数量</li>
+<li>样式表放页面顶部</li>
+<li>JS放页面底部</li>
+<li>少用滤镜和阴影毛玻璃等效果</li>
+<li>保证所有组件都小于25K</li>
+<li>不要使用html缩放图片</li>
+</ol>
+<p><a href="https://developer.yahoo.com/performance/rules.html" target="_blank" rel="noopener">Yahoo</a><br><a href="http://www.cocoachina.com/webapp/20150126/11020.html" target="_blank" rel="noopener">Webapp优化</a><br><a href="http://isux.tencent.com/h5-performance.html" target="_blank" rel="noopener">优化篇</a></p>
+<h3 id="体验方面"><a href="#体验方面" class="headerlink" title="体验方面"></a>体验方面</h3><ol>
+<li>使用touch事件</li>
+<li>触碰区域尽量足够大</li>
+<li>尽量使用CSS3动画</li>
+<li>使用GPU加速</li>
+<li>…</li>
+</ol>
+<h1 id="代码最佳实践"><a href="#代码最佳实践" class="headerlink" title="代码最佳实践"></a>代码最佳实践</h1><ol>
+<li><a href="http://coderlmn.github.io/code-standards/" target="_blank" rel="noopener">http://coderlmn.github.io/code-standards/</a></li>
+<li><a href="https://yuguo.us/weblog/15-best-javascript-practice/" target="_blank" rel="noopener">https://yuguo.us/weblog/15-best-javascript-practice/</a></li>
+<li><a href="https://leohxj.gitbooks.io/front-end-database/content/preference/javascript-best-practise.html" target="_blank" rel="noopener">https://leohxj.gitbooks.io/front-end-database/content/preference/javascript-best-practise.html</a></li>
+</ol>
+<h1 id="天下武功唯快不破"><a href="#天下武功唯快不破" class="headerlink" title="天下武功唯快不破"></a>天下武功唯快不破</h1><p><a href="http://yeoman.io" target="_blank" rel="noopener">yeoman</a><br><a href="http://snailsky.me/2014/09/30/Yeoman-%E7%8E%B0%E4%BB%A3wepapp%E7%9A%84%E8%84%9A%E6%89%8B%E6%9E%B6-Getting-started/" target="_blank" rel="noopener">看这里看这里</a></p>
+<h1 id="推荐书籍和框架"><a href="#推荐书籍和框架" class="headerlink" title="推荐书籍和框架"></a>推荐书籍和框架</h1><ol>
+<li>《Javascript高级程序设计》值得多次回味的书籍。</li>
+<li>《JavaScript语言精粹》</li>
+<li>《Javascript DOM编程艺术》</li>
+<li>《CSS权威指南（第三版）》</li>
+</ol>
+<p>HTML暂时就不需要推荐书籍了，跟他最相近的就是DOM编程艺术了，其余的属性和相关的方法查看网页即可</p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>洋洋洒洒写了好几千字，一时间竟不知道该说点啥了，前端是一个涉及面非常广的工种，不像后端程序环境运行在比较统一的*nix系统，专注到项目本身的工程、性能、可维护等方面即可。</p>
+<p>而前端不仅仅程序执行环境多样化，工程、性能同样是要抓，更多的还要关注交互、展示等体验甚至要求对美感都有要求。更重要的是前端工程师必须要有一个追求极致的心态，时刻从用户体验的角度出发考虑、不妥协否则优秀无从谈起。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/03/How-to-works-for-coder/" rel="next" title="How-to-works-for-coder">
+                <i class="fa fa-chevron-left"></i> How-to-works-for-coder
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/14/Nodejs-npm-package.json/" rel="prev" title="Nodejs-npm-package">
+                Nodejs-npm-package <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">218</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#乱花渐欲迷人眼"><span class="nav-number">1.</span> <span class="nav-text">乱花渐欲迷人眼</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#万变不离其中"><span class="nav-number">2.</span> <span class="nav-text">万变不离其中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三板斧"><span class="nav-number">3.</span> <span class="nav-text">三板斧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">3.1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML到底是什么"><span class="nav-number">3.1.1.</span> <span class="nav-text">HTML到底是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器如何解析HTML"><span class="nav-number">3.1.2.</span> <span class="nav-text">浏览器如何解析HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML核心"><span class="nav-number">3.1.3.</span> <span class="nav-text">HTML核心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML展现分类"><span class="nav-number">3.1.4.</span> <span class="nav-text">HTML展现分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#块级元素"><span class="nav-number">3.1.4.1.</span> <span class="nav-text">块级元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#行内元素"><span class="nav-number">3.1.4.2.</span> <span class="nav-text">行内元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inline-block"><span class="nav-number">3.1.4.3.</span> <span class="nav-text">inline-block</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文档流和浮动"><span class="nav-number">3.1.5.</span> <span class="nav-text">文档流和浮动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML和CSS以及Javascript的关系"><span class="nav-number">3.1.6.</span> <span class="nav-text">HTML和CSS以及Javascript的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS"><span class="nav-number">3.2.</span> <span class="nav-text">CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS是什么"><span class="nav-number">3.2.1.</span> <span class="nav-text">CSS是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS核心"><span class="nav-number">3.2.2.</span> <span class="nav-text">CSS核心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#selector"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">selector</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本选择器"><span class="nav-number">3.2.2.1.1.</span> <span class="nav-text">基本选择器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪元素选择器"><span class="nav-number">3.2.2.1.2.</span> <span class="nav-text">伪元素选择器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪类选择器"><span class="nav-number">3.2.2.1.3.</span> <span class="nav-text">伪类选择器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#组合选择器"><span class="nav-number">3.2.2.1.4.</span> <span class="nav-text">组合选择器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS的选择器优先级"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">CSS的选择器优先级</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#盒子模型"><span class="nav-number">3.2.3.</span> <span class="nav-text">盒子模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS支持的属性"><span class="nav-number">3.2.4.</span> <span class="nav-text">CSS支持的属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Javascript"><span class="nav-number">3.3.</span> <span class="nav-text">Javascript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Javascript到底是什么"><span class="nav-number">3.3.1.</span> <span class="nav-text">Javascript到底是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Javascript语言特色"><span class="nav-number">3.3.2.</span> <span class="nav-text">Javascript语言特色</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#纯粹的面向对象"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">纯粹的面向对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#弱类型"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">弱类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数作用域"><span class="nav-number">3.3.2.3.</span> <span class="nav-text">函数作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包"><span class="nav-number">3.3.2.4.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于prototype继承"><span class="nav-number">3.3.2.5.</span> <span class="nav-text">基于prototype继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多变的上下文对象"><span class="nav-number">3.3.2.6.</span> <span class="nav-text">多变的上下文对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法调用模式"><span class="nav-number">3.3.2.6.1.</span> <span class="nav-text">方法调用模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数调用模式"><span class="nav-number">3.3.2.6.2.</span> <span class="nav-text">函数调用模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决函数调用模式中this会指向全局变量的方法"><span class="nav-number">3.3.2.6.3.</span> <span class="nav-text">解决函数调用模式中this会指向全局变量的方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造器调用模式"><span class="nav-number">3.3.2.6.4.</span> <span class="nav-text">构造器调用模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#apply-call调用模式"><span class="nav-number">3.3.2.6.5.</span> <span class="nav-text">apply/call调用模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Function也是普通类型"><span class="nav-number">3.3.2.7.</span> <span class="nav-text">Function也是普通类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数传递方式"><span class="nav-number">3.3.2.8.</span> <span class="nav-text">参数传递方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Javascript最佳实践"><span class="nav-number">3.3.3.</span> <span class="nav-text">Javascript最佳实践</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个好汉三个帮"><span class="nav-number">4.</span> <span class="nav-text">一个好汉三个帮</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JS如何获取用户点击事件？"><span class="nav-number">4.1.</span> <span class="nav-text">JS如何获取用户点击事件？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是DOM？"><span class="nav-number">4.1.1.</span> <span class="nav-text">什么是DOM？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM树如下"><span class="nav-number">4.1.2.</span> <span class="nav-text">DOM树如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM具备的属性和能力"><span class="nav-number">4.1.3.</span> <span class="nav-text">DOM具备的属性和能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS获取按钮并提前给按钮绑定单击事件的代码如下"><span class="nav-number">4.1.4.</span> <span class="nav-text">JS获取按钮并提前给按钮绑定单击事件的代码如下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS如何发起HTTP请求并处理响应数据？"><span class="nav-number">4.2.</span> <span class="nav-text">JS如何发起HTTP请求并处理响应数据？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XMLHttpRequest对象"><span class="nav-number">4.2.1.</span> <span class="nav-text">XMLHttpRequest对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发起请求和处理请求数据"><span class="nav-number">4.2.2.</span> <span class="nav-text">发起请求和处理请求数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XMLHttpRequest状态值"><span class="nav-number">4.2.3.</span> <span class="nav-text">XMLHttpRequest状态值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的动画又是如何实现的"><span class="nav-number">4.3.</span> <span class="nav-text">常见的动画又是如何实现的?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过JS去改变按钮的颜色"><span class="nav-number">4.3.1.</span> <span class="nav-text">通过JS去改变按钮的颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过CSS3去改变属性"><span class="nav-number">4.3.2.</span> <span class="nav-text">通过CSS3去改变属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实现跟跟浏览器交互呢？"><span class="nav-number">4.4.</span> <span class="nav-text">如何实现跟跟浏览器交互呢？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BOM对象隆重登场"><span class="nav-number">4.4.1.</span> <span class="nav-text">BOM对象隆重登场</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#H5和CSS3粉墨登场"><span class="nav-number">5.</span> <span class="nav-text">H5和CSS3粉墨登场</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS3"><span class="nav-number">5.1.</span> <span class="nav-text">CSS3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5"><span class="nav-number">5.2.</span> <span class="nav-text">HTML5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Geolocation"><span class="nav-number">5.2.1.</span> <span class="nav-text">Geolocation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LocalStorage"><span class="nav-number">5.2.2.</span> <span class="nav-text">LocalStorage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canvas"><span class="nav-number">5.2.3.</span> <span class="nav-text">Canvas</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Avdio和Vedio"><span class="nav-number">5.2.4.</span> <span class="nav-text">Avdio和Vedio</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发工具"><span class="nav-number">6.</span> <span class="nav-text">开发工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sublime-text-3"><span class="nav-number">6.1.</span> <span class="nav-text">Sublime text 3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sublime-Plugins"><span class="nav-number">6.1.1.</span> <span class="nav-text">Sublime Plugins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sublime-快捷键"><span class="nav-number">6.1.2.</span> <span class="nav-text">Sublime 快捷键</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他编辑器如"><span class="nav-number">6.2.</span> <span class="nav-text">其他编辑器如</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome-Devtools"><span class="nav-number">6.3.</span> <span class="nav-text">Chrome Devtools</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调试和调试工具"><span class="nav-number">7.</span> <span class="nav-text">调试和调试工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Charles"><span class="nav-number">7.1.</span> <span class="nav-text">Charles</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主界面"><span class="nav-number">7.1.1.</span> <span class="nav-text">主界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要设置和注意项目"><span class="nav-number">7.1.2.</span> <span class="nav-text">主要设置和注意项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fiddler"><span class="nav-number">7.2.</span> <span class="nav-text">Fiddler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac电脑和iPhone手机"><span class="nav-number">7.2.1.</span> <span class="nav-text">Mac电脑和iPhone手机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请看神图"><span class="nav-number">7.2.2.</span> <span class="nav-text">请看神图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神器weire"><span class="nav-number">7.3.</span> <span class="nav-text">神器weire</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工程和性能"><span class="nav-number">8.</span> <span class="nav-text">工程和性能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工程化"><span class="nav-number">8.1.</span> <span class="nav-text">工程化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开发阶段前后端分离"><span class="nav-number">8.1.1.</span> <span class="nav-text">开发阶段前后端分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端分离"><span class="nav-number">8.1.2.</span> <span class="nav-text">前端分离</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表现和结构分离"><span class="nav-number">8.1.2.1.</span> <span class="nav-text">表现和结构分离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#行为和表现分离"><span class="nav-number">8.1.2.2.</span> <span class="nav-text">行为和表现分离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS的编程"><span class="nav-number">8.1.2.3.</span> <span class="nav-text">CSS的编程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Javascript包管理"><span class="nav-number">8.1.3.</span> <span class="nav-text">Javascript包管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端构建"><span class="nav-number">8.2.</span> <span class="nav-text">前端构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端构建的工作主要包括"><span class="nav-number">8.2.1.</span> <span class="nav-text">前端构建的工作主要包括</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主流的构建工具"><span class="nav-number">8.2.2.</span> <span class="nav-text">主流的构建工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#产品性能"><span class="nav-number">8.3.</span> <span class="nav-text">产品性能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络方面"><span class="nav-number">8.3.1.</span> <span class="nav-text">网络方面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#减少请求个数"><span class="nav-number">8.3.1.1.</span> <span class="nav-text">减少请求个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#减少请求过程中传输的"><span class="nav-number">8.3.1.2.</span> <span class="nav-text">减少请求过程中传输的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提升响应速度"><span class="nav-number">8.3.1.3.</span> <span class="nav-text">提升响应速度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求策略"><span class="nav-number">8.3.1.4.</span> <span class="nav-text">请求策略</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内容和代码经验方面"><span class="nav-number">8.3.2.</span> <span class="nav-text">内容和代码经验方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#体验方面"><span class="nav-number">8.3.3.</span> <span class="nav-text">体验方面</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码最佳实践"><span class="nav-number">9.</span> <span class="nav-text">代码最佳实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#天下武功唯快不破"><span class="nav-number">10.</span> <span class="nav-text">天下武功唯快不破</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#推荐书籍和框架"><span class="nav-number">11.</span> <span class="nav-text">推荐书籍和框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写在最后"><span class="nav-number">12.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="理论知识密码学要解决的问题：  机密性 完整性 身份验证（抗抵赖性）  差别 hash 是将目标文本转换成具有相同长度、不可逆的杂凑字符串（消息摘要） encrypt 是将目标文本转换成不同长度，可逆的密文。  hash散列算法（Hash Algorithm），又称哈希算法，杂凑算法。 常用的hash方法 md2/md3/md4/md5 SHA-1，SHA-2（SHA-224、SHA-256、SH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hash和加密的理论以及相关应用">
+<meta property="og:url" content="http://yoursite.com/2018/05/24/Hash和加密的理论以及相关应用/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="理论知识密码学要解决的问题：  机密性 完整性 身份验证（抗抵赖性）  差别 hash 是将目标文本转换成具有相同长度、不可逆的杂凑字符串（消息摘要） encrypt 是将目标文本转换成不同长度，可逆的密文。  hash散列算法（Hash Algorithm），又称哈希算法，杂凑算法。 常用的hash方法 md2/md3/md4/md5 SHA-1，SHA-2（SHA-224、SHA-256、SH">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277522343723.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277523830328.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277524400413.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277524763622.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277525144106.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277525469321.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277525927390.png">
+<meta property="og:updated_time" content="2020-03-04T08:56:48.926Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hash和加密的理论以及相关应用">
+<meta name="twitter:description" content="理论知识密码学要解决的问题：  机密性 完整性 身份验证（抗抵赖性）  差别 hash 是将目标文本转换成具有相同长度、不可逆的杂凑字符串（消息摘要） encrypt 是将目标文本转换成不同长度，可逆的密文。  hash散列算法（Hash Algorithm），又称哈希算法，杂凑算法。 常用的hash方法 md2/md3/md4/md5 SHA-1，SHA-2（SHA-224、SHA-256、SH">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277522343723.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/24/Hash和加密的理论以及相关应用/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Hash和加密的理论以及相关应用 | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/Hash和加密的理论以及相关应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hash和加密的理论以及相关应用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-24 00:00:00" itemprop="dateCreated datePublished" datetime="2018-05-24T00:00:00+08:00">2018-05-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-03-04 16:56:48" itemprop="dateModified" datetime="2020-03-04T16:56:48+08:00">2020-03-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h1><p>密码学要解决的问题：</p>
+<ul>
+<li>机密性</li>
+<li>完整性</li>
+<li>身份验证（抗抵赖性）</li>
+</ul>
+<h2 id="差别"><a href="#差别" class="headerlink" title="差别"></a>差别</h2><ol>
+<li><code>hash</code> 是将目标文本转换成具有相同长度、不可逆的杂凑字符串（消息摘要）</li>
+<li><code>encrypt</code> 是将目标文本转换成不同长度，可逆的密文。</li>
+</ol>
+<h2 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h2><p>散列算法（Hash Algorithm），又称哈希算法，杂凑算法。</p>
+<h3 id="常用的hash方法"><a href="#常用的hash方法" class="headerlink" title="常用的hash方法"></a>常用的hash方法</h3><ol>
+<li>md2/md3/md4/md5</li>
+<li>SHA-1，SHA-2（SHA-224、SHA-256、SHA-384，和SHA-512统称SHA-2）</li>
+<li>SHA-3，之前名为Keccak算法，是一个加密杂凑算法。</li>
+<li>HAVAL，不常用</li>
+<li>Tiger，不常用</li>
+<li>RIPEMD，不常用</li>
+</ol>
+<h3 id="hash算法的特点"><a href="#hash算法的特点" class="headerlink" title="hash算法的特点"></a>hash算法的特点</h3><ul>
+<li>正向快速：给定明文和 hash 算法，在有限时间和有限资源内能计算出 hash 值。</li>
+<li>逆向困难：给定（若干） hash 值，在有限时间内很难（基本不可能）逆推出明文。</li>
+<li>输入敏感：原始输入信息修改一点信息，产生的 hash 值看起来应该都有很大不同。</li>
+<li>冲突避免：很难找到两段内容不同的明文，使得它们的 hash 值一致（发生冲突）。即对于任意两个不同的数据块，其hash值相同的可能性极小；对于一个给定的数据块，找到和它hash值相同的数据块极为困难。</li>
+</ul>
+<p>参考内容</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/bf1d7eee28d0" target="_blank" rel="noopener">参考</a></li>
+<li><a href="http://www.atool.org/hash.php" target="_blank" rel="noopener">哈希算法</a></li>
+</ul>
+<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><p>分为对称加密和非对称加密。</p>
+<h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>对称密码技术：发件人和收件人使用其共同拥有的单个密钥，这种密钥既用于加密，也用于解密，叫做机密密钥(也称为对称密钥或会话密钥)。</p>
+<h4 id="对称加密特性"><a href="#对称加密特性" class="headerlink" title="对称加密特性"></a>对称加密特性</h4><ul>
+<li>用户只需记忆一个密钥，就可用于加密、解密；</li>
+<li>与非对称加密方法相比，加密解密的计算量小，速度快，简单易用，适合于对海量数据进行加密处理。</li>
+</ul>
+<h4 id="对称加密的缺点"><a href="#对称加密的缺点" class="headerlink" title="对称加密的缺点"></a>对称加密的缺点</h4><p>如果密钥交换不安全，密钥的安全性就会丧失。特别是在电子商务环境下，当客户是未知的、不可信的实体时，如何使客户安全地获得密钥就成为一大难题。</p>
+<h4 id="常用对称加密"><a href="#常用对称加密" class="headerlink" title="常用对称加密"></a>常用对称加密</h4><p>DES、3DES、Blowfish、IDEA、RC4、RC5、RC6和AES、Rijndael</p>
+<blockquote>
+<p>最常用的DES、3DES、AES</p>
+</blockquote>
+<h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>使用一对密钥：一个用于加密信息，另一个则用于解密信息，反之亦然。</p>
+<ul>
+<li>公钥(Public key)常用于数据加密（用对方公钥加密）或签名验证（用对方公钥解密）。</li>
+<li>私钥(Private key)常用于数据解密（发送方用接收方公钥加密）或签名（用自己私钥加密）。</li>
+</ul>
+<blockquote>
+<p>密钥依据性质划分，将其中的一个向外界公开，称为公钥；另一个则自己保留，称为私钥。</p>
+</blockquote>
+<h4 id="非对称加密的特性"><a href="#非对称加密的特性" class="headerlink" title="非对称加密的特性"></a>非对称加密的特性</h4><ul>
+<li>两个密钥之间存在着相互依存关系：即用其中任一个密钥加密的信息只能用另一个密钥进行解密。</li>
+<li>其中加密密钥不同于解密密钥，公钥加密私钥解密，反之也可私钥加密公钥解密。</li>
+</ul>
+<h4 id="常用非对称加密"><a href="#常用非对称加密" class="headerlink" title="常用非对称加密"></a>常用非对称加密</h4><ul>
+<li>Diffie-Hellman ：最早产生，计算离散对数，是一种密钥交换协定算法，不加密、不产生数字签名。</li>
+<li>RSA：大素数分解，可加密，可签名</li>
+<li>EI Gamal ：离散对数，可加密，可签名，最慢</li>
+<li>椭圆曲线：计算离散对数，功能与RSA相似，更快</li>
+<li>DSA：EI的变种，离散对数，不加密，可签名，比RSA慢</li>
+<li>背包：背包算法，可加密，可签名，已淘汰</li>
+<li>DSS：数字签名标准</li>
+</ul>
+<blockquote>
+<p>最常用RSA、DSS</p>
+</blockquote>
+<h1 id="常见应用"><a href="#常见应用" class="headerlink" title="常见应用"></a>常见应用</h1><p><a href="http://blog.51cto.com/lidongfeng/2068348" target="_blank" rel="noopener">该部分功能主要是引用</a>，中间夹杂这部分自己的理解以及格式的优化。</p>
+<h2 id="对称加密的应用（实现机密性）"><a href="#对称加密的应用（实现机密性）" class="headerlink" title="对称加密的应用（实现机密性）"></a>对称加密的应用（实现机密性）</h2><p>假设Alice和Bob是认识的，两人为了保证通信消息不被其它人截取，预先约定了一个密码，用来加密在他们之间传送的消息，这样即使有人截取了消息没有密码也无法知道消息的内容。由此便实现了机密性。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277522343723.png" alt=""></p>
+<blockquote>
+<p>缺点，以上的实现过程存在以下问题</p>
+</blockquote>
+<ol>
+<li>如果Alice和Bob是在互联网中彼此不认识的，那么Alice该如何和Bob协商（或者说传送）共享密钥（密码）？</li>
+<li>如果Alice要和100个人通信，他需要记住多少个密码？和1000个、10000个人……通信呢？</li>
+<li>如果Alice和其它人通信使用了和Bob相同的密码，那么如何知道这个消息一定是来自Bob呢？</li>
+</ol>
+<p>由此就引入了非对称密码。</p>
+<h2 id="非对称加密应用（缺乏身份完整性）"><a href="#非对称加密应用（缺乏身份完整性）" class="headerlink" title="非对称加密应用（缺乏身份完整性）"></a>非对称加密应用（缺乏身份完整性）</h2><ol>
+<li>首先，Alice为了保证消息的机密性，用Bob的公钥加密了数据，</li>
+<li>这样就只能用Bob的私钥解密消息，所以只有Bob才能看到消息。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277523830328.png" alt=""></p>
+<blockquote>
+<p>缺点，这固然实现了机密性，然而Bob如何验证消息是来自Alice呢，因为任何人都可以得到Bob的公钥。</p>
+</blockquote>
+<h2 id="解决非对称加密（身份完整性）"><a href="#解决非对称加密（身份完整性）" class="headerlink" title="解决非对称加密（身份完整性）"></a>解决非对称加密（身份完整性）</h2><p>Alice为了向Bob证明消息确实是她发的</p>
+<ol>
+<li>用自己的私钥加密消息然后发送给Bob。</li>
+<li>Bob用Alice的公钥解密了消息，于是知道了消息的确是Alice发的。</li>
+</ol>
+<p>因为只有用Alice私钥加密的消息才能用她的公钥解密。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277524400413.png" alt=""></p>
+<blockquote>
+<p>缺点，这样便实现了身份验证，然而任何人都可以用Alice的公钥来解密消息，这样<strong>机密性又无从保证了</strong>。</p>
+</blockquote>
+<p>于是又有了下面这种方式</p>
+<ol>
+<li>Alice先用自己的私钥加密数据（实现身份验证）</li>
+<li>然后再用Bob的公钥再次加密刚才加密过的消息密文（实现机密性）</li>
+<li>然后发送给Bob。</li>
+<li>Bob先用自己的私钥解密。</li>
+<li>再用Alice的公钥解密。</li>
+</ol>
+<p>如此便实现了机密性和身份验证。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277524763622.png" alt=""></p>
+<blockquote>
+<p>缺点，非对称算法本身就耗资源，运算速度慢，此处还加密了两次，对于批量数据是绝对不可接受的，有没有更好的办法呢？由此又引入了下面的混合加密。</p>
+</blockquote>
+<h2 id="混合加密"><a href="#混合加密" class="headerlink" title="混合加密"></a>混合加密</h2><blockquote>
+<p>混合加密简单的说就是用非对称算法交换对称秘钥，用对称密钥加密数据。</p>
+</blockquote>
+<p>混合加密的过程</p>
+<ol>
+<li>Alice先随机生成一个会话密钥。</li>
+<li>然后用这个会话密钥加密消息。</li>
+<li>再用Bob的公钥加密会话密钥。</li>
+<li>然后把消息密文和会话密钥密文（数字信封）都发送给Bob。</li>
+<li>Bob收到消息先用自己的私钥解密数字信封。</li>
+<li>得到会话秘钥。</li>
+<li>再用会话密钥解密消息密文。</li>
+</ol>
+<p>混合加密整个过程图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277525144106.png" alt=""></p>
+<blockquote>
+<p>注意，这里不能实现身份验证，Alice无法向Bob证明消息是自己发的。同时也无法防止篡改。</p>
+</blockquote>
+<p>为了验证身份，引入消息摘要，过程描述如下</p>
+<ol>
+<li>Alice使用散列算法对消息计算出消息摘要1。</li>
+<li>然后把消息摘要1附在消息明文后面一并发送给Bob。</li>
+<li>Bob收到消息后使用相同的散列算法对消息明文计算出消息摘要2。</li>
+<li>然后和消息摘要1比较。</li>
+<li>如果相同则表示消息未遭到篡改。</li>
+</ol>
+<p>过程图示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277525469321.png" alt=""></p>
+<blockquote>
+<p>缺点：简单的这样做并不能实现真正的完整性，假如有人在中间截获消息修改后重新计算消息摘要附在后面，Bob依然认为消息未遭到篡改。同时也不能实现身份验证，于是便有了数字签名。</p>
+</blockquote>
+<h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><blockquote>
+<p>数字签名是指用户用自己的私钥对原始数据的哈希摘要(Hash digest)进行加密所得的数据。</p>
+</blockquote>
+<ol>
+<li>信息接收者使用<strong>信息发送者的公钥</strong>对附在原始信息后的数字签名进行解密后<strong>获得哈希摘要</strong>。</li>
+<li>通过与自己用收到的原始数据产生的哈希摘要对照，以确认以下两点：<ul>
+<li>信息是由签名者发送的（身份验证、不可抵赖性）</li>
+<li>信息自签发后到收到为止未曾信得过任何修改（完整性）</li>
+</ul>
+</li>
+</ol>
+<h3 id="数字签名标准"><a href="#数字签名标准" class="headerlink" title="数字签名标准"></a>数字签名标准</h3><p>在1991年，NIST提议了一个为数字签名标准（Digital Signature Standard，DSS）的联邦标准 FIPS 186（ 使用SHA），它最近一次更新实在2013年，作为FIPS 186-4被发布，包括了DSA、RSA、ECC</p>
+<p>DSS有两种创建签名的方法DSA和RSA。与RSA不同，DSA只能用于数字签名，并且比RSA慢，RSA能够用于数字签名、加密以及密钥分发。</p>
+<h3 id="数字签名的过程"><a href="#数字签名的过程" class="headerlink" title="数字签名的过程"></a>数字签名的过程</h3><p>如下过程</p>
+<ol>
+<li>Alice用散列算法计算出消息摘要。</li>
+<li>然后用自己的私钥<strong>加密消息摘要</strong>（数字签名）</li>
+<li>然后将消息明文和数字签名一起发送给Bob。</li>
+<li>Bob收到消息用Alice的公钥解密数字签名得到原消息摘要（验证了Alice的身份）。</li>
+<li>用相同的散列算法对消息计算消息摘要。</li>
+<li>然后将两个消息摘要进行比较，如果消息摘要相同则表示消息没有遭到篡改。（完整性）</li>
+</ol>
+<blockquote>
+<p>注意：这里假如有第三者Tom进行中间人攻击，他可以篡改消息，也可以重新计算消息摘要，但是Tom却没有Alice的私钥来加密消息摘要，此时如果Tom用自己的私钥加密消息摘要，当Bob收到消息后用Alice的公钥将无法解密数字签名得到消息摘要原文。</p>
+</blockquote>
+<p>构成示意图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15271558510780/15277525927390.png" alt=""></p>
+<p>从上面可以看出，在这些实现过程中，公钥至关重要，那么我们又如何验证用户的公钥，就像本文的例子中，Alice如何得到Bob的公钥，得到公钥后又如何验证这个公钥就是Bob的？此时就需要一个双方都信任的第三方机构，由此引入PKI。</p>
+<h2 id="PKI"><a href="#PKI" class="headerlink" title="PKI"></a>PKI</h2><p>PKI是由软件、通信协议、数据格式、安全策略等用于使用、管理、控制公钥密码体制的一套系统。</p>
+<p>它主要有三个目的：</p>
+<ul>
+<li>发布公钥/证书，</li>
+<li>证明绑定公钥的实体，</li>
+<li>提供一个公钥有效性的验证</li>
+</ul>
+<p>PKI提供基本服务：</p>
+<ul>
+<li>机密性</li>
+<li>完整性</li>
+<li>访问控制</li>
+<li>真实性</li>
+<li>不可否认性</li>
+</ul>
+<h3 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h3><p>PKI技术采用证书管理公钥，通过第三方的可信任机构认证中心CA (Certificate Authority)，把用户的公钥和用户的其他标识信息（如名称、email、身份证号等）捆绑在一起，在Internet网上验证用户的身份。</p>
+<p>公钥证书是以数字方式签名的声明，它将公钥的值与持有相应私钥的主体(个人、设备和服务)的身份绑定在一起。通过在证书上签名，CA可以核实与证书上公钥相应的私钥为证书所指定的主体所拥有。</p>
+<p>数字证书的格式是由CCITT X.509国际标准所规定的，它包含了以下几点：</p>
+<ul>
+<li>证书拥有者的姓名</li>
+<li>证书拥有者的公钥</li>
+<li>公钥的有效期</li>
+<li>颁发数字证书的单位</li>
+<li>数字证书的序列号(Serial number)</li>
+<li>CA的名称，并用CA的数字签名签署该证书</li>
+<li>CA所遵循的用来确定证书主体身份策略的标识符</li>
+<li>在证书中标识的密钥对(公钥及相关的私钥)的用法</li>
+<li>证书废止列表(CRL)的位置</li>
+</ul>
+<p>ITU-T X.509并非证书的惟一格式。例如，Pretty Good Privacy (PGP)安全电子邮件是依赖PGP所独有的一种证书。</p>
+<h3 id="CA"><a href="#CA" class="headerlink" title="CA"></a>CA</h3><blockquote>
+<p>负责发放和管理数字证书的权威机构</p>
+</blockquote>
+<h4 id="具体功能"><a href="#具体功能" class="headerlink" title="具体功能"></a>具体功能</h4><ul>
+<li>接收验证RA转发来的最终用户数字证书的申请。</li>
+<li>确定是否接受最终用户数字证书的申请-证书的审批。</li>
+<li>生成密钥对和证书</li>
+<li>向申请者颁发证书</li>
+<li>为签发的证书提供组织与责任的权威公证</li>
+<li>接收最终用户数字证书的查询、撤销。</li>
+<li>产生和发布证书废止列表（CRL）</li>
+<li>密钥管理(密钥备份、密钥恢复、密钥更新)</li>
+<li>数字证书的归档。</li>
+<li>密钥归档</li>
+<li>历史数据归档。</li>
+</ul>
+<p>简单的说，PKI实现的功能就是用一个大家都信任的机构CA给用户颁发一个数字证书，证书中包含用户的公钥（这个公钥可以是用户自己生成的提交给CA的也可以是CA生成发给用户的）及相关身份信息。</p>
+<p>以本文的Alice和Bob为例，Alice为了向Bob证明自己是Alice和某个公钥是自己的，</p>
+<ol>
+<li>她便向一个Alice和Bob都信任的CA机构申请证书，</li>
+<li>Alice先自己生成了一对密钥对（私钥和公钥），</li>
+<li>把自己的私钥保存在自己电脑上，</li>
+<li>然后把公钥给CA申请证书，</li>
+<li>CA接受申请于是给Alice颁发了一个数字证书，证书中包含了Alice的那个公钥以及其它身份信息，当然，CA会计算这些信息的消息摘要并用自己的私钥加密消息摘要（数字签名）一并附在Alice的证书上，以此来证明这个证书就是CA自己颁发的。</li>
+<li>Bob得到Alice的证书后用CA的证书（自签署的）中的公钥来解密消息摘要，</li>
+<li>这样就确认Alice的证书是CA发的，</li>
+<li>证书中的信息未遭到篡改，同时也得到了Alice的公钥。</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://blog.51cto.com/lidongfeng/2068348" target="_blank" rel="noopener">对称密码、非对称密码、散列算法与PKI</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/17/UUID知识记录和整理/" rel="next" title="UUID知识记录和整理">
+                <i class="fa fa-chevron-left"></i> UUID知识记录和整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/02/ReactNative之Android平台Bundle探索/" rel="prev" title="ReactNative之Android平台Bundle探索">
+                ReactNative之Android平台Bundle探索 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">186</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#理论知识"><span class="nav-number">1.</span> <span class="nav-text">理论知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#差别"><span class="nav-number">1.1.</span> <span class="nav-text">差别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash"><span class="nav-number">1.2.</span> <span class="nav-text">hash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的hash方法"><span class="nav-number">1.2.1.</span> <span class="nav-text">常用的hash方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hash算法的特点"><span class="nav-number">1.2.2.</span> <span class="nav-text">hash算法的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加密"><span class="nav-number">1.3.</span> <span class="nav-text">加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对称加密"><span class="nav-number">1.3.1.</span> <span class="nav-text">对称加密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对称加密特性"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">对称加密特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对称加密的缺点"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">对称加密的缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用对称加密"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">常用对称加密</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非对称加密"><span class="nav-number">1.3.2.</span> <span class="nav-text">非对称加密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非对称加密的特性"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">非对称加密的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用非对称加密"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">常用非对称加密</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见应用"><span class="nav-number">2.</span> <span class="nav-text">常见应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对称加密的应用（实现机密性）"><span class="nav-number">2.1.</span> <span class="nav-text">对称加密的应用（实现机密性）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非对称加密应用（缺乏身份完整性）"><span class="nav-number">2.2.</span> <span class="nav-text">非对称加密应用（缺乏身份完整性）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决非对称加密（身份完整性）"><span class="nav-number">2.3.</span> <span class="nav-text">解决非对称加密（身份完整性）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#混合加密"><span class="nav-number">2.4.</span> <span class="nav-text">混合加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字签名"><span class="nav-number">2.5.</span> <span class="nav-text">数字签名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字签名标准"><span class="nav-number">2.5.1.</span> <span class="nav-text">数字签名标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字签名的过程"><span class="nav-number">2.5.2.</span> <span class="nav-text">数字签名的过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PKI"><span class="nav-number">2.6.</span> <span class="nav-text">PKI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字证书"><span class="nav-number">2.6.1.</span> <span class="nav-text">数字证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CA"><span class="nav-number">2.6.2.</span> <span class="nav-text">CA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体功能"><span class="nav-number">2.6.2.1.</span> <span class="nav-text">具体功能</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

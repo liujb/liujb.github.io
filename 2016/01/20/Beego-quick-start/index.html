@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Beego-quick-start本文主要记录使用beego框架开发web应用的demo。 确保你的go语言环境是好使的123456789101112131415161718192021~ ⌚ 0:09:47$ go envGOARCH=&amp;quot;amd64&amp;quot;GOBIN=&amp;quot;&amp;quot;GOCHAR=&amp;quot;6&amp;quot;GOEXE=&amp;quot;&amp;quot;GOHOSTAR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Beego-quick-start">
+<meta property="og:url" content="http://yoursite.com/2016/01/20/Beego-quick-start/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="Beego-quick-start本文主要记录使用beego框架开发web应用的demo。 确保你的go语言环境是好使的123456789101112131415161718192021~ ⌚ 0:09:47$ go envGOARCH=&amp;quot;amd64&amp;quot;GOBIN=&amp;quot;&amp;quot;GOCHAR=&amp;quot;6&amp;quot;GOEXE=&amp;quot;&amp;quot;GOHOSTAR">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://7xp4um.com1.z0.glb.clouddn.com/QQ20150617-1@2x.png">
+<meta property="og:updated_time" content="2018-08-30T03:35:08.237Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Beego-quick-start">
+<meta name="twitter:description" content="Beego-quick-start本文主要记录使用beego框架开发web应用的demo。 确保你的go语言环境是好使的123456789101112131415161718192021~ ⌚ 0:09:47$ go envGOARCH=&amp;quot;amd64&amp;quot;GOBIN=&amp;quot;&amp;quot;GOCHAR=&amp;quot;6&amp;quot;GOEXE=&amp;quot;&amp;quot;GOHOSTAR">
+<meta name="twitter:image" content="http://7xp4um.com1.z0.glb.clouddn.com/QQ20150617-1@2x.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/01/20/Beego-quick-start/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Beego-quick-start | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Beego-quick-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Beego-quick-start
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-30 11:35:08" itemprop="dateModified" datetime="2018-08-30T11:35:08+08:00">2018-08-30</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Beego-quick-start"><a href="#Beego-quick-start" class="headerlink" title="Beego-quick-start"></a>Beego-quick-start</h1><p>本文主要记录使用beego框架开发web应用的demo。</p>
+<h3 id="确保你的go语言环境是好使的"><a href="#确保你的go语言环境是好使的" class="headerlink" title="确保你的go语言环境是好使的"></a>确保你的go语言环境是好使的</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">~ ⌚ 0:09:47</span><br><span class="line">$ go env</span><br><span class="line">GOARCH=&quot;amd64&quot;</span><br><span class="line">GOBIN=&quot;&quot;</span><br><span class="line">GOCHAR=&quot;6&quot;</span><br><span class="line">GOEXE=&quot;&quot;</span><br><span class="line">GOHOSTARCH=&quot;amd64&quot;</span><br><span class="line">GOHOSTOS=&quot;darwin&quot;</span><br><span class="line">GOOS=&quot;darwin&quot;</span><br><span class="line">GOPATH=&quot;/Users/liujb/code/golang&quot;</span><br><span class="line">GORACE=&quot;&quot;</span><br><span class="line">GOROOT=&quot;/usr/local/Cellar/go/1.4.2&quot;</span><br><span class="line">GOTOOLDIR=&quot;/usr/local/Cellar/go/1.4.2/pkg/tool/darwin_amd64&quot;</span><br><span class="line">CC=&quot;clang&quot;</span><br><span class="line">GOGCCFLAGS=&quot;-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fno-common&quot;</span><br><span class="line">CXX=&quot;clang++&quot;</span><br><span class="line">CGO_ENABLED=&quot;1&quot;</span><br><span class="line"></span><br><span class="line">~ ⌚ 0:12:47</span><br><span class="line">$ echo $PATH</span><br><span class="line">/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/Cellar/go/1.4.2/bin:/Users/liujb/code/golang/bin</span><br></pre></td></tr></table></figure>
+<h3 id="install-beego-and-tools"><a href="#install-beego-and-tools" class="headerlink" title="install beego and tools"></a>install beego and tools</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go get github.com/astaxie/beego</span><br><span class="line">$ go get github.com/beego/bee</span><br></pre></td></tr></table></figure>
+<p>if success where </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">~/code/golang ⌚ 0:18:11</span><br><span class="line">$ tree -L 3</span><br><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">│   └── bee</span><br><span class="line">├── pkg</span><br><span class="line">│   └── darwin_amd64</span><br><span class="line">│       └── github.com</span><br><span class="line">└── src</span><br><span class="line">    ├── github.com</span><br><span class="line">    │   ├── astaxie</span><br><span class="line">    │   ├── beego</span><br><span class="line">    │   ├── go-sql-driver</span><br><span class="line">    │   ├── howeyc</span><br><span class="line">    │   ├── jtolds</span><br><span class="line">    │   ├── lib</span><br><span class="line">    │   └── smartystreets</span><br><span class="line">    └── hello-go</span><br><span class="line">        ├── doc.go</span><br><span class="line">        └── main.go</span><br><span class="line"></span><br><span class="line">14 directories, 3 files</span><br></pre></td></tr></table></figure>
+<p>and if run <code>bee</code> command like this</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$ bee</span><br><span class="line">Bee is a tool for managing beego framework.</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">	bee command [arguments]</span><br><span class="line"></span><br><span class="line">The commands are:</span><br><span class="line"></span><br><span class="line">    new         Create a Beego application</span><br><span class="line">    run         run the app and start a Web server for development</span><br><span class="line">    pack        Compress a beego project into a single file</span><br><span class="line">    api         create an API beego application</span><br><span class="line">    hprose      create an rpc application use hprose base on beego framework</span><br><span class="line">    bale        packs non-Go files to Go source files</span><br><span class="line">    version     show the Bee, Beego and Go version</span><br><span class="line">    generate    source code generator</span><br><span class="line">    migrate     run database migrations</span><br><span class="line"></span><br><span class="line">Use &quot;bee help [command]&quot; for more information about a command.</span><br><span class="line"></span><br><span class="line">Additional help topics:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Use &quot;bee help [topic]&quot; for more information about that topic.</span><br></pre></td></tr></table></figure>
+<h3 id="create-new-application-using-bee-command"><a href="#create-new-application-using-bee-command" class="headerlink" title="create new application using bee command"></a>create new application using bee command</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bee new go-where</span><br></pre></td></tr></table></figure>
+<p>like</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">~/code/golang/src ⌚ 0:18:53</span><br><span class="line">$ cd go-where </span><br><span class="line"></span><br><span class="line">~/code/golang/src/go-where ⌚ 0:19:17</span><br><span class="line">$ tree -L 2</span><br><span class="line">.</span><br><span class="line">├── conf</span><br><span class="line">│   └── app.conf</span><br><span class="line">├── controllers</span><br><span class="line">│   └── default.go</span><br><span class="line">├── main.go</span><br><span class="line">├── models</span><br><span class="line">├── routers</span><br><span class="line">│   └── router.go</span><br><span class="line">├── static</span><br><span class="line">│   ├── css</span><br><span class="line">│   ├── img</span><br><span class="line">│   └── js</span><br><span class="line">├── tests</span><br><span class="line">│   └── default_test.go</span><br><span class="line">└── views</span><br><span class="line">    └── index.tpl</span><br><span class="line"></span><br><span class="line">10 directories, 6 files</span><br></pre></td></tr></table></figure>
+<h3 id="run-the-new-applicatoin"><a href="#run-the-new-applicatoin" class="headerlink" title="run the new applicatoin"></a>run the new applicatoin</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ bee run go-where</span><br><span class="line">2015/06/17 00:23:55 [INFO] Uses &apos;go-where&apos; as &apos;appname&apos;</span><br><span class="line">2015/06/17 00:23:55 [INFO] Initializing watcher...</span><br><span class="line">2015/06/17 00:23:55 [TRAC] Directory(/Users/liujb/code/golang/src/go-where/controllers)</span><br><span class="line">2015/06/17 00:23:55 [TRAC] Directory(/Users/liujb/code/golang/src/go-where)</span><br><span class="line">2015/06/17 00:23:55 [TRAC] Directory(/Users/liujb/code/golang/src/go-where/routers)</span><br><span class="line">2015/06/17 00:23:55 [TRAC] Directory(/Users/liujb/code/golang/src/go-where/tests)</span><br><span class="line">2015/06/17 00:23:55 [INFO] Start building...</span><br><span class="line">2015/06/17 00:23:56 [SUCC] Build was successful</span><br><span class="line">2015/06/17 00:23:56 [INFO] Restarting go-where ...</span><br><span class="line">2015/06/17 00:23:56 [INFO] ./go-where is running...</span><br><span class="line">2015/06/17 00:23:56 [asm_amd64.s:2232] [I] http server Running on :8080</span><br></pre></td></tr></table></figure>
+<h3 id="request-the-http-localhost-8080"><a href="#request-the-http-localhost-8080" class="headerlink" title="request the http://localhost:8080"></a>request the <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a></h3><p>日志如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">~/code/golang/src/go-where ⌚ 0:23:49</span><br><span class="line">$ bee run go-where</span><br><span class="line">2015/06/17 00:23:55 [INFO] Uses &apos;go-where&apos; as &apos;appname&apos;</span><br><span class="line">2015/06/17 00:23:55 [INFO] Initializing watcher...</span><br><span class="line">2015/06/17 00:23:55 [TRAC] Directory(/Users/liujb/code/golang/src/go-where/controllers)</span><br><span class="line">2015/06/17 00:23:55 [TRAC] Directory(/Users/liujb/code/golang/src/go-where)</span><br><span class="line">2015/06/17 00:23:55 [TRAC] Directory(/Users/liujb/code/golang/src/go-where/routers)</span><br><span class="line">2015/06/17 00:23:55 [TRAC] Directory(/Users/liujb/code/golang/src/go-where/tests)</span><br><span class="line">2015/06/17 00:23:55 [INFO] Start building...</span><br><span class="line">2015/06/17 00:23:56 [SUCC] Build was successful</span><br><span class="line">2015/06/17 00:23:56 [INFO] Restarting go-where ...</span><br><span class="line">2015/06/17 00:23:56 [INFO] ./go-where is running...</span><br><span class="line">2015/06/17 00:23:56 [asm_amd64.s:2232] [I] http server Running on :8080</span><br><span class="line">2015/06/17 00:24:17 [router.go:849] [D] | GET        | /                                        | 19.301597ms      | match      | /                                        |</span><br></pre></td></tr></table></figure>
+<p>web界面也已经出来了</p>
+<p><img src="http://7xp4um.com1.z0.glb.clouddn.com/QQ20150617-1@2x.png" alt=""></p>
+<h3 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h3><p>在<code>~/.zshrc</code>里面加上 <code>export GOROOT=&quot;/usr/local/Cellar/go/1.4.2/libexec.&quot;</code> 就不会出现找不到fmt的错误。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/20/Bigdata-getting-started.md/" rel="next" title="Bigdata-getting-started">
+                <i class="fa fa-chevron-left"></i> Bigdata-getting-started
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/20/Javascript-closure-question/" rel="prev" title="Javascript-closure-question">
+                Javascript-closure-question <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">218</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Beego-quick-start"><span class="nav-number">1.</span> <span class="nav-text">Beego-quick-start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#确保你的go语言环境是好使的"><span class="nav-number">1.0.1.</span> <span class="nav-text">确保你的go语言环境是好使的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install-beego-and-tools"><span class="nav-number">1.0.2.</span> <span class="nav-text">install beego and tools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#create-new-application-using-bee-command"><span class="nav-number">1.0.3.</span> <span class="nav-text">create new application using bee command</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-the-new-applicatoin"><span class="nav-number">1.0.4.</span> <span class="nav-text">run the new applicatoin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#request-the-http-localhost-8080"><span class="nav-number">1.0.5.</span> <span class="nav-text">request the http://localhost:8080</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题记录"><span class="nav-number">1.0.6.</span> <span class="nav-text">问题记录</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

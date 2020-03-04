@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="背景交代前端同学在项目上线的时候总会有将html、js、css、image等资源打包的需求，大部分的做法有：  简单粗暴，在线压缩一下即可。 使用 grunt 管理资源. 国内的同学们很多喜欢使用 fis 来构建 gulp  像grunt和fis我个人理解是已经成型的前端构建的武器。首先他们都很优秀，确实能帮我们解决很多事情。但是作为一个coder要有一颗折腾的心。gulp有很多插件让我们自己来折">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gulp开发实践备注">
+<meta property="og:url" content="http://yoursite.com/2016/06/01/Gulp开发实践备注/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="背景交代前端同学在项目上线的时候总会有将html、js、css、image等资源打包的需求，大部分的做法有：  简单粗暴，在线压缩一下即可。 使用 grunt 管理资源. 国内的同学们很多喜欢使用 fis 来构建 gulp  像grunt和fis我个人理解是已经成型的前端构建的武器。首先他们都很优秀，确实能帮我们解决很多事情。但是作为一个coder要有一颗折腾的心。gulp有很多插件让我们自己来折">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-30T14:05:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gulp开发实践备注">
+<meta name="twitter:description" content="背景交代前端同学在项目上线的时候总会有将html、js、css、image等资源打包的需求，大部分的做法有：  简单粗暴，在线压缩一下即可。 使用 grunt 管理资源. 国内的同学们很多喜欢使用 fis 来构建 gulp  像grunt和fis我个人理解是已经成型的前端构建的武器。首先他们都很优秀，确实能帮我们解决很多事情。但是作为一个coder要有一颗折腾的心。gulp有很多插件让我们自己来折">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/01/Gulp开发实践备注/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Gulp开发实践备注 | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/01/Gulp开发实践备注/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Gulp开发实践备注
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2016-06-01T00:00:00+08:00">2016-06-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-30 22:05:17" itemprop="dateModified" datetime="2018-08-30T22:05:17+08:00">2018-08-30</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="背景交代"><a href="#背景交代" class="headerlink" title="背景交代"></a>背景交代</h4><p>前端同学在项目上线的时候总会有将html、js、css、image等资源打包的需求，大部分的做法有：</p>
+<ol>
+<li>简单粗暴，在线压缩一下即可。</li>
+<li>使用 <a href="http://gruntjs.com" target="_blank" rel="noopener">grunt</a> 管理资源.</li>
+<li>国内的同学们很多喜欢使用 <a href="http://fis.baidu.com" target="_blank" rel="noopener">fis</a> 来构建</li>
+<li><a href="http://gulpjs.com" target="_blank" rel="noopener">gulp</a></li>
+</ol>
+<p>像<code>grunt</code>和<code>fis</code>我个人理解是已经成型的前端构建的武器。首先他们都很优秀，确实能帮我们解决很多事情。但是作为一个<code>coder</code>要有一颗折腾的心。<code>gulp</code>有很多插件让我们自己来折腾前端构建这个事情。</p>
+<h4 id="闲聊扯淡"><a href="#闲聊扯淡" class="headerlink" title="闲聊扯淡"></a>闲聊扯淡</h4><p>web开发主要的模式有</p>
+<ol>
+<li>传统的 <code>asp</code>、<code>asp.net</code>、<code>jsp</code>、<code>php（直接echo出html）</code>等面包屑形式。</li>
+<li>采用mvc或mvvm模式来前后端分离比如<code>asp.net mvc</code>，<code>codeigniter</code>，<code>beego</code> 等一大堆。</li>
+</ol>
+<p>不管哪种方式，跟前端相关都会涉及到<code>html</code>和<code>static资源</code>。这里面有两种模式</p>
+<ol>
+<li><code>static</code> 和项目中的其他文件在同一个项目下。</li>
+<li><code>static</code> 项目单独出来，跟主项目是两个不同的项目。</li>
+</ol>
+<blockquote>
+<p>此处的<code>html</code>并非特指html文件，泛指各类页面<code>骨架</code>文件(如ejs)，反正最后都会生成html元素。</p>
+</blockquote>
+<p>而前端资源又有两种部署方式，</p>
+<ol>
+<li>一种是<code>js，css，fonts，images</code>等资源直接部署到<code>web server</code>。这种方式有一个显著的坏处就是每一个静态请求都会带上cookie。</li>
+<li>另一种是静态资源直接部署到单独的<code>static server</code>，有条件的可能还加个<code>CDN</code>。</li>
+</ol>
+<p>本文的内容适用以上两种方式，即static项目可独立可不独立。</p>
+<h4 id="约定和路径"><a href="#约定和路径" class="headerlink" title="约定和路径"></a>约定和路径</h4><h5 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h5><ol>
+<li>每个项目下都有一个 <code>src</code> 和 <code>dist</code> 文件夹，分别是源码和构建后的代码</li>
+<li>每个项目下都有<code>package.json</code>和<code>gulpfile.js</code>两个文件。</li>
+</ol>
+<blockquote>
+<p><code>package.json</code>存储的是依赖包，只需要进行<code>npm install</code>就会在项目下创建<code>node_modules</code>文件夹，且包都在此文件夹下。<br><code>gulpfile.js</code>是主文件。</p>
+</blockquote>
+<h5 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h5><ol>
+<li>对static资源（不包括项目骨架html）<ol start="2">
+<li>minify － 压缩</li>
+<li>concat － 合并文件</li>
+<li>replace － 有部分js中还引用其他js</li>
+<li>…</li>
+</ol>
+</li>
+<li>对项目骨架文件进行<ol start="3">
+<li>build html － 比如html中引用了4个js，替换成引用一个合并后的js</li>
+<li>minify － 压缩html</li>
+<li>replace － 替换路径</li>
+<li>对引用的js和css等做版本hash</li>
+<li>…</li>
+</ol>
+</li>
+</ol>
+<h4 id="static下的gulpfile-js"><a href="#static下的gulpfile-js" class="headerlink" title="static下的gulpfile.js"></a>static下的gulpfile.js</h4><p><a href="https://github.com/liujb/static-gulp" target="_blank" rel="noopener">项目地址</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br></pre></td><td class="code"><pre><span class="line">var gulp = require(&apos;gulp&apos;);</span><br><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line">var fse = require(&apos;fs-extra&apos;);</span><br><span class="line">var process = require(&apos;child_process&apos;);</span><br><span class="line">var uglify = require(&apos;gulp-uglify&apos;);</span><br><span class="line">var minifyCSS = require(&apos;gulp-minify-css&apos;);</span><br><span class="line">var imagemin = require(&apos;gulp-imagemin&apos;);</span><br><span class="line">var pngquant = require(&apos;imagemin-pngquant&apos;);</span><br><span class="line">var flatten = require(&apos;gulp-flatten&apos;);</span><br><span class="line">var minifyHtml = require(&apos;gulp-compressor&apos;);</span><br><span class="line">var concat = require(&apos;gulp-concat&apos;);</span><br><span class="line">var rename = require(&apos;gulp-rename&apos;);</span><br><span class="line">var frep = require(&apos;gulp-frep&apos;);</span><br><span class="line">var jshint = require(&apos;gulp-jshint&apos;);</span><br><span class="line"></span><br><span class="line">// conf</span><br><span class="line">var ignoreDir = &apos;!./src/base/bower_components/**&apos;;</span><br><span class="line">var minOpts = require(&apos;./conf/minify.js&apos;);</span><br><span class="line">var patterns = require(&apos;./conf/replace.js&apos;);</span><br><span class="line">var concatOpts = require(&apos;./conf/concat.js&apos;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * minify css files</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;mincss&apos;, function() &#123;</span><br><span class="line">    return gulp.src([&apos;src/**/*.css&apos;, ignoreDir])</span><br><span class="line">        .pipe(minifyCSS(minOpts.css))</span><br><span class="line">        .pipe(gulp.dest(&apos;dist&apos;));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * minify javascript</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;minjs&apos;, function() &#123;</span><br><span class="line">    return gulp.src([&apos;src/**/*.js&apos;, &apos;!./src/base/bower/**&apos;, ignoreDir])</span><br><span class="line">        .pipe(uglify(minOpts.js))</span><br><span class="line">        .pipe(gulp.dest(&apos;dist&apos;));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * minify html files</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;minhtml&apos;, function() &#123;</span><br><span class="line"></span><br><span class="line">    return gulp.src([&apos;src/**/*.html&apos;, ignoreDir])</span><br><span class="line">        .pipe(minifyHtml(minOpts.html))</span><br><span class="line">        .pipe(gulp.dest(&apos;dist&apos;));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * minify images</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;minimg&apos;, function() &#123;</span><br><span class="line">    return gulp.src([&apos;src/**/*.png&apos;, &apos;src/**/*.jpg&apos;, &apos;src/**/*.gif&apos;, ignoreDir])</span><br><span class="line">        .pipe(imagemin(&#123;</span><br><span class="line">            progressive: true,</span><br><span class="line">            svgoPlugins: [&#123;</span><br><span class="line">                removeViewBox: false</span><br><span class="line">            &#125;],</span><br><span class="line">            use: [pngquant()]</span><br><span class="line">        &#125;))</span><br><span class="line">        .pipe(gulp.dest(&apos;dist&apos;));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 处理bower安装的package</span><br><span class="line"> * 主要是对requirejs做一个特殊处理</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;bower&apos;, function() &#123;</span><br><span class="line">    var srcPath = &apos;src/base/bower&apos;,</span><br><span class="line">        destPath = &apos;dist/base/bower&apos;,</span><br><span class="line">        pkgsConf = require(&apos;./conf/bower.js&apos;);</span><br><span class="line"></span><br><span class="line">    pkgsConf.forEach(function(it) &#123;</span><br><span class="line">        gulp.src(it.src + it.fileName)</span><br><span class="line">            .pipe(uglify())</span><br><span class="line">            .pipe(rename(it.rename))</span><br><span class="line">            .pipe(gulp.dest(srcPath));</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    return gulp.src([&apos;src/base/bower_components/**/*.min.*&apos;])</span><br><span class="line">        .pipe(flatten())</span><br><span class="line">        .pipe(gulp.dest(srcPath));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * cpdist 特定的资源到特定的文件夹</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;cpdist&apos;, [&apos;bower&apos;], function() &#123;</span><br><span class="line">    fse.copy(&apos;src/base/fonts&apos;, &apos;dist/base/fonts&apos;, function(err) &#123;</span><br><span class="line">        if (err) return console.error(err);</span><br><span class="line">    &#125;);</span><br><span class="line">    fse.copy(&apos;src/base/bower&apos;, &apos;dist/base/bower&apos;, function(err) &#123;</span><br><span class="line">        if (err) return console.error(err);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 文件合并</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;concat&apos;, function() &#123;</span><br><span class="line">    var tmpConf = &#123;&#125;;</span><br><span class="line">    var getMinOpts = function(fileName) &#123;</span><br><span class="line">        var ext = fileName.split(&apos;.&apos;).pop();</span><br><span class="line">        return &#123;</span><br><span class="line">            handler: (ext === &apos;js&apos;) ? uglify : minifyCSS,</span><br><span class="line">            opts: (ext === &apos;js&apos;) ? minOpts.js : minOpts.css,</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    concatOpts.forEach(function(it) &#123;</span><br><span class="line">        tmpConf = getMinOpts(it.name);</span><br><span class="line">        gulp.src(it.src)</span><br><span class="line">            .pipe(concat(it.name))</span><br><span class="line">            .pipe(tmpConf.handler(tmpConf.opts))</span><br><span class="line">            .pipe(gulp.dest(it.dest));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 替换links</span><br><span class="line"> */</span><br><span class="line">var replaceLinks = function(env) &#123;</span><br><span class="line">    var opts = (env === &apos;test&apos;) ? patterns.test : patterns.deploy;</span><br><span class="line">    return gulp.src([&apos;dist/**/main.js&apos;])</span><br><span class="line">        .pipe(frep(opts))</span><br><span class="line">        .pipe(gulp.dest(&apos;dist&apos;));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 注册minify任务，用户集合所有的minify</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;min&apos;, [&apos;minimg&apos;, &apos;minhtml&apos;, &apos;mincss&apos;, &apos;minjs&apos;], function() &#123;</span><br><span class="line"></span><br><span class="line">    // 特殊处理My97DatePicker/zh-cn.js</span><br><span class="line">    return gulp.src(&apos;src/base/js/My97DatePicker/lang/zh-*.js&apos;)</span><br><span class="line">        .pipe(uglify(&#123;</span><br><span class="line">            output: &#123;</span><br><span class="line">                ascii_only: true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;))</span><br><span class="line">        .pipe(gulp.dest(&apos;dist/base/js/My97DatePicker/lang/&apos;));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * dev</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;dev&apos;, [&apos;bower&apos;]);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 测试环境尽量要接近线上环境</span><br><span class="line"> * 替换/static/src/ 为 /static/dist/</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;test&apos;, [&apos;cpdist&apos;, &apos;concat&apos;, &apos;min&apos;], function() &#123;</span><br><span class="line">    replaceLinks(&apos;test&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">gulp.task(&apos;default&apos;, [&apos;test&apos;]);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 这个在静态资源没有部署到静态集群之前暂时用不上</span><br><span class="line"> * 替换成/static/src/ 和 /static/dist/ 为 </span><br><span class="line"> * http://static.xxx.com/dist/</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;deploy&apos;, [&apos;test&apos;], function() &#123;</span><br><span class="line">    replaceLinks(&apos;deploy&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 检查js语法</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;jshint&apos;, function() &#123;</span><br><span class="line">    return gulp.src(&apos;src/auth/**/*.js&apos;)</span><br><span class="line">        .pipe(jshint(&#123;&#125;))</span><br><span class="line">        .pipe(jshint.reporter(&apos;jshint-stylish&apos;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="views下的gulpfile-js"><a href="#views下的gulpfile-js" class="headerlink" title="views下的gulpfile.js"></a>views下的gulpfile.js</h4><p><a href="https://github.com/liujb/views-gulp" target="_blank" rel="noopener">项目地址</a> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">var gulp = require(&apos;gulp&apos;);</span><br><span class="line">var frep = require(&apos;gulp-frep&apos;);</span><br><span class="line">var minifyHtml = require(&apos;gulp-compressor&apos;);</span><br><span class="line">var hash_src = require(&quot;gulp-hash-src&quot;);</span><br><span class="line">var htmlReplace = require(&apos;gulp-html-replace&apos;);</span><br><span class="line">var process = require(&apos;child_process&apos;);</span><br><span class="line"></span><br><span class="line">// variables and conf</span><br><span class="line">var srcPath = [&apos;src/**/*.html&apos;, &apos;src/**/*.php&apos;, &apos;!./src/order/temp.php&apos;];</span><br><span class="line">var destDir = &apos;dist&apos;;</span><br><span class="line">var staticParentDir = &apos;/Users/liujb/Dropbox/Code/mis-dev/&apos;</span><br><span class="line">var staticPath = staticParentDir + &apos;/static/&apos;;</span><br><span class="line">var minOpts = require(staticPath + &apos;conf/minify.js&apos;).html;</span><br><span class="line">var replaceOpts = require(staticPath + &apos;conf/replace.js&apos;);</span><br><span class="line">var concatOpts = require(staticPath + &apos;conf/concat.js&apos;);</span><br><span class="line">var hashOpts = &#123;</span><br><span class="line">    build_dir: staticParentDir,</span><br><span class="line">    src_path: &quot;./src&quot;,</span><br><span class="line">    query_name: &apos;v&apos;,</span><br><span class="line">    hash_len: 12</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 替换html中的js和css的links</span><br><span class="line"> * 同时给这些links加上版本号</span><br><span class="line"> */</span><br><span class="line">var replaceLinksAndHash = function(action) &#123;</span><br><span class="line">    var opts = (action === &apos;test&apos;) ? replaceOpts.test : replaceOpts.deploy;</span><br><span class="line">    return gulp.src([&apos;dist/**/*.php&apos;, &apos;dist/**/*.html&apos;])</span><br><span class="line">        .pipe(hash_src(hashOpts))</span><br><span class="line">        .pipe(frep(opts))</span><br><span class="line">        .pipe(gulp.dest(destDir));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">gulp.task(&apos;htmlBuildAndMinfiy&apos;, function() &#123;</span><br><span class="line">    var opts = &#123;&#125;;</span><br><span class="line">    concatOpts.forEach(function(item) &#123;</span><br><span class="line">        if (item.tag &amp;&amp; item.dest &amp;&amp; item.name) opts[item.tag] = &apos;/static/&apos; + item.dest + item.name;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    return gulp.src(srcPath)</span><br><span class="line">        .pipe(htmlReplace(opts))</span><br><span class="line">        .pipe(minifyHtml(minOpts))</span><br><span class="line">        .pipe(gulp.dest(destDir));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 构建依赖的static项目，并且构建html</span><br><span class="line"> */</span><br><span class="line">var buildDependStaticThenHtml = function(action) &#123;</span><br><span class="line">    if (action != &apos;test&apos; &amp;&amp; action !== &apos;deploy&apos;) return console.log(&apos;action must be test or deploy&apos;);</span><br><span class="line"></span><br><span class="line">    console.log(&apos;Starting Build static files, please waitting for a moment...&apos;);</span><br><span class="line">    process.exec(&apos;cd &apos; + staticPath + &apos; &amp;&amp; gulp &apos; + action + &apos;&apos;, function(error, stdout, stderr) &#123;</span><br><span class="line">        if (error) return console.log(error);</span><br><span class="line">        console.log(&apos;Static files have done.&apos;);</span><br><span class="line"></span><br><span class="line">        if (action === &apos;dev&apos;) return console.log(&apos;Done&apos;);</span><br><span class="line"></span><br><span class="line">        console.log(&apos;Starting build html...&apos;);</span><br><span class="line">        process.exec(&apos;cd &apos; + __dirname + &apos; &amp;&amp; gulp htmlBuildAndMinfiy&apos;, function(err) &#123;</span><br><span class="line">            if (err) return console.log(err);</span><br><span class="line">            replaceLinksAndHash(action);</span><br><span class="line">            console.log(&apos;HTML files have done.&apos;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 发布到开发环境</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;dev&apos;, function() &#123;</span><br><span class="line">    buildDependStaticThenHtml(&apos;dev&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 发布到测试环境</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;test&apos;, function() &#123;</span><br><span class="line">    buildDependStaticThenHtml(&apos;test&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">gulp.task(&apos;default&apos;, [&apos;test&apos;]);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 发布到线上环境</span><br><span class="line"> * 若静态资源未迁移到静态server上，此命令目前不需要执行</span><br><span class="line"> */</span><br><span class="line">gulp.task(&apos;deploy&apos;, function() &#123;</span><br><span class="line">    buildDependStaticThenHtml(&apos;deploy&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 初始化所有gulp</span><br><span class="line">gulp.task(&apos;init&apos;, function() &#123;</span><br><span class="line">    concole.log(&apos;Installing static dependent packages and init static project....&apos;);</span><br><span class="line">    console.log(&apos;Please waitting... &apos;);</span><br><span class="line">    process.exec(&apos;cd &apos; + staticPath + &apos; &amp;&amp; sh gulpinit.sh&apos;, function(error, stdout, stderr) &#123;</span><br><span class="line">        if (!error) &#123;</span><br><span class="line">            concole.log(&apos;All static packages installed and init done.&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>其实是static项目和views下边的两个构建脚手架，建议fork回去自己更改。</p>
+<h4 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h4><ol>
+<li>单双引号的问题，采用<code>var minifyHtml = require(&#39;gulp-htmlmin’);</code> element上的单引号会被替换为单引号，这对于有<code>&#39;&lt;?php echo $variables ?&gt;&#39;</code> 的东西不太靠谱. 所以还是采用了<code>var minifyHtml = require(&#39;gulp-compressor&#39;);</code></li>
+<li>var minifyHtml = require(‘gulp-compressor’); </li>
+</ol>
+<p>一开始不好使，后来加上</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=<span class="string">"/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home”</span></span><br><span class="line"><span class="string">export PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span></span><br><span class="line"><span class="string">export CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span></span><br></pre></td></tr></table></figure>
+</code></pre><p>就好使了。</p>
+<ol start="4">
+<li>html和php文件被minify的时候，出现<code>再js中出现</code>export`关键字结果导致报错，应避免此关键字。</li>
+<li><p>直接在javascript中直接写php，例如</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> json_data = <span class="xml"><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> json_encode($data);<span class="meta">?&gt;</span></span>;</span></span><br></pre></td></tr></table></figure>
+<p> 应避免此类写法，有可能一个引号直接导致js脚本挂了。</p>
+</li>
+</ol>
+<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><ol>
+<li><a href="http://ztd811.leanote.com/post/Gulp-%E5%AD%A6%E4%B9%A0" target="_blank" rel="noopener">Gulp</a></li>
+<li><a href="http://gulpjs.com" target="_blank" rel="noopener">Gulp官网</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/24/Git常用命令/" rel="next" title="Git常用命令">
+                <i class="fa fa-chevron-left"></i> Git常用命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/01/Lnmp面试题备注/" rel="prev" title="Lnmp面试题备注">
+                Lnmp面试题备注 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">186</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景交代"><span class="nav-number">1.</span> <span class="nav-text">背景交代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闲聊扯淡"><span class="nav-number">2.</span> <span class="nav-text">闲聊扯淡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#约定和路径"><span class="nav-number">3.</span> <span class="nav-text">约定和路径</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#约定"><span class="nav-number">3.1.</span> <span class="nav-text">约定</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#路径"><span class="nav-number">3.2.</span> <span class="nav-text">路径</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static下的gulpfile-js"><span class="nav-number">4.</span> <span class="nav-text">static下的gulpfile.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#views下的gulpfile-js"><span class="nav-number">5.</span> <span class="nav-text">views下的gulpfile.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遇到的问题"><span class="nav-number">6.</span> <span class="nav-text">遇到的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考文章"><span class="nav-number">7.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

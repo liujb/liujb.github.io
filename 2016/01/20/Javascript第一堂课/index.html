@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="ECMAScriptjavascript主要分为三个部分：  javascript核心（ECMAScript） DOM文档对象模型 BOM浏览器对象模型  ECMAScript与web浏览器没有任何依赖，这门语言并不包含输入输出，ECMAScript-262定义的只是语言基础。web浏览器只是ECMAScript实现可能的宿主环境之一 宿主环境提供基本的ECMAScript实现，同时也会提供该语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript第一堂课">
+<meta property="og:url" content="http://yoursite.com/2016/01/20/Javascript第一堂课/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="ECMAScriptjavascript主要分为三个部分：  javascript核心（ECMAScript） DOM文档对象模型 BOM浏览器对象模型  ECMAScript与web浏览器没有任何依赖，这门语言并不包含输入输出，ECMAScript-262定义的只是语言基础。web浏览器只是ECMAScript实现可能的宿主环境之一 宿主环境提供基本的ECMAScript实现，同时也会提供该语言">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-01T14:54:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript第一堂课">
+<meta name="twitter:description" content="ECMAScriptjavascript主要分为三个部分：  javascript核心（ECMAScript） DOM文档对象模型 BOM浏览器对象模型  ECMAScript与web浏览器没有任何依赖，这门语言并不包含输入输出，ECMAScript-262定义的只是语言基础。web浏览器只是ECMAScript实现可能的宿主环境之一 宿主环境提供基本的ECMAScript实现，同时也会提供该语言">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/01/20/Javascript第一堂课/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Javascript第一堂课 | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Javascript第一堂课/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Javascript第一堂课
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-01 22:54:30" itemprop="dateModified" datetime="2018-09-01T22:54:30+08:00">2018-09-01</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h4><p>javascript主要分为三个部分：</p>
+<ul>
+<li>javascript核心（ECMAScript）</li>
+<li>DOM文档对象模型</li>
+<li>BOM浏览器对象模型</li>
+</ul>
+<p>ECMAScript与web浏览器没有任何依赖，这门语言并不包含输入输出，ECMAScript-262定义的只是语言基础。web浏览器只是ECMAScript实现可能的宿主环境之一</p>
+<p>宿主环境提供基本的ECMAScript实现，同时也会提供该语言的扩展，这些扩展如DOM利用ECMAScript的核心类型和语法提供更多的功能。</p>
+<p>ECMAScript-262标准没有参照Web浏览器，它规定了这门语言的语法、类型、语句、关键字、保留字、操作符、对象。</p>
+<p>Javascript实现了ECMAScript，同样ActionScript、OpenView ScriptEase也实现了ECMAScript。</p>
+<h4 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h4><ol>
+<li>DOM是针对XML但经过扩展用于HTML的应用程序编程接口（API Application Program Interface）。</li>
+<li><p>DOM1级（1998年10月）正式成为W3C的推荐标准，DOM1级有两个模块：</p>
+<blockquote>
+<p>①DOM核心（DOM Core）<br>②DOM HTML。</p>
+</blockquote>
+</li>
+<li><p>DOM Core规定的是如何映射基于XML的文档结构，以便简化对文档中任一部分的访问和操作。</p>
+</li>
+<li>DOM HTML是在DOM Core的基础上加以扩展，添加了针对HTML的对象和方法。</li>
+<li>DOM2级在原来DOM的基础上又扩充了（DHTML一直都支持的）鼠标和用户界面事件、范围、便利（迭代DOM文档的方法）等模块。，而且还通过对象接口增加了对CSS的支持。</li>
+<li>DOM2级同时也对DOM1级的核心进行扩展并开始支持XML命名空间。</li>
+<li><p>DOM2级别增加的新类型和新接口的定义：</p>
+<blockquote>
+<p>①DOM视图（跟踪不同文档视图的接口）<br>②DOM事件（事件和事件处理接口）<br>③DOM样式（基于Css为元素应用样式的接口）<br>④DOM遍历和范围（遍历和操作文档树的接口）</p>
+</blockquote>
+</li>
+<li><p>DOM3级进一步扩展DOM。引入了：</p>
+<blockquote>
+<p>①以统一方式加载和保存文档的方法（在DOM加载和保存模块中定义）<br>②新增验证文档的方法（在DOM验证模块中定义）</p>
+</blockquote>
+</li>
+<li><p>DOM3级也对DOM核心进行了扩展，开始支持XML1.0规范，涉及XML Infoset，XPath，XML Base。</p>
+</li>
+<li>DOM0（其实不存在）指的是IE4.0，Netscape Navigator4.0最初支持的DHTML而已。</li>
+<li>Web浏览器对DOM的支持：IE在IE的时候才完全实现DOM1，而FF，Chrome，Safari，Opera已经远超IE了！</li>
+</ol>
+<h4 id="BOM："><a href="#BOM：" class="headerlink" title="BOM："></a>BOM：</h4><ol>
+<li>根本上来讲BOM只处理浏览器窗口和框架，但是人们习惯把针对浏览器的js扩展算作BOM的一部分。</li>
+<li><p>BOM主要包括以下内容：</p>
+<blockquote>
+<p>①弹出新浏览器窗口的功能<br>②移动、缩放管理浏览器窗口的功能<br>③提供浏览器对象信息的navigator对象<br>④提供浏览器所加载页面的详细信息的location对象<br>⑤提供用户显示器分辨率的screen对象<br>⑥对cookies的支持<br>⑦像XMLHttpRequest和IE的ActiveXObject对象。</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="Script元素"><a href="#Script元素" class="headerlink" title="Script元素"></a>Script元素</h4><ol>
+<li>在HTML页面中插入Javascript的主要方法，就是使用<code>&lt;script&gt;</code>元素，这个元素被加入到正式的HTML规范中。</li>
+<li><p><code>&lt;script&gt;</code>元素定义了5个属性：</p>
+<blockquote>
+<p>①charset（指定代码的字符集，大部分浏览器会忽略此属性，不常用）<br>②defer（表示脚本可以延迟到文档完全被解析和现实之后在加载）<br>③language（已被废弃）<br>④src（可选，表示外部文件，也可来源于外部域）<br>⑤type（必选，可以看成是language的替代属性，虽然<code>text/javascript</code>和<code>text/ecmascript</code>已经不被推荐，但是一直以来还是使用<code>text/javascript</code>，实际上服务器在传送javascript文件时使用的MIME类型为<code>application/x-javascript</code>,另外非IE浏览器中可以使用<code>application/javascript</code>或者<code>application/ecmascript</code>，考虑到最大限度的浏览器兼容性还是建议使用<code>text/javascript</code>）</p>
+</blockquote>
+</li>
+<li><p>在使用<code>&lt;script&gt;</code>嵌入到代码中时，记住不要在代码中任何地方出现<code>&lt;/script&gt;</code>，注意分割！</p>
+</li>
+<li>外部js，只需要包好<code>&lt;script&gt;&lt;/script&gt;</code>之间的代码，也就是说外部js不需要再包含<code>&lt;script&gt;&lt;/script&gt;</code>。</li>
+<li>如果在XHTML中<code>&lt;script&gt;</code>元素也可以写成<code>&lt;script type=&#39;text/javscript&#39; src=&#39;example.js&#39; /&gt;</code>注意此处没有<code>&lt;/script&gt;</code>，而在HTML中则不行，特别是IE会报错。</li>
+<li>外部js文件的扩展名.js不是必须的，浏览器不会检测其扩展名，这样就使得服务器返回动态生成js文件成为可能。</li>
+<li>带有src属性的<code>&lt;script&gt;</code>元素不应该在其<code>&lt;script&gt;&lt;/script&gt;</code>中再出现代码。</li>
+<li>建议把<code>&lt;script&gt;</code>元素放在body元素的后面。防止出现由于加载js文件文档出现空白。</li>
+<li><p>在XHTML中使用<code>&lt;script&gt;</code>需要利用CData片段</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt; </span><br><span class="line">&lt;![CData[ </span><br><span class="line">    //这个区域内写js代码</span><br><span class="line">//]]&gt;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p> 当有浏览器不兼容XHTML时，因而不支持XHTML，再使用//注释掉CData即可。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&apos;text/javascript&apos;&gt;</span><br><span class="line">//&lt;![CData[</span><br><span class="line">    //这里写js代码！</span><br><span class="line">//]]</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不支持javascript的浏览器会把<code>&lt;script&gt;</code>元素直接输出到页面，解决方法</p>
+<p><script type="text/javascript"><br>&lt;!–</p>
+<pre><code>//这里写js代码！
+</code></pre><p>–&gt;</script><br>PS：其实这个已经没有必要了，因为大部分浏览器都开始支持js了。</p>
+</li>
+<li><p><code>&lt;noscript&gt;</code>元素，在浏览器不支持脚本或者脚本被禁用时，<code>&lt;noscript&gt;</code>有用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;noscript&gt;</span><br><span class="line">&lt;p&gt;本页面需要浏览器支持（启用）JavaScript&lt;/p&gt;</span><br><span class="line">&lt;/noscript&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/20/Javascript经典闭包问题/" rel="next" title="Javascript经典闭包问题">
+                <i class="fa fa-chevron-left"></i> Javascript经典闭包问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/20/Javascript移除数组重复项/" rel="prev" title="Javascript移除数组重复项">
+                Javascript移除数组重复项 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">186</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ECMAScript"><span class="nav-number">1.</span> <span class="nav-text">ECMAScript</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM"><span class="nav-number">2.</span> <span class="nav-text">DOM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BOM："><span class="nav-number">3.</span> <span class="nav-text">BOM：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Script元素"><span class="nav-number">4.</span> <span class="nav-text">Script元素</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

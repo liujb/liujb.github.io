@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="解决Nodejs异步问题的终极方案就是使用 async/await，但是每次在项目中配置都会或多或少有些问题，每次都会被几个组件  babel-core babel-polyfill babel-preset-es2015 babel-preset-stage-0 babel-plugin-*  搞的有点混淆不清，甚至不知所措，我们的项目环境利用expressjs搭建，不同程度的使用了es6甚至e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BABEL转码解惑">
+<meta property="og:url" content="http://yoursite.com/2017/03/24/BABEL转码解惑/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="解决Nodejs异步问题的终极方案就是使用 async/await，但是每次在项目中配置都会或多或少有些问题，每次都会被几个组件  babel-core babel-polyfill babel-preset-es2015 babel-preset-stage-0 babel-plugin-*  搞的有点混淆不清，甚至不知所措，我们的项目环境利用expressjs搭建，不同程度的使用了es6甚至e">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/14886112498834/14901700891179.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/14886112498834/14901725937633.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/14886112498834/14901725032359.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/14886112498834/14901727299238.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/14901741704474.jpg">
+<meta property="og:updated_time" content="2020-03-04T08:56:48.927Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BABEL转码解惑">
+<meta name="twitter:description" content="解决Nodejs异步问题的终极方案就是使用 async/await，但是每次在项目中配置都会或多或少有些问题，每次都会被几个组件  babel-core babel-polyfill babel-preset-es2015 babel-preset-stage-0 babel-plugin-*  搞的有点混淆不清，甚至不知所措，我们的项目环境利用expressjs搭建，不同程度的使用了es6甚至e">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/14886112498834/14901700891179.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/24/BABEL转码解惑/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>BABEL转码解惑 | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/BABEL转码解惑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BABEL转码解惑
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-03-24 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-24T00:00:00+08:00">2017-03-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-03-04 16:56:48" itemprop="dateModified" datetime="2020-03-04T16:56:48+08:00">2020-03-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>解决Nodejs异步问题的终极方案就是使用 async/await，但是每次在项目中配置都会或多或少有些问题，每次都会被几个组件</p>
+<ol>
+<li>babel-core</li>
+<li>babel-polyfill</li>
+<li>babel-preset-es2015</li>
+<li>babel-preset-stage-0</li>
+<li>babel-plugin-*</li>
+</ol>
+<p>搞的有点混淆不清，甚至不知所措，我们的项目环境利用expressjs搭建，不同程度的使用了es6甚至es7的语法特性和新的API，所以babel转码</p>
+<p>我们先看下具体的CASE</p>
+<h1 id="CASE"><a href="#CASE" class="headerlink" title="CASE"></a>CASE</h1><h2 id="nodejs-4-4-7"><a href="#nodejs-4-4-7" class="headerlink" title="nodejs 4.4.7"></a>nodejs 4.4.7</h2><h3 id="Case-1"><a href="#Case-1" class="headerlink" title="Case 1"></a>Case 1</h3><p>去掉 <code>app.js</code> 里边的 <code>// import &#39;babel-polyfill&#39;</code> 和 <code>// import &#39;babel-core/register&#39;</code>， <code>.babelrc</code>里边需要有plugins</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;presets&quot;: [</span><br><span class="line">        &quot;es2015&quot;,</span><br><span class="line">        &quot;stage-0&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;plugins&quot;: [</span><br><span class="line">        [&quot;transform-runtime&quot;, &#123; &quot;regenerator&quot;: true &#125;]</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>带有async的代码正常能run起来。</p>
+<h3 id="Case-2"><a href="#Case-2" class="headerlink" title="Case 2"></a>Case 2</h3><p>去掉 <code>app.js</code> 里边加上 <code>import &#39;babel-polyfill&#39;</code>，babel里边正常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;presets&quot;: [</span><br><span class="line">        &quot;es2015&quot;,</span><br><span class="line">        &quot;stage-0&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;plugins&quot;: [</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>带有async的代码能正常run</p>
+<blockquote>
+<p><code>import &#39;babel-polyfill</code> 换成 <code>import &quot;babel-core/register&quot;</code>代码无法run起来，报错</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/14886112498834/14901700891179.jpg" alt=""></p>
+<h2 id="nodejs-v7-4-0"><a href="#nodejs-v7-4-0" class="headerlink" title="nodejs v7.4.0"></a>nodejs v7.4.0</h2><h3 id="Case-1-1"><a href="#Case-1-1" class="headerlink" title="Case 1"></a>Case 1</h3><p>app.js 中引入<code>import &#39;babel-polyfill&#39;</code></p>
+<p>而 .babelrc 如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;presets&quot;: [</span><br><span class="line">        &quot;es2015&quot;,</span><br><span class="line">        &quot;stage-0&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码能正常run起来。</p>
+<blockquote>
+<p>去掉 <code>import &#39;babel-polyfill&#39;</code> 或者替换为 <code>import &quot;babel-core/register&quot;</code> 代码均不能正常run</p>
+</blockquote>
+<h3 id="Case-2-1"><a href="#Case-2-1" class="headerlink" title="Case 2"></a>Case 2</h3><p>app.js 中去掉 <code>import &#39;babel-polyfill&#39;</code>，而 .babelrc 代码加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;presets&quot;: [</span><br><span class="line">        &quot;es2015&quot;,</span><br><span class="line">        &quot;stage-0&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;plugins&quot;: [</span><br><span class="line">        [&quot;transform-runtime&quot;, &#123; &quot;regenerator&quot;: true &#125;]</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码可以正常run。</p>
+<h1 id="得到结论"><a href="#得到结论" class="headerlink" title="得到结论"></a>得到结论</h1><p>如果需要使用async和await有两种方式，</p>
+<ol>
+<li>在程序的入口处第一行引入 <code>import babel-polyfill</code>.</li>
+<li>或者使用babel转码的时候引入插件 <code>[&quot;transform-runtime&quot;, { &quot;regenerator&quot;: true }]</code></li>
+</ol>
+<h1 id="往下探索"><a href="#往下探索" class="headerlink" title="往下探索"></a>往下探索</h1><p>首先我们要搞清楚async和await属于es2016（es6实际上是2015年发布的，es6常被称为es2015，而es2016其实就是es7）的特性，Nodejs在实现标准版本的进程上相对浏览器侧要快，截止到nodejs6.x的版本上，想要使用async和await还需要babel的转码才能实现。</p>
+<h2 id="还是看Case"><a href="#还是看Case" class="headerlink" title="还是看Case"></a>还是看Case</h2><p>例如如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;)</span><br><span class="line"></span><br><span class="line">async function readFiles (fileName) &#123;</span><br><span class="line">  return new Promise(function(resolve, reject) &#123;</span><br><span class="line">    fs.readFile(fileName, function(error, data) &#123;</span><br><span class="line">      if (error) reject(error)</span><br><span class="line">      resolve(data)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const start = async function() &#123;</span><br><span class="line">  const result = await readFiles(&apos;/Users/liujb/Desktop/aa.txt&apos;)</span><br><span class="line">  console.log(result.toString())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">start()</span><br></pre></td></tr></table></figure>
+<p>亲测在<code>v7.4.0</code>下报语法错误，在<code>v7.7.4</code>下能run。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/14886112498834/14901725937633.jpg" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/14886112498834/14901725032359.jpg" alt=""></p>
+<h2 id="关于babel"><a href="#关于babel" class="headerlink" title="关于babel"></a>关于babel</h2><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/14886112498834/14901727299238.jpg" alt=""><br><a href="http://www.ruanyifeng.com/blog/2016/01/babel.html" target="_blank" rel="noopener">from</a></p>
+<p>以上内容还是很清晰的，通过babel转码会默认读取babelrc设定的规则，同时会运用相应的插件。</p>
+<h2 id="关于插件"><a href="#关于插件" class="headerlink" title="关于插件"></a>关于插件</h2><h3 id="babel-register-and-babel-polyfill"><a href="#babel-register-and-babel-polyfill" class="headerlink" title="babel-register and babel-polyfill"></a>babel-register and babel-polyfill</h3><p>仔细阅读<a href="http://www.ruanyifeng.com/blog/2016/01/babel.html" target="_blank" rel="noopener">阮老师的博客</a></p>
+<p>babel-register是一个钩子，会对require的js、es、jsx、es6后缀的文件进行转码，且不会对当前文件进行转码，而且是实时转码所以只适合开发阶段。</p>
+<p>babel-polyfill对es6的API进行转码，bable只会对syntax进行转码。</p>
+<h3 id="babel-plugin"><a href="#babel-plugin" class="headerlink" title="babel-plugin-*"></a>babel-plugin-*</h3><p>babel-plugin-* 代表了一系列的转码插件，如babel-plugin-transform-es2015-arrow-functions 用于转码 es6 中的箭头函数，babel-plugin-transform-async-to-generator 用于将 es7 中的 async 转成 generator。</p>
+<h3 id="babel-preset"><a href="#babel-preset" class="headerlink" title="babel-preset-*"></a>babel-preset-*</h3><p>我们现在有了 babel-plugin 系列，可以按需配置自己想要的特性。但若是想搭个 es6 环境，一个个地配置各个插件，我猜你会疯掉。babel-preset 系列就可以满足我们的需求，babel-preset 系列打包了一组插件，类似于餐厅的套餐。如 babel-preset-es2015 打包了 es6 的特性，babel-preset-stage-0 打包处于 strawman 阶段的语法</p>
+<h3 id="babel-plugin-transform-runtime"><a href="#babel-plugin-transform-runtime" class="headerlink" title="babel-plugin-transform-runtime"></a>babel-plugin-transform-runtime</h3><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/14901741704474.jpg" alt=""></p>
+<p>以上内容来源于<a href="https://github.com/brunoyang/blog/issues/20" target="_blank" rel="noopener">https://github.com/brunoyang/blog/issues/20</a></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这一路下来，发现了不少的好文章，终于解决了自己的一些困惑，还是那句废话知易行难，学习总是靠一点点坚持。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="http://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined-with-async-await" target="_blank" rel="noopener">http://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined-with-async-await</a></li>
+<li><a href="http://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined" target="_blank" rel="noopener">http://stackoverflow.com/questions/28976748/regeneratorruntime-is-not-defined</a></li>
+<li><a href="https://www.zfanw.com/blog/babel-6.html" target="_blank" rel="noopener">https://www.zfanw.com/blog/babel-6.html</a></li>
+<li><a href="http://babeljs.io/docs/plugins/transform-runtime/" target="_blank" rel="noopener">transform-runtime</a></li>
+<li><a href="https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-runtime" target="_blank" rel="noopener">babel-plugin-transform-runtime</a></li>
+<li><a href="https://github.com/lmk123/blog/issues/45" target="_blank" rel="noopener">https://github.com/lmk123/blog/issues/45</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/11/Expressjs配置加载器/" rel="next" title="Expressjs配置加载器">
+                <i class="fa fa-chevron-left"></i> Expressjs配置加载器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/30/浏览器同源策略好跨域请求那些事/" rel="prev" title="浏览器同源策略好跨域请求那些事">
+                浏览器同源策略好跨域请求那些事 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">186</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CASE"><span class="nav-number">1.</span> <span class="nav-text">CASE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs-4-4-7"><span class="nav-number">1.1.</span> <span class="nav-text">nodejs 4.4.7</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Case-1"><span class="nav-number">1.1.1.</span> <span class="nav-text">Case 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case-2"><span class="nav-number">1.1.2.</span> <span class="nav-text">Case 2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs-v7-4-0"><span class="nav-number">1.2.</span> <span class="nav-text">nodejs v7.4.0</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Case-1-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Case 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case-2-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">Case 2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#得到结论"><span class="nav-number">2.</span> <span class="nav-text">得到结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#往下探索"><span class="nav-number">3.</span> <span class="nav-text">往下探索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#还是看Case"><span class="nav-number">3.1.</span> <span class="nav-text">还是看Case</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于babel"><span class="nav-number">3.2.</span> <span class="nav-text">关于babel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于插件"><span class="nav-number">3.3.</span> <span class="nav-text">关于插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#babel-register-and-babel-polyfill"><span class="nav-number">3.3.1.</span> <span class="nav-text">babel-register and babel-polyfill</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#babel-plugin"><span class="nav-number">3.3.2.</span> <span class="nav-text">babel-plugin-*</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#babel-preset"><span class="nav-number">3.3.3.</span> <span class="nav-text">babel-preset-*</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#babel-plugin-transform-runtime"><span class="nav-number">3.3.4.</span> <span class="nav-text">babel-plugin-transform-runtime</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

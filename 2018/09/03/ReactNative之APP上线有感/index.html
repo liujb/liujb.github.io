@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="历经3个月的金融APP1.0正式达上线状态，终于达成阶段性目标，万事开头难所有系统的建设1.0确实也是最难的需要做的事情和面临的问题也是最多的，整个过程有点“煎熬”的所以迫不及待想要拿出来跟大家Share一下，聊聊心路历程。 先睹为快APP主界面图   还有保险频道，但是由于资质问题暂时无法上线。  下载地址  目前还只能在内网下载，4G网络下可以正常体验  Android正在提交应用市场，预计3">
+<meta name="keywords" content="Android,ReactNative,iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactNative之APP上线有感">
+<meta property="og:url" content="http://yoursite.com/2018/09/03/ReactNative之APP上线有感/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="历经3个月的金融APP1.0正式达上线状态，终于达成阶段性目标，万事开头难所有系统的建设1.0确实也是最难的需要做的事情和面临的问题也是最多的，整个过程有点“煎熬”的所以迫不及待想要拿出来跟大家Share一下，聊聊心路历程。 先睹为快APP主界面图   还有保险频道，但是由于资质问题暂时无法上线。  下载地址  目前还只能在内网下载，4G网络下可以正常体验  Android正在提交应用市场，预计3">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/Untitled.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/Canvas%202.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/%E6%BB%B4%E6%BB%B4%E9%87%91%E8%9E%8DAPP%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15312995245315.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15313003128621.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15312932758397.jpg">
+<meta property="og:updated_time" content="2020-03-04T08:56:48.927Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactNative之APP上线有感">
+<meta name="twitter:description" content="历经3个月的金融APP1.0正式达上线状态，终于达成阶段性目标，万事开头难所有系统的建设1.0确实也是最难的需要做的事情和面临的问题也是最多的，整个过程有点“煎熬”的所以迫不及待想要拿出来跟大家Share一下，聊聊心路历程。 先睹为快APP主界面图   还有保险频道，但是由于资质问题暂时无法上线。  下载地址  目前还只能在内网下载，4G网络下可以正常体验  Android正在提交应用市场，预计3">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/Untitled.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/03/ReactNative之APP上线有感/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ReactNative之APP上线有感 | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/ReactNative之APP上线有感/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ReactNative之APP上线有感
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-09-03 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-03T00:00:00+08:00">2018-09-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-03-04 16:56:48" itemprop="dateModified" datetime="2020-03-04T16:56:48+08:00">2020-03-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>历经3个月的金融APP1.0正式达上线状态，终于达成阶段性目标，万事开头难所有系统的建设1.0确实也是最难的需要做的事情和面临的问题也是最多的，整个过程有点“煎熬”的所以迫不及待想要拿出来跟大家Share一下，聊聊心路历程。</p>
+<h1 id="先睹为快"><a href="#先睹为快" class="headerlink" title="先睹为快"></a>先睹为快</h1><p>APP主界面图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/Untitled.png" alt="Untitled"></p>
+<blockquote>
+<p>还有保险频道，但是由于资质问题暂时无法上线。</p>
+</blockquote>
+<p><strong>下载地址</strong><br><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/Canvas%202.png" alt="Canvas 2"></p>
+<blockquote>
+<p>目前还只能在内网下载，4G网络下可以正常体验</p>
+</blockquote>
+<p>Android正在提交应用市场，预计3-5天就能直接在市场下载，iOS由于收购滴滴金融商标所属的公司目前有“滴滴金融APP”在App store需要对方下线后我们才能提交审核。</p>
+<h1 id="承上"><a href="#承上" class="headerlink" title="承上"></a>承上</h1><p>接年初我在Way社区分享的文章 <a href="http://way.xiaojukeji.com/article/6569" target="_blank" rel="noopener">滴滴金融App技术架构设计感想</a> 一文，作为前端团队的我们“主动请缨”来承接滴滴金融APP的研发工作，当时几个核心点</p>
+<ol>
+<li>为什么做金融APP？（战略意义+品牌落地+业务推广）</li>
+<li>为什么是前端同学来做？（技术诉求+技术能力+效率至上）</li>
+<li>技术选型+怎么做？（以RN为切入+借力）</li>
+</ol>
+<p>当时给出的总体架构设计如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/%E6%BB%B4%E6%BB%B4%E9%87%91%E8%9E%8DAPP%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="滴滴金融APP总体架构图"></p>
+<p>架构的核心想法就是借力</p>
+<ol>
+<li>借助平台已有的能力，不重复做工作。</li>
+<li>借助过去金融Webapp的能力，保障能快速上线。</li>
+</ol>
+<blockquote>
+<p>目前来看跟过去的设想差别不大，实施过程中也是这么做的，好处也跟当初想的差不多。</p>
+</blockquote>
+<h1 id="“打怪升级”"><a href="#“打怪升级”" class="headerlink" title="“打怪升级”"></a>“打怪升级”</h1><p>接下来跟大家聊聊整个过程中我们的心路历程。</p>
+<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><h3 id="框架选型"><a href="#框架选型" class="headerlink" title="框架选型"></a>框架选型</h3><p>我们在RN、Weex、Flutter三者之间做了比较</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15312995245315.jpg" alt=""></p>
+<blockquote>
+<p>最终基于团队现状我们选择了RN。</p>
+</blockquote>
+<h3 id="语言选择"><a href="#语言选择" class="headerlink" title="语言选择"></a>语言选择</h3><p>我们在关于使用ts和js也做了比较</p>
+<h4 id="ts"><a href="#ts" class="headerlink" title="ts"></a>ts</h4><ol start="2">
+<li>类型校验更容易避免低级错误。</li>
+<li>可维护性更友好。</li>
+<li>代码量会增多。</li>
+<li>略有学习成本。</li>
+</ol>
+<h4 id="js"><a href="#js" class="headerlink" title="js"></a>js</h4><ol start="3">
+<li>写起来更爽，可以达到随意之所至。</li>
+<li>代码量相比ts会少。</li>
+<li>无学习成本。</li>
+<li>类型校验能力较弱（当然可以用flow来做）</li>
+<li>可维护性差</li>
+</ol>
+<blockquote>
+<p>综合结论就是想前期爽就用js，想后期爽就用ts，毫无疑问我们选择了ts。</p>
+</blockquote>
+<h3 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h3><p>我们在Mbox和Redux上也进行了相应的纠结</p>
+<h4 id="Mbox"><a href="#Mbox" class="headerlink" title="Mbox"></a>Mbox</h4><ol>
+<li>OOP范式相对于函数式更低的上手成本。</li>
+<li>Mobx自动追踪修改。</li>
+<li>多个业务store可拆分。</li>
+</ol>
+<h4 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h4><ol>
+<li>单个store不可修改。</li>
+<li>与React的配合更默契。</li>
+<li>调试更加简单。</li>
+</ol>
+<blockquote>
+<p>最终结论就是不论选择redux还是mobx对于我们来说问题都不大，所以基于大部分同学的诉求选择了redux。</p>
+</blockquote>
+<h2 id="接入平台SDK"><a href="#接入平台SDK" class="headerlink" title="接入平台SDK"></a>接入平台SDK</h2><p>项目启动之初我们主要是3个人来进行研发工作，其中只有一位同学拥有1年的Android经验且中间有1年多未进行Android开发，整个团队都没有iOS经验。</p>
+<p><strong>当时团队的现状是</strong></p>
+<ol>
+<li>几乎无Native经验。</li>
+<li>对Java和Object c的语法都不熟悉。</li>
+<li>对工具使用如Gradle和Pod也不熟悉。</li>
+</ol>
+<p>我们花了差不多1个星期的时间进行了快速的学习并且写了相应的Demo就在我们认为“问题不大”的时候那就开搞！</p>
+<h4 id="“欲仙欲死”的一周"><a href="#“欲仙欲死”的一周" class="headerlink" title="“欲仙欲死”的一周"></a>“欲仙欲死”的一周</h4><p>第一周团队成员可以说“欲仙欲死”，为什么呢？</p>
+<p>因为有些功能我们按照文档跟相关同学的请教并且按照自己仅有的知识和过去的经验认为应该怎么怎么样的时候，发现怎么“调戏”都不好使，那种感觉真是坐立不安有过类似经验的人相信都能感同身受，但是大家又都知道不能放弃，就是不服！一瞬间我感觉自己回到了毕业之初，很多知识不健全无法串联起来的那种痛苦，毕竟这种感觉已经多年没有体验过了。</p>
+<p>经历了痛苦的一周后，后续的工作就能比较顺利的开展了，还好做基础组件的同学们对我们不离不弃，陪着我们浪，这里真心给帮助过我们的同学表示感谢。</p>
+<p><strong>于此同时我们也发现了平台相关的SDK之间的部分问题</strong></p>
+<ol>
+<li>SDK依赖关系可以说是错综复杂。</li>
+<li>版本管理不够严谨。（未能严格按照3级版本的方式进行升级迭代）</li>
+<li>部分SDK依赖过多。</li>
+<li>文档相对代码落后。（我认为这是个共性问题，对于成熟选手可能感受不会那么浓烈，对于初级选手真的是要哭）</li>
+</ol>
+<p>第一版我们接入的SDK主要有</p>
+<ol>
+<li>Omega数据上报。</li>
+<li>Crash report。</li>
+<li>Webview。</li>
+<li>JSBridge。</li>
+<li>UnifyPassport。</li>
+<li>支付组件。</li>
+<li>人脸识别。</li>
+</ol>
+<h2 id="自己挖坑"><a href="#自己挖坑" class="headerlink" title="自己挖坑"></a>自己挖坑</h2><p>搞定大部分SDK的接入工作，我们认为最难的部分应该过去了，那就按照原型图开始画页面。这可是我们的优势啊，我们就马不停蹄的搞，看着页面在我们手里一点点出来沾沾自喜，直到我们把所有的频道+页面整合到一起后，嗯iOS还算顺滑，Android就GG了。</p>
+<p>Android遇到的问题在多个tab页切换的时候会比较明显的卡顿，当时团队里边唯一有Android经验的人得出的结论“可能因为我们是单个RNApp”加载的Bundle大导致的，所以要拆分多个RNApp，并且非常确凿的说单个RNAPP还有个致命的问题就是RNApp某一处的奔溃会导致整个App崩溃。</p>
+<p>所以基于此我们就相信他了，谁叫他是唯一有Android经验的人，那就陪他浪，反正我们拆解起来也非常快，因为都是组件化的思路搭建起来的页面拆完之后果然诶安卓上也顺滑多了，心中默念了一遍“问题不大”。</p>
+<p>与此同时我们发现引入了新的问题，通用数据会在不同的RNApp上进行发送，这个我们还能堵住，后来发现诶多个RNApp中的通信又变麻烦了，也可以搞定，多个RNApp之间的二级页面跳转也能勉强搞，但是一路都是各种hack手段来实现，RNApp之间以及和NativeApp以及和Web之间的通信更复杂了，链路更长了，并且还遇到诸如Alert这样的会多次弹出。如果想要堵住这个问题需要改造原生的Alert或Popup一类的组件，这个时候我开始迷茫了。我意识到我们可能把事情搞砸了。</p>
+<p>迷途知返，我们再一次调头，还是沿用单RNApp的，我们来专注解决Tab切换的问题就好了，后来经过不断的努力和尝试，Android的这个问题暂时得以解决。</p>
+<p>过程图如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15313003128621.jpg" alt=""></p>
+<blockquote>
+<p>这个坑得出的结论就是1、步子迈大了真的容易扯到什么东西。2、技术方案不能轻易变动特别是没想清楚的前提下。</p>
+</blockquote>
+<h1 id="“沟沟坎坎”"><a href="#“沟沟坎坎”" class="headerlink" title="“沟沟坎坎”"></a>“沟沟坎坎”</h1><h2 id="人力问题"><a href="#人力问题" class="headerlink" title="人力问题"></a>人力问题</h2><p>前文提到我们近3个月才达到上线状态，效率不行啊 ，实际上我们的研发时间是从3.19号-4.28号，只有3个FE和一个Android工程师，接近40天时间从0到1建设的APP，我个人认为还能接受，但是QA的同学是5.28号才开始入场，所以兜兜转转才会有3个多月这么长时间。</p>
+<p>这几位同学不仅承担APP本身的研发工作，还包括API层，以及某些配置类的服务层。</p>
+<h2 id="司乘账号问题"><a href="#司乘账号问题" class="headerlink" title="司乘账号问题"></a>司乘账号问题</h2><p>滴滴过去的账号体系区分角色、而金融天然是个只认自然人的场景，过去我们的webapp分别投放在司机端和乘客端，取的是各自身份的token进行业务的开展，而业务侧的代码也是依赖于角色和对应的uid。</p>
+<p>金融端作为面向普罗大众，我们在接入Passport的时候只能选择乘客角色，而乘客角色对于过去的webapp和业务的兼容不同程度会有体验问题。</p>
+<p>我们本想基于平台已有的司乘统一的体系，但是整个服务端的接入改造需要至少3个月的时间，所以上上下下左左右右经过很多次沟通，最后还是只能沿用当前乘客端的逻辑。牺牲了一定的体验（在信贷和理财如果用户在司机端进行了实名有相应的业务数据到乘客端还需要进行一次实名绑定到该自然人）</p>
+<blockquote>
+<p>这个问题其实一直都有，只是在做APP的过程中会有一定程度的放开。</p>
+</blockquote>
+<h2 id="“滴滴金融”商标回购"><a href="#“滴滴金融”商标回购" class="headerlink" title="“滴滴金融”商标回购"></a>“滴滴金融”商标回购</h2><p>滴滴金融品牌的商标很早就被别人注册，整个团队研究了很久到底是收购商标还是重新申请商标，商标会影响APP上很多东西比如icon、slogo、软件著作权、开屏页面等等，也是一种煎熬。</p>
+<h1 id="聊聊大前端的不归路"><a href="#聊聊大前端的不归路" class="headerlink" title="聊聊大前端的不归路"></a>聊聊大前端的不归路</h1><p>熟知我的朋友们都知道我是坚定在把整个团队往“全栈”的方向推进和建设，而前端毫无疑问是往“大前端”方向，今天在再次跟大家简单的回答下以下几个问题。</p>
+<h2 id="为什么我要做大前端"><a href="#为什么我要做大前端" class="headerlink" title="为什么我要做大前端"></a>为什么我要做大前端</h2><h3 id="事"><a href="#事" class="headerlink" title="事"></a>事</h3><ol start="2">
+<li>“套页面”时代的痛苦以及更低迭代效率。</li>
+<li>“性能优化”时的掣肘和施展空间不够。</li>
+<li>“跨端”“可能”带来的效率提升。</li>
+</ol>
+<h3 id="人"><a href="#人" class="headerlink" title="人"></a>人</h3><ol start="6">
+<li>“鄙视链”底层的痛苦。</li>
+<li>“可能被淘汰”的危机感。</li>
+<li>坦白来讲希望扩充自己的技术边界以求在职场更好的发展。</li>
+</ol>
+<blockquote>
+<p>基于以上毫无疑问我要做大前端。</p>
+</blockquote>
+<h2 id="什么是大前端"><a href="#什么是大前端" class="headerlink" title="什么是大前端"></a>什么是大前端</h2><p>笼统的讲过去的前端同学主要工作都是在利用js/css/html来做web的展示和交互，而大前端主要包括（当然不局限于此）</p>
+<ol>
+<li>引入“Nodejs、PHP”胶水层让整个Web应用整体衔接更紧密。</li>
+<li>让前端同学拥有跨端的能力。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15312932758397.jpg" alt=""></p>
+<blockquote>
+<p>前端好歹带个端字怎么可以只做页面。</p>
+</blockquote>
+<h2 id="为什么我们能做大前端"><a href="#为什么我们能做大前端" class="headerlink" title="为什么我们能做大前端"></a>为什么我们能做大前端</h2><p>毫无疑问得益于技术的发展，十年前不可能说走什么大前端路什么全栈几乎没这概念。近些年这几个方面的技术发展对于大前端起到了至关重要的作用。</p>
+<ol>
+<li>浏览器厂商对于标准的渴望越来越浓，以H5/CSS3/ES为代表的标准和步伐越来越快。</li>
+<li>Nodejs为主的JS在Server端的发展打开了前端同学新的窗口。</li>
+<li>RN/Weex/Flutter为代表的跨端技术呼声越来越大发展极为迅速。</li>
+</ol>
+<h2 id="这条路的优劣"><a href="#这条路的优劣" class="headerlink" title="这条路的优劣"></a>这条路的优劣</h2><p>毫无疑问走大前端会让自身拥有更多的技能，中国有句老话叫做技多不压身，我骨子里还是非常传统的对于这种几千年流传下来的话我是很信的。另外对于企业来说大前端意味着“更快”的效率“更低”的成本。</p>
+<p>还有一层含义就是做事的人更爽了，不再被鄙视了，效率上去了，施展空间大了，没什么比在这里做事的人干着爽更重要的。</p>
+<p>另外就是我深刻的体会到大前端对于人才的要求更高，这也是近期Airbab放弃RN中讲到的很重要的一个点，要求高意味这要付出更多的努力，会更加辛苦。</p>
+<p>就拿我自己来说我做过Server、作为前端，现在又要来学端的知识，尽管我自认为学习能力还比较强，但是整个过程也是很痛苦并且我要想学到对端的技术融会贯通的地步我觉着这可能真的是一条不归路。</p>
+<blockquote>
+<p>允许我在这里说句实话，大前端在国内的大企业不见得很受待见有客观的也有主观的原因，这也是不归路的点，有兴趣的朋友我们可以私下交流。</p>
+</blockquote>
+<h1 id="启下"><a href="#启下" class="headerlink" title="启下"></a>启下</h1><h2 id="忘掉招式"><a href="#忘掉招式" class="headerlink" title="忘掉招式"></a>忘掉招式</h2><p><strong>临阵杀敌忘掉所有招式</strong></p>
+<p>这是我想对我和团队同学们要说的，过去我们总说我们在做RN，实际上经过这段时间的演变，我也开始在质问和质疑我自己，引入RN是否真的提高了效率，是否真的因为引入了RN所有的前端同学就都能做APP开发了，是不是我把事情搞复杂啦，我看到引入RN又增加了一层通信的成本过去APP只需要跟Webview里边的js进行通信就能拥有混合型APP的能力，现在还需要跟RN通过桥接的方式进行通信。</p>
+<p>所以忘掉招式把，我们是在探索是最适合团队和以及相比于传统的端的开发模式更高效的方式。不排除有一天我会移除RN或者又引入新的什么跨端技术如Flutter等等。</p>
+<h2 id="APP接下来的重点"><a href="#APP接下来的重点" class="headerlink" title="APP接下来的重点"></a>APP接下来的重点</h2><ol>
+<li>增强Web开发者的开发体验，增强Webapp本身的能力和体验。</li>
+<li>金融APP的安全和风控能力。</li>
+<li>辅助工具（如<a href="https://mcodepush.xiaojukeji.com" target="_blank" rel="noopener">热更新服务</a>基于开源完成部署可直接于内部团队）</li>
+<li>可能有的RN生态（如组件库的建设）</li>
+</ol>
+<h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p>最后还是感谢，在为期3个多月的研发工作中，很多人都给予了极大地支持包括但不限于</p>
+<ul>
+<li>平台组的大左、龙熠的鼓励和支持。</li>
+<li>基础组件和工具的同学如（Omega、Apollo、Webview、JSBridge、UnifyPassport、人脸识别、收银台SDK）等兄弟姐妹们。</li>
+<li>还有个国际化”不靠谱“的王佳佳给予了我们iOS基础能力的传授。</li>
+<li>曾经的谷雨客户端的兄弟（于洋、王栋）手把手的教我们。</li>
+<li>最后是曼哈顿直接参与的产品设计和研发测试的同学们你们“很可爱”</li>
+<li>还有支持我们的市场、品牌、PR、法务的同学们。</li>
+</ul>
+<p>历史永远是往前发展，技术和开发模式同样如此，人亦当也是如此，我们在走一条不一样的路也许没有归期，路途中也许会孤独可能会无助，知道为什么以及可能会到哪里很重要，共勉！</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/ReactNative/" rel="tag"># ReactNative</a>
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/02/Android技术初步探索/" rel="next" title="Android技术初步探索">
+                <i class="fa fa-chevron-left"></i> Android技术初步探索
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/03/HTTP2.0初步探索/" rel="prev" title="HTTP2.0初步探索">
+                HTTP2.0初步探索 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">186</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#先睹为快"><span class="nav-number">1.</span> <span class="nav-text">先睹为快</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#承上"><span class="nav-number">2.</span> <span class="nav-text">承上</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#“打怪升级”"><span class="nav-number">3.</span> <span class="nav-text">“打怪升级”</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#技术选型"><span class="nav-number">3.1.</span> <span class="nav-text">技术选型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#框架选型"><span class="nav-number">3.1.1.</span> <span class="nav-text">框架选型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语言选择"><span class="nav-number">3.1.2.</span> <span class="nav-text">语言选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ts"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">ts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#js"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">js</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态管理"><span class="nav-number">3.1.3.</span> <span class="nav-text">状态管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mbox"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">Mbox</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redux"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">Redux</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接入平台SDK"><span class="nav-number">3.2.</span> <span class="nav-text">接入平台SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#“欲仙欲死”的一周"><span class="nav-number">3.2.0.1.</span> <span class="nav-text">“欲仙欲死”的一周</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自己挖坑"><span class="nav-number">3.3.</span> <span class="nav-text">自己挖坑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#“沟沟坎坎”"><span class="nav-number">4.</span> <span class="nav-text">“沟沟坎坎”</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#人力问题"><span class="nav-number">4.1.</span> <span class="nav-text">人力问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#司乘账号问题"><span class="nav-number">4.2.</span> <span class="nav-text">司乘账号问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“滴滴金融”商标回购"><span class="nav-number">4.3.</span> <span class="nav-text">“滴滴金融”商标回购</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#聊聊大前端的不归路"><span class="nav-number">5.</span> <span class="nav-text">聊聊大前端的不归路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么我要做大前端"><span class="nav-number">5.1.</span> <span class="nav-text">为什么我要做大前端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事"><span class="nav-number">5.1.1.</span> <span class="nav-text">事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#人"><span class="nav-number">5.1.2.</span> <span class="nav-text">人</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是大前端"><span class="nav-number">5.2.</span> <span class="nav-text">什么是大前端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么我们能做大前端"><span class="nav-number">5.3.</span> <span class="nav-text">为什么我们能做大前端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这条路的优劣"><span class="nav-number">5.4.</span> <span class="nav-text">这条路的优劣</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启下"><span class="nav-number">6.</span> <span class="nav-text">启下</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#忘掉招式"><span class="nav-number">6.1.</span> <span class="nav-text">忘掉招式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#APP接下来的重点"><span class="nav-number">6.2.</span> <span class="nav-text">APP接下来的重点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感谢"><span class="nav-number">7.</span> <span class="nav-text">感谢</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

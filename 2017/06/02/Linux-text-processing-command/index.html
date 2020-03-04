@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Linux-text-processing-command 在类Unix系统中，核心思想就是一切皆文件，而文本文件是最常见的文件类型，日常工作中我们有大量的时间都在查看和处理文本。 今天我们学习Unix和Linux中文本处理几个常见的命令，主要包括  grep sort uniq cut paste split  以及几个常见的文本查看命令  less cat more vi/vim   最后还有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-text-processing-command">
+<meta property="og:url" content="http://yoursite.com/2017/06/02/Linux-text-processing-command/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="Linux-text-processing-command 在类Unix系统中，核心思想就是一切皆文件，而文本文件是最常见的文件类型，日常工作中我们有大量的时间都在查看和处理文本。 今天我们学习Unix和Linux中文本处理几个常见的命令，主要包括  grep sort uniq cut paste split  以及几个常见的文本查看命令  less cat more vi/vim   最后还有">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-30T03:35:08.318Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux-text-processing-command">
+<meta name="twitter:description" content="Linux-text-processing-command 在类Unix系统中，核心思想就是一切皆文件，而文本文件是最常见的文件类型，日常工作中我们有大量的时间都在查看和处理文本。 今天我们学习Unix和Linux中文本处理几个常见的命令，主要包括  grep sort uniq cut paste split  以及几个常见的文本查看命令  less cat more vi/vim   最后还有">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/02/Linux-text-processing-command/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Linux-text-processing-command | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/Linux-text-processing-command/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux-text-processing-command
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-02T00:00:00+08:00">2017-06-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-08-30 11:35:08" itemprop="dateModified" datetime="2018-08-30T11:35:08+08:00">2018-08-30</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Linux-text-processing-command</p>
+<p>在<code>类Unix</code>系统中，核心思想就是<code>一切皆文件</code>，而文本文件是最常见的文件类型，日常工作中我们有大量的时间都在查看和处理文本。</p>
+<p>今天我们学习Unix和Linux中文本处理几个常见的命令，主要包括</p>
+<ul>
+<li>grep</li>
+<li>sort</li>
+<li>uniq</li>
+<li>cut</li>
+<li>paste</li>
+<li>split</li>
+</ul>
+<p>以及几个常见的文本查看命令</p>
+<ul>
+<li>less</li>
+<li>cat</li>
+<li>more</li>
+<li>vi/vim </li>
+</ul>
+<p>最后还有两个比较复杂的文本处理命令 </p>
+<ul>
+<li>sed</li>
+<li>awk</li>
+</ul>
+<h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h1><p><code>grep</code>是一个非常强大的命令，主要作用是用来搜索文本，本文只做简单的使用介绍。</p>
+<p>常见用法</p>
+<ol>
+<li><code>grep &#39;keywords&#39; test.txt</code> 在指定文件中搜索关键字</li>
+<li><code>grep -i &#39;keywords&#39; test.txt</code> 在指定的文件中搜索关键字，并忽略大小写</li>
+<li><code>grep -n &#39;keywords&#39; test.txt</code> 在指定的文件中搜索关键字，同时打印出行号</li>
+<li><code>grep -c &#39;keywords&#39; test.txt</code> 在指定的文件中搜索关键字，打印出匹配次数</li>
+<li><code>grep -r &#39;keywords&#39; path</code> 在指定的路径中递归搜索关键字</li>
+<li><code>grep -v &#39;keywords&#39; test.txt</code> 在指定的文件中反向匹配关键字（打印出不是keywords的文本）</li>
+</ol>
+<h1 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h1><p><code>sort</code>命令主要用于对数据进行排序</p>
+<p>常见用法</p>
+<ol>
+<li><code>cat test.txt | sort</code> 排序输出</li>
+<li><code>cat test.txt | sort -n</code> 数字方式排序输出</li>
+<li><code>cat test.txt | sort -r</code> 反向排序输出</li>
+<li><code>cat test.txt | sort -t &quot;,&quot; -k 2 -n</code> 将<code>test.txt</code>文件通过分隔符<code>,</code>分割，然后按照第2列数字排序</li>
+</ol>
+<h1 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h1><p><code>uniq</code>命令用于删除文件中（或标准输出）重复的行，或者计算出重复行出现的次数，该命令常与<code>sort</code>一起使用，因为命令只会删除连续重复的行，所以一般先排序，然后在删除。</p>
+<p>常见用法</p>
+<ol>
+<li><code>cat test.txt | sort | uniq</code> 删除<code>test.txt</code>中重复的行（排序后，重复的行会连续在一起）</li>
+<li><code>cat test.txt | sort | uniq -i</code> 忽略大小写的情况下，删除重复行</li>
+<li><code>cat test.txt | sort | uniq -c</code> 排序后并删除重复行，同时打印出重复行出现的次数</li>
+</ol>
+<h1 id="cut"><a href="#cut" class="headerlink" title="cut"></a>cut</h1><p><code>cut</code>命令处理的对象是一行，可以从一行中选取出用户所需要的部分。<br><code>cut -f 指定的列 -d &#39;分隔符&#39;</code></p>
+<ol>
+<li><code>cat test.txt | cut -f1 -d&#39;:&#39;</code> 截取<code>test.txt</code>文件中，通过<code>:</code>分割的第一列</li>
+<li><code>cat test.txt | cut f1,6-7 -d&#39;:&#39;</code> 截取<code>test.txt</code>文件中，通过<code>:</code>分割的第1列，和6，7两列</li>
+</ol>
+<p>如果处理的文本没有分隔符，这时候该如何是好 <code>cut -c</code> 指定列的字符</p>
+<p>比如：<code>cat test.txt | cut -c1-5, 7-10</code> 截取<code>test.txt</code>文件中，第1个到第5个字符，以及第7个到第10个字符。</p>
+<h1 id="paste"><a href="#paste" class="headerlink" title="paste"></a>paste</h1><p><code>paste</code>命令的主要将文件按照行进行合并，中间默认使用<code>tab</code>隔开</p>
+<ol>
+<li><code>paste a.txt b.txt</code> 将<code>a.txt</code>和<code>b.txt</code>进行合并，默认使用的<code>tab</code>分割。</li>
+<li><code>paste -d, a.txt b.txt</code> 将<code>a.txt</code>和<code>b.txt</code>使用<code>,</code>进行合并</li>
+</ol>
+<h1 id="split"><a href="#split" class="headerlink" title="split"></a>split</h1><p><code>split</code>命令主要用于将文本进行切割，支持按指定行数，或者指定大小</p>
+<ol>
+<li><code>split -l 500 big_file.txt small_file_</code> 将<code>big_file.txt</code>切割成500行一个小文件</li>
+<li><code>split -b 64m big_file.txt small_file_</code> 将<code>big_file.txt</code>切割成64M一个小文件</li>
+</ol>
+<h1 id="less"><a href="#less" class="headerlink" title="less"></a>less</h1><h1 id="more"><a href="#more" class="headerlink" title="more"></a>more</h1><h1 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h1><h1 id="vi-vim"><a href="#vi-vim" class="headerlink" title="vi/vim"></a>vi/vim</h1><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ol>
+<li><code>cut</code>其实也是切割文件，只不过是垂直切割，<code>split</code>是横向切割而已。</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/02/Shell-judge-variables/" rel="next" title="Shell-judge-variables">
+                <i class="fa fa-chevron-left"></i> Shell-judge-variables
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/02/Linux-view-device-infomation/" rel="prev" title="Linux-view-device-infomation">
+                Linux-view-device-infomation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">218</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#grep"><span class="nav-number">1.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sort"><span class="nav-number">2.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#uniq"><span class="nav-number">3.</span> <span class="nav-text">uniq</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cut"><span class="nav-number">4.</span> <span class="nav-text">cut</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#paste"><span class="nav-number">5.</span> <span class="nav-text">paste</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#split"><span class="nav-number">6.</span> <span class="nav-text">split</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#less"><span class="nav-number">7.</span> <span class="nav-text">less</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#more"><span class="nav-number">8.</span> <span class="nav-text">more</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cat"><span class="nav-number">9.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vi-vim"><span class="nav-number">10.</span> <span class="nav-text">vi/vim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">11.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

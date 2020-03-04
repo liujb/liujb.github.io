@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="三周年了2015-09-09，公司三周年了，这一天，公司从滴滴打车更名为滴滴出行，预示着公司将承载着更大的梦想。产品首页更是大改，作为一个在滴滴两年的员工，内心还是无比的激动，过去的两年伴随着公司的成长个人各方面能力都有提升，能在这样一家年轻，激情的公司，能和一群有理想的同学们一起，实属荣幸。 作为一个带有极简主义倾向，和轻微强迫症的前FE同学现RD未来的PM同学，针对新首页的设计也想谈谈自己的想">
+<meta property="og:type" content="article">
+<meta property="og:title" content="滴滴打车APP3.0改版有感">
+<meta property="og:url" content="http://yoursite.com/2016/07/16/滴滴打车APP3.0改版有感/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="三周年了2015-09-09，公司三周年了，这一天，公司从滴滴打车更名为滴滴出行，预示着公司将承载着更大的梦想。产品首页更是大改，作为一个在滴滴两年的员工，内心还是无比的激动，过去的两年伴随着公司的成长个人各方面能力都有提升，能在这样一家年轻，激情的公司，能和一群有理想的同学们一起，实属荣幸。 作为一个带有极简主义倾向，和轻微强迫症的前FE同学现RD未来的PM同学，针对新首页的设计也想谈谈自己的想">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/New_Mockup_5.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/IMG_7244.JPG">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/IMG_7246.JPG">
+<meta property="og:updated_time" content="2020-03-04T08:56:48.801Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="滴滴打车APP3.0改版有感">
+<meta name="twitter:description" content="三周年了2015-09-09，公司三周年了，这一天，公司从滴滴打车更名为滴滴出行，预示着公司将承载着更大的梦想。产品首页更是大改，作为一个在滴滴两年的员工，内心还是无比的激动，过去的两年伴随着公司的成长个人各方面能力都有提升，能在这样一家年轻，激情的公司，能和一群有理想的同学们一起，实属荣幸。 作为一个带有极简主义倾向，和轻微强迫症的前FE同学现RD未来的PM同学，针对新首页的设计也想谈谈自己的想">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/New_Mockup_5.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/16/滴滴打车APP3.0改版有感/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>滴滴打车APP3.0改版有感 | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/16/滴滴打车APP3.0改版有感/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">滴滴打车APP3.0改版有感
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-07-16 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-16T00:00:00+08:00">2016-07-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-03-04 16:56:48" itemprop="dateModified" datetime="2020-03-04T16:56:48+08:00">2020-03-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="三周年了"><a href="#三周年了" class="headerlink" title="三周年了"></a>三周年了</h2><p>2015-09-09，公司三周年了，这一天，公司从<code>滴滴打车</code>更名为<code>滴滴出行</code>，预示着公司将承载着更大的梦想。产品首页更是大改，作为一个在滴滴两年的员工，内心还是无比的激动，过去的两年伴随着公司的成长个人各方面能力都有提升，能在这样一家年轻，激情的公司，能和一群有理想的同学们一起，实属荣幸。</p>
+<p>作为一个带有极简主义倾向，和轻微强迫症的前FE同学现RD未来的PM同学，针对新首页的设计也想谈谈自己的想法。</p>
+<h2 id="个人认为不合理点"><a href="#个人认为不合理点" class="headerlink" title="个人认为不合理点"></a>个人认为不合理点</h2><ol>
+<li>厚重的<code>header</code>很容易让人压抑感，第一次看到设计稿的时候第一感觉就是如此，就好比本来一个身材俊俏的小伙突然变得矮胖矮胖了，而且在切换到顺风车时更是如此。(具体参考下图或者打开app)</li>
+<li><code>header</code>上三个<code>icon</code>看起来很僵硬，特别是通知的icon在切换到顺风车和其他产品线还不一致的时候。</li>
+<li>最左边的icon可以考虑把人头换掉了，用三道杠和三个点吧，毕竟里面的内容并非都是指人，而是诸如设置，消息中心，积分商城，发现等功能。</li>
+<li>底部的出发地和目的地会一直占用很大的屏幕，特别在iPhone4和iPhone5上，感觉整个app没有空间感。</li>
+<li>底部选择时间的交互方式找了很久，既然是低频需求，可以考虑在切换到输入目的地的时候再加上该选项吧。</li>
+<li>header第二行右边还有三个点的icon，跟通知的icon太近，而且太靠近右边，整个这一块离简洁太远了。</li>
+</ol>
+<h2 id="YY下个人设计的极简版滴滴打车"><a href="#YY下个人设计的极简版滴滴打车" class="headerlink" title="YY下个人设计的极简版滴滴打车"></a>YY下个人设计的极简版滴滴打车</h2><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/New_Mockup_5.png" alt=""></p>
+<ol>
+<li><code>header</code>保持一贯的清爽。那个<code>小人</code>上边说了可以换一下找一下感觉。</li>
+<li>另外不建议放一个固定的通知按钮。</li>
+<li><code>header</code>正中间的logo其实还可以考虑随着下面业务条的切换而变化。</li>
+<li>下面的<code>业务条</code>保持简洁，没有被选中的<code>icon</code>都用<code>点</code>替代，下面带上文字描述。</li>
+<li>最重要的把中间的定位提示框，加上<code>在哪儿</code>，和<code>去哪儿</code>，如果是<code>顺风车的话切换司机和乘客</code>，<code>在哪儿</code>和<code>去哪儿</code>都可以点击进去更改，其他功能，类似<code>加价</code>选<code>车型</code>还有原来的<code>捎话</code>等功能都可以放到第二个页面中去完成。（当然了这个圆形设计得比较low，就别看啦，哈哈）</li>
+</ol>
+<h2 id="顺带说一下功能"><a href="#顺带说一下功能" class="headerlink" title="顺带说一下功能"></a>顺带说一下功能</h2><ol>
+<li><p>原先的<code>附近有xx辆车</code>此功能应该是当年为了吸引乘客叫车，现在该数值对用户叫车行为应该没有直接影响，用户会凭着个人生活经验以及地图上是否有车的logo来判断此处是否有车，而且说实话大部分人都知道那个车辆数并非准备可信，所以还鸡肋还不如直接下掉，或者找个地方简单展示。</p>
+</li>
+<li><p>右上角通知消息固定入口，可以考虑挪到<code>我</code>里边真正的消息处吧，毕竟真的想强推消息的时候，在进入app或者切换到业务线的时候直接展示即可。感兴趣的用户第一次就会点进去，不感兴趣的，即使你摆放一个固定的按钮他好奇点了一下，也不至于会在进入落地页看详情。还不如让真正的消息中心发挥作用。</p>
+</li>
+</ol>
+<h2 id="值得表扬的地方"><a href="#值得表扬的地方" class="headerlink" title="值得表扬的地方"></a>值得表扬的地方</h2><ol>
+<li>新首页终于把出发地和目的地上下排列了，作为打开这个app想叫车的人而言，第一眼我想看我在哪里，第二眼我会点击按钮输入我要去哪里。把他俩放一起更聚焦，而不至于像原来那样我还得着重看一下文字原来<code>这里是输入我想去哪儿的</code>?</li>
+<li>整个色调保持一贯的小清新，很爽。</li>
+</ol>
+<p>另外下午看到有微博说视障用户的兼容性问题，确实也应该值得改进。</p>
+<blockquote>
+<p>郑重声明：此文绝非吐槽，仅仅谈谈自己的小想法。设计师PM和程序员都很不容易，应该给予高度尊重！</p>
+</blockquote>
+<h3 id="过去3-x和现在的4-x首页对比"><a href="#过去3-x和现在的4-x首页对比" class="headerlink" title="过去3.x和现在的4.x首页对比"></a>过去3.x和现在的4.x首页对比</h3><table>
+<thead>
+<tr>
+<th>3.x</th>
+<th>4.x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/IMG_7244.JPG" alt=""></td>
+<td><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/IMG_7246.JPG" alt=""></td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/16/重回前端之Vuejs构建单页应用/" rel="next" title="重回前端之Vuejs构建单页应用">
+                <i class="fa fa-chevron-left"></i> 重回前端之Vuejs构建单页应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/16/Windows命令行/" rel="prev" title="Windows命令行">
+                Windows命令行 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">186</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#三周年了"><span class="nav-number">1.</span> <span class="nav-text">三周年了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个人认为不合理点"><span class="nav-number">2.</span> <span class="nav-text">个人认为不合理点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YY下个人设计的极简版滴滴打车"><span class="nav-number">3.</span> <span class="nav-text">YY下个人设计的极简版滴滴打车</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#顺带说一下功能"><span class="nav-number">4.</span> <span class="nav-text">顺带说一下功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#值得表扬的地方"><span class="nav-number">5.</span> <span class="nav-text">值得表扬的地方</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过去3-x和现在的4-x首页对比"><span class="nav-number">5.1.</span> <span class="nav-text">过去3.x和现在的4.x首页对比</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="对RD而言API文档有多重要不用多说，在日常的工作开展中文档从来都是个比较难的问题，诸如  文档残缺不全。 文档书写不清楚、不清晰、格式迥异。 文档脱离代码太远导致更新不及时。  出现这种情况的根本原因我的理解是：研发人员没意识或打心眼里“不愿意”去写和维护，作为RD在技术层面我只想关专注于代码其实完全没毛病。 API文档过去我们写API文档常用的两种方式  在Wiki（富文本/markdown）">
+<meta name="keywords" content="Nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nodejs之Swagger快速构建API文档">
+<meta property="og:url" content="http://yoursite.com/2017/08/12/Nodejs之Swagger快速构建API文档/index.html">
+<meta property="og:site_name" content="liujb&#39;s blog">
+<meta property="og:description" content="对RD而言API文档有多重要不用多说，在日常的工作开展中文档从来都是个比较难的问题，诸如  文档残缺不全。 文档书写不清楚、不清晰、格式迥异。 文档脱离代码太远导致更新不及时。  出现这种情况的根本原因我的理解是：研发人员没意识或打心眼里“不愿意”去写和维护，作为RD在技术层面我只想关专注于代码其实完全没毛病。 API文档过去我们写API文档常用的两种方式  在Wiki（富文本/markdown）">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15060659406296.jpg">
+<meta property="og:updated_time" content="2020-03-04T08:56:48.926Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nodejs之Swagger快速构建API文档">
+<meta name="twitter:description" content="对RD而言API文档有多重要不用多说，在日常的工作开展中文档从来都是个比较难的问题，诸如  文档残缺不全。 文档书写不清楚、不清晰、格式迥异。 文档脱离代码太远导致更新不及时。  出现这种情况的根本原因我的理解是：研发人员没意识或打心眼里“不愿意”去写和维护，作为RD在技术层面我只想关专注于代码其实完全没毛病。 API文档过去我们写API文档常用的两种方式  在Wiki（富文本/markdown）">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15060659406296.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/12/Nodejs之Swagger快速构建API文档/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Nodejs之Swagger快速构建API文档 | liujb's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liujb's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Nodejs之Swagger快速构建API文档/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Nodejs之Swagger快速构建API文档
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-08-12 00:00:00" itemprop="dateCreated datePublished" datetime="2017-08-12T00:00:00+08:00">2017-08-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-03-04 16:56:48" itemprop="dateModified" datetime="2020-03-04T16:56:48+08:00">2020-03-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对RD而言API文档有多重要不用多说，在日常的工作开展中<strong>文档</strong>从来都是个比较难的问题，诸如</p>
+<ul>
+<li>文档残缺不全。</li>
+<li>文档书写不清楚、不清晰、格式迥异。</li>
+<li>文档脱离代码太远导致更新不及时。</li>
+</ul>
+<p>出现这种情况的根本原因我的理解是：<strong>研发人员没意识或打心眼里“不愿意”去写和维护，作为RD在技术层面我只想关专注于代码其实完全没毛病。</strong></p>
+<h1 id="API文档"><a href="#API文档" class="headerlink" title="API文档"></a>API文档</h1><p>过去我们写API文档常用的两种方式</p>
+<ul>
+<li>在Wiki（富文本/markdown）等系统上写。</li>
+<li>在工程内开docs文件夹，以Markdown标记语言写。</li>
+</ul>
+<p>这两种方式的弊端有</p>
+<ul>
+<li>文档离代码太远跟项目脱节</li>
+<li>编辑不友好效率低（Markdown相对富文本好）</li>
+<li>文档都只做纯展示，无法发出请求，一般配合 Postman，或者用 curl 发起请求。</li>
+</ul>
+<h1 id="Swagger"><a href="#Swagger" class="headerlink" title="Swagger"></a>Swagger</h1><p>Swagger是什么，我们看下官方的话</p>
+<blockquote>
+<p>Swagger is the world’s largest framework of API developer tools for the OpenAPI Specification(OAS), enabling development across the entire API lifecycle, from design and documentation, to test and deployment.</p>
+</blockquote>
+<p>直白点就是一款标准化的API文档工具，很牛逼什么的。</p>
+<p>研发人员只需要以<strong>类似代码的方式</strong> 生产出 <code>Swagger</code>所需要的文档元数据，就能得到标准化的文档接口。</p>
+<p><strong>Swagger优势主要有</strong></p>
+<ul>
+<li>标准清晰的API文档</li>
+<li>自带发送请求功能<ul>
+<li>参数校验</li>
+<li>返回数据</li>
+<li>无需手动编辑参数可提供example</li>
+</ul>
+</li>
+</ul>
+<p><strong>Swagger不完美的地方</strong></p>
+<ul>
+<li>接入成本偏高</li>
+<li>文档元数据编写成本高</li>
+</ul>
+<p>虽然官方提供了优秀的 <a href="https://editor.swagger.io/" target="_blank" rel="noopener">online editor</a>，自带Lint和预览功能，但是研发人员还是要<strong>谨慎的</strong>进行文档元数据的编辑。</p>
+<h1 id="mfe-swagger"><a href="#mfe-swagger" class="headerlink" title="mfe-swagger"></a>mfe-swagger</h1><p><a href="https://github.com/liujb/mfe-swagger" target="_blank" rel="noopener">mfe-swagger</a> 是一款结合 <a href="https://swagger.io/swagger-ui/" target="_blank" rel="noopener">Swagger-UI</a> 和 <a href="https://expressjs.com" target="_blank" rel="noopener">Expressjs</a> 以及 <a href="https://www.npmjs.com/package/swagger-ui-express" target="_blank" rel="noopener">swagger-ui-express</a> 的文档生成工具，满足三种形式来构建文档。</p>
+<ul>
+<li>编写<code>swagger</code>配置文件，主要是<code>yaml</code>，<code>json</code>格式的配置生成API文档</li>
+<li>添加 <a href="https://github.com/Surnet/swagger-jsdoc/blob/master/example/routes.js" target="_blank" rel="noopener">满足swagger需要的</a> <code>JSDoc</code>的代码注释生成API文档</li>
+<li>将 <code>JSDoc</code> 注释生成swagger配置文件并将文件代理出去，用于其他<a href="https://swaggerhub.com" target="_blank" rel="noopener">swaggerhub</a>来呈现API文档</li>
+</ul>
+<p><strong>mfe-swagger</strong>的优势</p>
+<ol>
+<li>更低的接入成本。</li>
+<li>代码和文档更紧密。</li>
+<li>解放研发提高生产力（相比手工编写文档RD更熟悉编写代码注释）</li>
+</ol>
+<p>mfe-swagger 暂时还是无法完美解决 swagger 文档的配置内容，只不过是换成写注释了，当然你也可以继续写文档配置。未来希望能通过Typescript的反射功能，让RD连注释也不需要写就能出API文档。</p>
+<h2 id="一睹为快"><a href="#一睹为快" class="headerlink" title="一睹为快"></a>一睹为快</h2><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/15060659406296.jpg" alt=""></p>
+<p>这样的页面满足文档本身的功能，同时还附带部分Postman的功能，日常的HTTP服务开发和接入非常方便。</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install mfe-swagger</span><br></pre></td></tr></table></figure>
+<h3 id="app-js-引入代码"><a href="#app-js-引入代码" class="headerlink" title="app.js 引入代码"></a>app.js 引入代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">if (env !== &apos;production&apos;) &#123;</span><br><span class="line">  var options = &#123;</span><br><span class="line">    swaggerDefinition: &#123;</span><br><span class="line">      info: &#123;</span><br><span class="line">        title: &apos;活动系统&apos;,</span><br><span class="line">        version: &apos;1.0.0&apos;,</span><br><span class="line">        description: &apos;这是活动系统的API文档，利用代码的注释生成的&apos;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    apis: [path.join(__dirname, &apos;./routers/*.js&apos;)], // Path to the API docs</span><br><span class="line">  &#125;</span><br><span class="line">  // 方式一：利用JSDOC形式的注释生成文档</span><br><span class="line">  app.use(swagger.fromJsDoc(options, null, &apos;活动API文档&apos;, &apos;http://manhattan.didistatic.com/static/manhattan/favicon.ico&apos;))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一般情况下，我们只需要在非生产模式下产出 Swagger相关文档，Web开发时我们只需要在 routers 或者 API文件夹下的 JS 文件进行注册即可。</p>
+<h3 id="代码中添加注释"><a href="#代码中添加注释" class="headerlink" title="代码中添加注释"></a>代码中添加注释</h3><p>具体的某个路由的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Router &#125; from &apos;express&apos;</span><br><span class="line"></span><br><span class="line">const router = Router()</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @swagger</span><br><span class="line"> * definitions:</span><br><span class="line"> *   ApiResponse:</span><br><span class="line"> *     type: &quot;object&quot;</span><br><span class="line"> *     properties:</span><br><span class="line"> *       errorCode:</span><br><span class="line"> *         type: &quot;integer&quot;</span><br><span class="line"> *         format: &quot;int64&quot;</span><br><span class="line"> *       errorMsg:</span><br><span class="line"> *         type: &quot;string&quot;</span><br><span class="line"> *       data:</span><br><span class="line"> *         type: &quot;object&quot;</span><br><span class="line"> *   ApiResponseString:</span><br><span class="line"> *     type: &quot;object&quot;</span><br><span class="line"> *     properties:</span><br><span class="line"> *       errorCode:</span><br><span class="line"> *         type: &quot;integer&quot;</span><br><span class="line"> *         format: &quot;int64&quot;</span><br><span class="line"> *       errorMsg:</span><br><span class="line"> *         type: &quot;string&quot;</span><br><span class="line"> *       data:</span><br><span class="line"> *         type: &quot;string&quot;</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @swagger</span><br><span class="line"> * /api/test:</span><br><span class="line"> *   get:</span><br><span class="line"> *     description: 这个接口是测试的，这个接口是测试的，是测试的。</span><br><span class="line"> *     parameters:</span><br><span class="line"> *       - name: username</span><br><span class="line"> *         description: 用户姓名</span><br><span class="line"> *         in: query</span><br><span class="line"> *         required: true</span><br><span class="line"> *         type: string</span><br><span class="line"> *       - name: age</span><br><span class="line"> *         description: 用户的年龄</span><br><span class="line"> *         in: query</span><br><span class="line"> *         required: true</span><br><span class="line"> *         type: number</span><br><span class="line"> *     responses:</span><br><span class="line"> *       200:</span><br><span class="line"> *         schema:</span><br><span class="line"> *           $ref: &quot;#/definitions/ApiResponse&quot;</span><br><span class="line"> */</span><br><span class="line">router.get(&apos;/test&apos;, (req, res, next) =&gt; &#123;</span><br><span class="line">  const query = req.query</span><br><span class="line">  res.json(&#123;</span><br><span class="line">    errorCode: 0,</span><br><span class="line">    errorMsg: &apos;ok&apos;,</span><br><span class="line">    data: query,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @swagger</span><br><span class="line"> * /api/login:</span><br><span class="line"> *   post:</span><br><span class="line"> *     description: 这个接口是测试POST的，这个接口是测试POST的，是测试POST的。</span><br><span class="line"> *     parameters:</span><br><span class="line"> *       - name: username</span><br><span class="line"> *         description: 用户姓名</span><br><span class="line"> *         in: formData</span><br><span class="line"> *         type: string</span><br><span class="line"> *       - name: age</span><br><span class="line"> *         description: 用户的年龄</span><br><span class="line"> *         in: formData</span><br><span class="line"> *         required: true</span><br><span class="line"> *         type: number</span><br><span class="line"> *     responses:</span><br><span class="line"> *       200:</span><br><span class="line"> *         schema:</span><br><span class="line"> *           $ref: &quot;#/definitions/ApiResponseString&quot;</span><br><span class="line"> */</span><br><span class="line">router.post(&apos;/login&apos;, (req, res, next) =&gt; &#123;</span><br><span class="line">  const token = (+new Date()).toString()</span><br><span class="line">  res.json(&#123;</span><br><span class="line">    errorCode: 0,</span><br><span class="line">    errorMsg: &apos;ok&apos;,</span><br><span class="line">    data: token,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default router</span><br></pre></td></tr></table></figure>
+<p>至此完成API文档的工作完成，此时可以方便的访问文档。详细的使用<a href="https://github.com/liujb/mfe-swagger" target="_blank" rel="noopener">文档参考</a></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ul>
+<li><a href="https://swagger.io/specification/" target="_blank" rel="noopener">specification</a></li>
+<li><a href="https://editor.swagger.io//?_ga=2.236083265.1391609737.1505925000-306079269.1505925000#/" target="_blank" rel="noopener">swagger online editor</a></li>
+<li><a href="https://github.com/Surnet/swagger-jsdoc/blob/master/example/routes.js" target="_blank" rel="noopener">swagger-jsdoc-example</a></li>
+<li><a href="https://www.npmjs.com/package/swagger-ui-express" target="_blank" rel="noopener">swagger-ui-express</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Nodejs/" rel="tag"># Nodejs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/12/Nodejs包管理器Yarn尝鲜/" rel="next" title="Yarn包管理器尝鲜">
+                <i class="fa fa-chevron-left"></i> Yarn包管理器尝鲜
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/28/Linux入门命令介绍/" rel="prev" title="Linux入门命令介绍">
+                Linux入门命令介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="liujiangbei" />
+            
+              <p class="site-author-name" itemprop="name">liujiangbei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">186</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/liujb" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:liujiangbei88@gmail.com" target="_blank" title="Mail"><i class="fa fa-fw fa-envelope"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/liujiangbei" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#API文档"><span class="nav-number">1.</span> <span class="nav-text">API文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swagger"><span class="nav-number">2.</span> <span class="nav-text">Swagger</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mfe-swagger"><span class="nav-number">3.</span> <span class="nav-text">mfe-swagger</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一睹为快"><span class="nav-number">3.1.</span> <span class="nav-text">一睹为快</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用"><span class="nav-number">3.2.</span> <span class="nav-text">如何使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">3.2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#app-js-引入代码"><span class="nav-number">3.2.2.</span> <span class="nav-text">app.js 引入代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码中添加注释"><span class="nav-number">3.2.3.</span> <span class="nav-text">代码中添加注释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liujiangbei</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
