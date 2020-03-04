@@ -655,84 +655,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/Linux更改文件权限/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="liujiangbei">
-      <meta itemprop="description" content="This is description">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liujb's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/06/02/Linux更改文件权限/" class="post-title-link" itemprop="url">Linux更改文件权限</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-02T00:00:00+08:00">2017-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-04 16:56:48" itemprop="dateModified" datetime="2020-03-04T16:56:48+08:00">2020-03-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文主要介绍修改文件和文件夹权限的两种方式</p>
-<h1 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h1><h2 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod [who] [+ | - | =] [mode] 文件名</span><br></pre></td></tr></table></figure>
-<h2 id="命令中各选项的含义为"><a href="#命令中各选项的含义为" class="headerlink" title="命令中各选项的含义为"></a>命令中各选项的含义为</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">u 表示“用户（user）”，即文件或目录的所有者。</span><br><span class="line">g 表示“同组（group）用户”，即与文件属主有相同组ID的所有用户。</span><br><span class="line">o 表示“其他（others）用户”。</span><br><span class="line">a 表示“所有（all）用户”。它是系统默认值。</span><br></pre></td></tr></table></figure>
-<h2 id="操作符号可以是："><a href="#操作符号可以是：" class="headerlink" title="操作符号可以是："></a>操作符号可以是：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ 添加某个权限。</span><br><span class="line">- 取消某个权限。</span><br><span class="line">= 赋予给定权限并取消其他所有权限（如果有的话）。</span><br></pre></td></tr></table></figure>
-<h2 id="设置mode所表示的权限可用下述字母的任意组合："><a href="#设置mode所表示的权限可用下述字母的任意组合：" class="headerlink" title="设置mode所表示的权限可用下述字母的任意组合："></a>设置mode所表示的权限可用下述字母的任意组合：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">r 可读。</span><br><span class="line">w 可写。</span><br><span class="line">x 可执行。</span><br><span class="line">X 只有目标文件对某些用户是可执行的或该目标文件是目录时才追加x 属性。</span><br><span class="line">s 在文件执行时把进程的属主或组ID置为该文件的文件属主。方式“u＋s”设置文件的用户ID位，“g＋s”设置组ID位。</span><br><span class="line">t 保存程序的文本到交换设备上。</span><br><span class="line">u 与文件属主拥有一样的权限。</span><br><span class="line">g 与和文件属主同组的用户拥有一样的权限。</span><br><span class="line">o 与其他用户拥有一样的权限。</span><br></pre></td></tr></table></figure>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+rw xx.js</span><br></pre></td></tr></table></figure>
-<h1 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h1><h2 id="在linux终端先输入ll-可以看到如"><a href="#在linux终端先输入ll-可以看到如" class="headerlink" title="在linux终端先输入ll,可以看到如:"></a>在linux终端先输入ll,可以看到如:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rwx-r--r-- (一共10个参数) 表示文件所属组和用户的对应权限。</span><br></pre></td></tr></table></figure>
-<p>第一个跟参数属于管理员，跟chmod无关,先不管.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2-4参数:属于user</span><br><span class="line">5-7参数:属于group</span><br><span class="line">8-10参数:属于others</span><br></pre></td></tr></table></figure>
-<p>接下来就简单了:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r==&gt;可读 w==&gt;可写 x==&gt;可执行</span><br><span class="line">r=4 w=2 x=1</span><br><span class="line">所以755代表 rwxr-xr-x </span><br><span class="line">777 代表 rwxr-rwx-rwx 所有用户都可读可写可执行。</span><br></pre></td></tr></table></figure>
-<p>所以</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 755 xx.file</span><br></pre></td></tr></table></figure>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/363003_1227493859FdXT.png" alt=""></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/Linux命令之获取设备信息/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -803,6 +725,84 @@
 <p>“有多少核心即为有多少负荷”法则： 在多核处理中，你的系统均值不应该高于处理器核心的总数量</p>
 <p>进程使用的内存可以用top，有3个列VIRT RES SHR, 标示了进程使用的内存情况, VIRT标识这个进程可以使用的内存总大小, 包括这个进程真实使用的内存, 映射过的文件, 和别的进程共享的内存等。</p>
 <p>RES标识这个这个进程真实占用内存的大小. SHR标识可以和别的进程共享的内存和库大小.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/Linux更改文件权限/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="This is description">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/06/02/Linux更改文件权限/" class="post-title-link" itemprop="url">Linux更改文件权限</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-02T00:00:00+08:00">2017-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-04 16:56:48" itemprop="dateModified" datetime="2020-03-04T16:56:48+08:00">2020-03-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本文主要介绍修改文件和文件夹权限的两种方式</p>
+<h1 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h1><h2 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod [who] [+ | - | =] [mode] 文件名</span><br></pre></td></tr></table></figure>
+<h2 id="命令中各选项的含义为"><a href="#命令中各选项的含义为" class="headerlink" title="命令中各选项的含义为"></a>命令中各选项的含义为</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">u 表示“用户（user）”，即文件或目录的所有者。</span><br><span class="line">g 表示“同组（group）用户”，即与文件属主有相同组ID的所有用户。</span><br><span class="line">o 表示“其他（others）用户”。</span><br><span class="line">a 表示“所有（all）用户”。它是系统默认值。</span><br></pre></td></tr></table></figure>
+<h2 id="操作符号可以是："><a href="#操作符号可以是：" class="headerlink" title="操作符号可以是："></a>操作符号可以是：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ 添加某个权限。</span><br><span class="line">- 取消某个权限。</span><br><span class="line">= 赋予给定权限并取消其他所有权限（如果有的话）。</span><br></pre></td></tr></table></figure>
+<h2 id="设置mode所表示的权限可用下述字母的任意组合："><a href="#设置mode所表示的权限可用下述字母的任意组合：" class="headerlink" title="设置mode所表示的权限可用下述字母的任意组合："></a>设置mode所表示的权限可用下述字母的任意组合：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">r 可读。</span><br><span class="line">w 可写。</span><br><span class="line">x 可执行。</span><br><span class="line">X 只有目标文件对某些用户是可执行的或该目标文件是目录时才追加x 属性。</span><br><span class="line">s 在文件执行时把进程的属主或组ID置为该文件的文件属主。方式“u＋s”设置文件的用户ID位，“g＋s”设置组ID位。</span><br><span class="line">t 保存程序的文本到交换设备上。</span><br><span class="line">u 与文件属主拥有一样的权限。</span><br><span class="line">g 与和文件属主同组的用户拥有一样的权限。</span><br><span class="line">o 与其他用户拥有一样的权限。</span><br></pre></td></tr></table></figure>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+rw xx.js</span><br></pre></td></tr></table></figure>
+<h1 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h1><h2 id="在linux终端先输入ll-可以看到如"><a href="#在linux终端先输入ll-可以看到如" class="headerlink" title="在linux终端先输入ll,可以看到如:"></a>在linux终端先输入ll,可以看到如:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rwx-r--r-- (一共10个参数) 表示文件所属组和用户的对应权限。</span><br></pre></td></tr></table></figure>
+<p>第一个跟参数属于管理员，跟chmod无关,先不管.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2-4参数:属于user</span><br><span class="line">5-7参数:属于group</span><br><span class="line">8-10参数:属于others</span><br></pre></td></tr></table></figure>
+<p>接下来就简单了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r==&gt;可读 w==&gt;可写 x==&gt;可执行</span><br><span class="line">r=4 w=2 x=1</span><br><span class="line">所以755代表 rwxr-xr-x </span><br><span class="line">777 代表 rwxr-rwx-rwx 所有用户都可读可写可执行。</span><br></pre></td></tr></table></figure>
+<p>所以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 755 xx.file</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/363003_1227493859FdXT.png" alt=""></p>
 
       
     </div>

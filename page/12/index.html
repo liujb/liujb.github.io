@@ -509,75 +509,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Gulp异步任务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="liujiangbei">
-      <meta itemprop="description" content="This is description">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liujb's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/01/20/Gulp异步任务/" class="post-title-link" itemprop="url">Gulp异步任务</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-09-03 10:13:49" itemprop="dateModified" datetime="2018-09-03T10:13:49+08:00">2018-09-03</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Async-gulp-task"><a href="#Async-gulp-task" class="headerlink" title="Async gulp task"></a>Async gulp task</h3><p>gulp是基于nodejs中，在node中所有操作都是异步进行的，如果下一个任务依赖于上一个任务完成，异步可能导致上一个任务还没有完成，下一个任务就已经执行了，这样就会出错。</p>
-<p>解决这个问题有以下几种方法；</p>
-<h4 id="gulp-task-‘taskname’-‘deps-tasks’-function"><a href="#gulp-task-‘taskname’-‘deps-tasks’-function" class="headerlink" title="gulp.task(‘taskname’,[‘deps tasks’],function(){});"></a>gulp.task(‘taskname’,[‘deps tasks’],function(){});</h4><p>利用gulp自身的依赖任务，可以完成简单依赖关系的任务，若“依赖”任务间还有依赖，完蛋了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(&apos;default&apos;, [&apos;compressor&apos;], function() &#123;</span><br><span class="line">    return gulp.src([&apos;./dist&apos;, &apos;./compressor&apos;])</span><br><span class="line">    .pipe(clean(&#123;</span><br><span class="line">        force: true,</span><br><span class="line">        read: false</span><br><span class="line">    &#125;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h4 id="恶心的回调"><a href="#恶心的回调" class="headerlink" title="恶心的回调"></a>恶心的回调</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var exec = require(&apos;child_process&apos;).exec;</span><br><span class="line">gulp.task(&quot;sss&quot;, function(cb) &#123;</span><br><span class="line">    exec(&apos;gulp htmlbty&apos;, function(err) &#123;</span><br><span class="line">        console.log(&apos;finished bty&apos;);</span><br><span class="line"></span><br><span class="line">        exec(&apos;gulp htmlhint&apos;, function(err) &#123;</span><br><span class="line">            console.log(&apos;finished lint&apos;);</span><br><span class="line"></span><br><span class="line">            exec(&apos;gulp switchPaths&apos;, function(err) &#123;</span><br><span class="line">                console.log(&apos;finished replace&apos;);</span><br><span class="line"></span><br><span class="line">                exec(&apos;gulp compressor&apos;, function(err) &#123;</span><br><span class="line">                    console.log(&quot;finished compressed&quot;);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h4 id="Return-a-stream"><a href="#Return-a-stream" class="headerlink" title="Return a stream"></a>Return a stream</h4><h4 id="Q-promise"><a href="#Q-promise" class="headerlink" title="Q.promise"></a>Q.promise</h4>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Gulp快速入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -638,6 +569,75 @@
 <li><code>gulp concat</code> 执行指定任务</li>
 </ol>
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Gulp异步任务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="This is description">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/01/20/Gulp异步任务/" class="post-title-link" itemprop="url">Gulp异步任务</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-09-03 10:13:49" itemprop="dateModified" datetime="2018-09-03T10:13:49+08:00">2018-09-03</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Async-gulp-task"><a href="#Async-gulp-task" class="headerlink" title="Async gulp task"></a>Async gulp task</h3><p>gulp是基于nodejs中，在node中所有操作都是异步进行的，如果下一个任务依赖于上一个任务完成，异步可能导致上一个任务还没有完成，下一个任务就已经执行了，这样就会出错。</p>
+<p>解决这个问题有以下几种方法；</p>
+<h4 id="gulp-task-‘taskname’-‘deps-tasks’-function"><a href="#gulp-task-‘taskname’-‘deps-tasks’-function" class="headerlink" title="gulp.task(‘taskname’,[‘deps tasks’],function(){});"></a>gulp.task(‘taskname’,[‘deps tasks’],function(){});</h4><p>利用gulp自身的依赖任务，可以完成简单依赖关系的任务，若“依赖”任务间还有依赖，完蛋了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(&apos;default&apos;, [&apos;compressor&apos;], function() &#123;</span><br><span class="line">    return gulp.src([&apos;./dist&apos;, &apos;./compressor&apos;])</span><br><span class="line">    .pipe(clean(&#123;</span><br><span class="line">        force: true,</span><br><span class="line">        read: false</span><br><span class="line">    &#125;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="恶心的回调"><a href="#恶心的回调" class="headerlink" title="恶心的回调"></a>恶心的回调</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var exec = require(&apos;child_process&apos;).exec;</span><br><span class="line">gulp.task(&quot;sss&quot;, function(cb) &#123;</span><br><span class="line">    exec(&apos;gulp htmlbty&apos;, function(err) &#123;</span><br><span class="line">        console.log(&apos;finished bty&apos;);</span><br><span class="line"></span><br><span class="line">        exec(&apos;gulp htmlhint&apos;, function(err) &#123;</span><br><span class="line">            console.log(&apos;finished lint&apos;);</span><br><span class="line"></span><br><span class="line">            exec(&apos;gulp switchPaths&apos;, function(err) &#123;</span><br><span class="line">                console.log(&apos;finished replace&apos;);</span><br><span class="line"></span><br><span class="line">                exec(&apos;gulp compressor&apos;, function(err) &#123;</span><br><span class="line">                    console.log(&quot;finished compressed&quot;);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Return-a-stream"><a href="#Return-a-stream" class="headerlink" title="Return a stream"></a>Return a stream</h4><h4 id="Q-promise"><a href="#Q-promise" class="headerlink" title="Q.promise"></a>Q.promise</h4>
       
     </div>
 

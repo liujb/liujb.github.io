@@ -988,7 +988,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/CSS3之font-face属性介绍/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/CSS3之font-face实战/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1002,7 +1002,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2016/01/20/CSS3之font-face属性介绍/" class="post-title-link" itemprop="url">CSS3之font-face属性介绍</a>
+            <a href="/2016/01/20/CSS3之font-face实战/" class="post-title-link" itemprop="url">CSS3之font-face实战</a>
         </h1>
 
         <div class="post-meta">
@@ -1019,7 +1019,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-04 16:56:48" itemprop="dateModified" datetime="2020-03-04T16:56:48+08:00">2020-03-04</time>
+                <time title="Modified: 2020-03-04 16:56:49" itemprop="dateModified" datetime="2020-03-04T16:56:49+08:00">2020-03-04</time>
               </span>
 
           
@@ -1033,43 +1033,86 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="font-face简介"><a href="#font-face简介" class="headerlink" title="@font-face简介"></a>@font-face简介</h4><ol>
-<li>@font-face是Css3的一个模块，主要作用是让我们可以使用自定义的字体，以往使用的字体必须要客户端存在，font-face让我们可以使用服务器端的字体。</li>
-<li>兼容问题－－don’t worry！IE很早就支持了！！！</li>
+          <h3 id="1-如何将icon转为font？"><a href="#1-如何将icon转为font？" class="headerlink" title="1. 如何将icon转为font？"></a>1. 如何将icon转为font？</h3><p>目前我们用到的icon大多是通过Illustrator做的矢量图，那最关键的就是将设计稿中的矢量图icon完美还原成字体，这并不是很麻烦。我们可以用到一些字体编辑软件，比如FontLab，Fontograhper，Fontforge，inkscape等。这里以Fontgrapher为例.    </p>
+<p>下载地址: <a href="http://www.skycn.com/soft/appid/21484.html" target="_blank" rel="noopener">Illustrator</a>   <a href="http://www.pc6.com/softview/SoftView_57664.html" target="_blank" rel="noopener">Fontgrapher</a>     </p>
+<h5 id="step-1-设计师设计出图标的矢量图（建议都转为-ai的图像），在illustrator中打开，选中一个icon，复制"><a href="#step-1-设计师设计出图标的矢量图（建议都转为-ai的图像），在illustrator中打开，选中一个icon，复制" class="headerlink" title="step-1: 设计师设计出图标的矢量图（建议都转为.ai的图像），在illustrator中打开，选中一个icon，复制"></a>step-1: 设计师设计出图标的矢量图（建议都转为.ai的图像），在illustrator中打开，选中一个icon，复制</h5><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/icon_1.png" alt="icon"></p>
+<h5 id="step-2-打开Fontgrapher，并新建一个空白字体（或者打开一个已有字体）"><a href="#step-2-打开Fontgrapher，并新建一个空白字体（或者打开一个已有字体）" class="headerlink" title="step-2: 打开Fontgrapher，并新建一个空白字体（或者打开一个已有字体）"></a>step-2: 打开Fontgrapher，并新建一个空白字体（或者打开一个已有字体）</h5><p>双击想要变成图标的字符（这里比方a，如果a已有字体，则选中原有字体并删除）<br><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/icon_2.png" alt="icon"></p>
+<h5 id="step-3-将在illustrator中选复制的icon，粘贴到上一步打开的a的字体栏中"><a href="#step-3-将在illustrator中选复制的icon，粘贴到上一步打开的a的字体栏中" class="headerlink" title="step-3: 将在illustrator中选复制的icon，粘贴到上一步打开的a的字体栏中"></a>step-3: 将在illustrator中选复制的icon，粘贴到上一步打开的a的字体栏中</h5><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/icon_3.png" alt="icon"></p>
+<h5 id="step-4-重复以上步骤，将你所需要的所有icon都黏贴到所需的字符编码上，并将文件导出-File—-Generate-font-files…"><a href="#step-4-重复以上步骤，将你所需要的所有icon都黏贴到所需的字符编码上，并将文件导出-File—-Generate-font-files…" class="headerlink" title="step-4: 重复以上步骤，将你所需要的所有icon都黏贴到所需的字符编码上，并将文件导出, File—-Generate font files…"></a>step-4: 重复以上步骤，将你所需要的所有icon都黏贴到所需的字符编码上，并将文件导出, File—-Generate font files…</h5><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/icon_4.png" alt="icon"></p>
+<h5 id="step-5-打开导出的-ttf格式的文件，看到我们将icon转成的font喽"><a href="#step-5-打开导出的-ttf格式的文件，看到我们将icon转成的font喽" class="headerlink" title="step-5: 打开导出的.ttf格式的文件，看到我们将icon转成的font喽~~~"></a>step-5: 打开导出的.ttf格式的文件，看到我们将icon转成的font喽~~~</h5><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/icon_5.png" alt="icon"></p>
+<h4 id="step-6-为了处理兼容，我们还需要eot-svg-woff格式的-我们需要通过下方这个网址转换格式："><a href="#step-6-为了处理兼容，我们还需要eot-svg-woff格式的-我们需要通过下方这个网址转换格式：" class="headerlink" title="step-6: 为了处理兼容，我们还需要eot,svg,woff格式的,我们需要通过下方这个网址转换格式："></a>step-6: 为了处理兼容，我们还需要<strong>eot,svg,woff</strong>格式的,我们需要通过下方这个网址转换格式：</h4><p><a href="http://www.fontsquirrel.com/tools/webfont-generator" target="_blank" rel="noopener">http://www.fontsquirrel.com/tools/webfont-generator</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/icon_6.png" alt="icon"></p>
+<p>一起下载下来的，还包括demo，css，js，我们可以选择自己所需的 ttf， eot，svg，woff，</p>
+<blockquote>
+<p>注：通过这个网址转换的.ttf格式的文件大小，要比我们自己通过Fontgrapher生成的.fft格式的文件大小要小，所以问了减小体积，在实际应用中用转换后的.ttf格式的文件。</p>
+</blockquote>
+<h5 id="下面我们看看这些不同格式的文件（ttf，eot-svg-woff）的兼容性吧"><a href="#下面我们看看这些不同格式的文件（ttf，eot-svg-woff）的兼容性吧" class="headerlink" title="下面我们看看这些不同格式的文件（ttf，eot,svg,woff）的兼容性吧"></a>下面我们看看这些不同格式的文件（ttf，eot,svg,woff）的兼容性吧</h5><p>目前，各个浏览器对字体格式的支持是最大的区别：</p>
+<ol>
+<li>webkit/safari：支持TrueType/OpenType(.ttf)，OpenType PS(.otf)，iOS4.2+支持.ttf，iOS 4.2以下只支持SVG字体；</li>
+<li>Chrome：除webkit支持的以外，从Chrome 6开始，开始支持woff格式；</li>
+<li>Firefox：支持.ttf和.otf，从Firefox 3.6开始支持woff格式；</li>
+<li>Opera：支持.ttf、.otf、.svg。尚不支持woff Opera 11开始支持WOFF(多谢Apostle提醒~~)；</li>
+<li>IE：只支持eot格式，IE9开始支持woff。</li>
 </ol>
-<h4 id="font-face语法"><a href="#font-face语法" class="headerlink" title="@font-face语法"></a>@font-face语法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@font-face&#123;</span><br><span class="line">    font-family: YourDefinedName;</span><br><span class="line">    src: url(&apos;/static/your-path/xx.otf&apos;) format(&quot;opentype&quot;);</span><br><span class="line">    src: url(&apos;&apos;),</span><br><span class="line">        url(),</span><br><span class="line">        url(),</span><br><span class="line">        url(); //为了兼容不同的浏览器</span><br><span class="line">    font-weight: [normal|border];</span><br><span class="line">    font-style: [normal|italic]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="字体文件格式介绍"><a href="#字体文件格式介绍" class="headerlink" title="字体文件格式介绍"></a>字体文件格式介绍</h4><ol>
-<li>otf</li>
-<li>eot</li>
-<li>woff</li>
-<li>ttf</li>
-<li>svg</li>
-</ol>
-<h4 id="使用-font-face的demo"><a href="#使用-font-face的demo" class="headerlink" title="使用@font-face的demo"></a>使用@font-face的demo</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">	&lt;title&gt;@font-face属性demo&lt;/title&gt;</span><br><span class="line">	&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">		@font-face&#123;</span><br><span class="line">			font-family: WebFont;</span><br><span class="line">			src: url(&apos;/static/webapp/font/Fontin_Sans_R_45b.otf&apos;) format(&quot;opentype&quot;);</span><br><span class="line">			font-weight: 700;			</span><br><span class="line">		&#125;</span><br><span class="line">		h1&#123;</span><br><span class="line">			font-family: WebFont;</span><br><span class="line">			font-size: 60px;</span><br><span class="line">			text-align: center;</span><br><span class="line">			border: solid 1px #4488aa;</span><br><span class="line">			margin: 20px;</span><br><span class="line">			padding: 5px;</span><br><span class="line">		&#125;</span><br><span class="line">		address&#123;</span><br><span class="line">			font-family: WebFont;</span><br><span class="line">			font-size: 14px;</span><br><span class="line">			font-style: normal;</span><br><span class="line">			text-align: center;</span><br><span class="line">			margin: 20px;</span><br><span class="line">			padding: 5px;			</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;h1&gt;Cascading style sheets&lt;/h1&gt;</span><br><span class="line">	&lt;address&gt;This page use font-face ssss&lt;/address&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>效果如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20140423-1.png" alt="字体效果"></p>
-<h4 id="Icon-Font的优缺点"><a href="#Icon-Font的优缺点" class="headerlink" title="Icon Font的优缺点"></a>Icon Font的优缺点</h4><h5 id="Icon-Font-的优点"><a href="#Icon-Font-的优点" class="headerlink" title="Icon Font 的优点"></a>Icon Font 的优点</h5><ul>
-<li>轻薄：Market项目中原icon图片背景27K（如果做成半透明发光，阴影效果会达到100K），目前全部用6K的字体代替。</li>
-<li>丰满：并且添加hover，click等状态效果更灵活。</li>
-<li>百搭：在不同的分辨率屏幕上适配缩放不失真！</li>
-<li>安静：由于体积小，可实现通过base64编码能置于样式表内。从而没有了http请求。　　</li>
-</ul>
-<h5 id="Icon-Font-的缺点"><a href="#Icon-Font-的缺点" class="headerlink" title="Icon Font 的缺点"></a>Icon Font 的缺点</h5><ul>
-<li>样式不如图片丰富。但是，我们有很多场景是用纯色icon，特别是在Windows 8这种Metro UI开始越来越多的时候。</li>
-<li>文字渐变在Android平台上无法显示，在充满未知的将来一切或许都会后得到解决。</li>
-<li>重构成本相应提高。熟练之后其实也充满乐趣。</li>
-<li>页面重构越来越背离“切图”这个不准确的描述。用轻量级代码还原UI，优化设计稿是页面重构最核心的任务。</li>
-</ul>
-<h4 id="如何制作Icon-Font"><a href="#如何制作Icon-Font" class="headerlink" title="如何制作Icon Font"></a>如何制作Icon Font</h4><h4 id="Icon-Font与Data-URI"><a href="#Icon-Font与Data-URI" class="headerlink" title="Icon-Font与Data-URI"></a>Icon-Font与Data-URI</h4><h4 id="Icon-Font与Css-Sprites"><a href="#Icon-Font与Css-Sprites" class="headerlink" title="Icon-Font与Css-Sprites"></a>Icon-Font与Css-Sprites</h4><h4 id="Css-Sprite与Data-URI"><a href="#Css-Sprite与Data-URI" class="headerlink" title="Css-Sprite与Data-URI"></a>Css-Sprite与Data-URI</h4><h4 id="SVG字体图标"><a href="#SVG字体图标" class="headerlink" title="SVG字体图标"></a>SVG字体图标</h4><h4 id="有用的连接："><a href="#有用的连接：" class="headerlink" title="有用的连接："></a>有用的连接：</h4><ul>
-<li><a href="http://www.qianduan.net/css3-icon-font-guide.html" target="_blank" rel="noopener">前端观察</a></li>
-<li><a href="http://www.iconfont.cn/" target="_blank" rel="noopener">阿里巴巴iconfont库</a></li>
-<li><a href="http://fontello.com/" target="_blank" rel="noopener">免费生成图标字体</a></li>
-<li><a href="http://www.exljbris.com/fontinsans.html" target="_blank" rel="noopener">免费字体下载</a></li>
-<li><a href="http://yife.im/web-design-icon-fonts-simple-way/" target="_blank" rel="noopener">网页设计图标字体的简单方法</a></li>
-<li><a href="http://cube.qq.com/?p=476" target="_blank" rel="noopener">ICON字体的优缺点</a></li>
-<li><a href="http://www.high-logic.com/font-editor/fontcreator.html" target="_blank" rel="noopener">FontCreator下载地址</a></li>
-<li><a href="http://www.fontsquirrel.com/tools/webfont-generator" target="_blank" rel="noopener">WebFont-Generator</a></li>
-<li><a href="http://fontawesome.io/" target="_blank" rel="noopener">Fontawesome for bootstroop</a></li>
+<blockquote>
+<p>注：woff是最新的web开放字体格式(web open font format)，w3c推荐，主要优势是针对浏览器进行优化，字体文件小。</p>
+</blockquote>
+<p>这个仅仅是其中的一种方式，我们再看看另一种方式吧~~</p>
+<h3 id="2-如何将svg格式的icon转成icon-font"><a href="#2-如何将svg格式的icon转成icon-font" class="headerlink" title="2. 如何将svg格式的icon转成icon_font"></a>2. 如何将svg格式的icon转成icon_font</h3><hr>
+<p>由于以上方法是修改已有的字符，这样有了局限性，下面介绍一个更强大的方法：<br>使用IcoMoon，他提供600+字符，您可以根据自己需求定制（如就选两个）；可以导入其他字体，也进行特别定制（类似fontforge功能）；定制字体提供打包导出功能（省去了字体转换），兼容IE6+，现代浏览器以及各类手机设备，且有demo实例，并对字符进行了HTML转化。</p>
+<h5 id="step-1-将需要svg格式的矢量图"><a href="#step-1-将需要svg格式的矢量图" class="headerlink" title="step-1: 将需要svg格式的矢量图"></a>step-1: 将需要svg格式的矢量图</h5><p>下面提供一个网址：<a href="http://www.iconfont.cn/" target="_blank" rel="noopener">http://www.iconfont.cn/</a>  上面有svg，ai的图标, 打开网址<a href="http://icomoon.io/" target="_blank" rel="noopener">http://icomoon.io/</a> 点击IcoMoon App</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/icon_8.png" alt="icon"></p>
+<h5 id="step-2-可以导入自己的-svg格式的矢量图，也可以选择下方提供的一些，而且可以修改他原有的icon"><a href="#step-2-可以导入自己的-svg格式的矢量图，也可以选择下方提供的一些，而且可以修改他原有的icon" class="headerlink" title="step-2: 可以导入自己的.svg格式的矢量图，也可以选择下方提供的一些，而且可以修改他原有的icon"></a>step-2: 可以导入自己的.svg格式的矢量图，也可以选择下方提供的一些，而且可以修改他原有的icon</h5><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/icon_9.png" alt="icon"></p>
+<h5 id="step-3-鼠标点击选中你要的icon-点击font"><a href="#step-3-鼠标点击选中你要的icon-点击font" class="headerlink" title="step-3: 鼠标点击选中你要的icon,点击font"></a>step-3: 鼠标点击选中你要的icon,点击font</h5><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/icon_10.png" alt="icon"></p>
+<h5 id="step-4-可以修改编码，这里面的编码，在编写css的时候会用到哦"><a href="#step-4-可以修改编码，这里面的编码，在编写css的时候会用到哦" class="headerlink" title="step-4: 可以修改编码，这里面的编码，在编写css的时候会用到哦~~"></a>step-4: 可以修改编码，这里面的编码，在编写css的时候会用到哦~~</h5><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/icon_11.png" alt="icon"></p>
+<h5 id="step-5-下载后同样会有-ttf，eot-svg-woff格式的icon-font-同时还有demo，各位按需所求"><a href="#step-5-下载后同样会有-ttf，eot-svg-woff格式的icon-font-同时还有demo，各位按需所求" class="headerlink" title="step-5: 下载后同样会有.ttf，eot,svg,woff格式的icon_font,同时还有demo，各位按需所求"></a>step-5: 下载后同样会有.ttf，eot,svg,woff格式的icon_font,同时还有demo，各位按需所求</h5><p>测试用7个svg的图片组成的ttf格式的大小仅有不到3k</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/icon_14.png" alt="icon"></p>
+<p>好了，icon_font已经制作完毕，下面看看怎么应用这些字体吧~~</p>
+<h3 id="3-如何使用icon-font"><a href="#3-如何使用icon-font" class="headerlink" title="3. 如何使用icon_font"></a>3. 如何使用icon_font</h3><p>代码如下：</p>
+<pre><code>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=UTF-8&quot;&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+@font-face {
+            font-family: &apos;kaixin&apos;;/* 字体名字 */
+            src: url(&apos;kaixin.eot&apos;); /* 文件名字，IE9*/
+             src: url(&apos;kaixin.eot?#iefix&apos;) format(&apos;embedded-opentype&apos;), /* IE6-IE8 */
+               url(&apos;kaixin.woff&apos;) format(&apos;woff&apos;), /* chrome、firefox */
+               url(&apos;kaixin.ttf&apos;)  format(&apos;truetype&apos;), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+               url(&apos;kaixin.svg#kaixin&apos;) format(&apos;svg&apos;); /*  iOS 4.1- */
+        }
+        .icon{font-family:&quot;kaixin&quot; Tahoma;}
+
+        .icon2:before {font-family: Kaixin; font-size: 60px; color: yellow; content: &quot;C&quot;}
+
+        .icon3:before {font-family: Kaixin; font-size: 60px; opacity:0.5; filter:alpha(opacity:50); color: red; content: &quot;C&quot;;}
+
+        .icon4:before {font-family: &quot;Kaixin&quot;; content: &quot;\e600&quot;;}
+        /*这里面的content: &quot;\e600&quot;;对应的是svg转换icon_font的编码*/
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;span class=&quot;icon&quot;&gt;C&lt;/span&gt;
+/*在HTML里面直接写icon对应的字母就可以啦，例如改的是C这个字符*/
+
+&lt;span class=&quot;icon2&quot;&gt;&lt;/span&gt;
+/*就是用实际元素占位，用伪元素:before+content属性显示icon，然后覆盖到实际元素上面，之后我们修改某个icon只需要更改css样式就可以了。*/
+
+&lt;span class=&quot;icon3&quot;&gt;&lt;/span&gt;
+/*所有对字体操作的CSS属性都可以在这个icon_font上使用啦*/
+
+&lt;span class=&quot;icon4&quot;&gt;&lt;/span&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="4-参考网址"><a href="#4-参考网址" class="headerlink" title="4. 参考网址"></a>4. 参考网址</h3><ul>
+<li><a href="http://stupig.me/tech/2012/11/27/transfer-icon-to-webfont.html" target="_blank" rel="noopener">icon转webfont(矢量图转font详细，css书写讲的不详细)</a></li>
+<li><a href="http://www.qianduan.net/css3-icon-font-guide.html" target="_blank" rel="noopener">CSS3 icon font完全指南</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2012/06/free-icon-font-usage-icomoon/" target="_blank" rel="noopener">讲解了两种方法</a></li>
+<li><a href="http://sjolzy.cn/What-is-the-data-URI-scheme-and-how-to-use-the-data-URI-scheme.html" target="_blank" rel="noopener">Data URI</a></li>
+<li><a href="http://ourjs.com/detail/532bdaea6922aa7e1d000002" target="_blank" rel="noopener">在手机上，Data-url和CSS Sprites哪一个更快?</a></li>
 </ul>
 
       
