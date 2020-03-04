@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="This is description">
@@ -316,105 +316,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/Linux命令之nohup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="liujiangbei">
-      <meta itemprop="description" content="This is description">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liujb's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/06/02/Linux命令之nohup/" class="post-title-link" itemprop="url">Linux命令之nohup</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-02T00:00:00+08:00">2017-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-09-01 22:39:02" itemprop="dateModified" datetime="2018-09-01T22:39:02+08:00">2018-09-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文主要想记录一下<code>nohup</code>命令的用途和使用方法。参考文章 <a href="http://codex.wiki/post/177286-598" target="_blank" rel="noopener">Linux-nohup-详解</a></p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>nohup命令的主要作用就是让 <strong>普通程序</strong> 能够在后台执行。</p>
-<p>像MySQL，Nginx等程序在设计初就做成了守护进程，所以当我们启动Nginx的时候并不需要使用nohup。</p>
-<h1 id="nohup语法"><a href="#nohup语法" class="headerlink" title="nohup语法"></a>nohup语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup Command [ Arg ... ] [　&amp; ]</span><br></pre></td></tr></table></figure>
-<ol>
-<li><code>nohup</code>默认输出附加到当前目录的<code>nohup.out</code>文件中</li>
-<li>如果当前目录的<code>nohup.out</code>不可写，则输出重定向到<code>$HOME/nohup.out</code>文件中。</li>
-</ol>
-<h1 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command</span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &amp;</span><br></pre></td></tr></table></figure>
-<p>是否<code>&amp;</code>的区别是，即使终端关闭，或者电脑死机程序是否依然运行。</p>
-<p>这种写法把标准输出和标准错误结果都输出到<code>nohup.out</code>文件中，这看似方便，但是当输出很大或者很多程序都往这一个文件写的时候会导致<code>nohup.out</code>文件很大，很排除错误造成很大不便。</p>
-<p>所以还有一类用法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &gt; output</span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &gt; myout.file 2 &gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p><strong>着重解释一下</strong></p>
-<ul>
-<li><code>&gt;</code>其实就是<code>1&gt;output</code>的缩写，代表的是<code>标准输出</code></li>
-</ul>
-<ol start="2">
-<li><code>2&gt; &amp;1</code>就是把<code>标准错误</code>，重定向到<code>标准输出</code>，看得出<code>2</code>代表的就是<code>标准错误</code>，<code>&lt;</code>就是重定向的意思。</li>
-<li><code>0&lt;</code>表示的是<code>标准输入</code>。</li>
-</ol>
-<p>所以这里意思是，将标准输出重定向到<code>myout.file</code>，同时将<code>标准错误</code>重定向到<code>标准输出</code>也就是<code>myout.file</code>。</p>
-<p>总的来说就是标准输出和标准错误全部都定向到<code>myout.file</code>文件中。</p>
-<h1 id="与-amp-的区别"><a href="#与-amp-的区别" class="headerlink" title="与&amp;的区别"></a>与&amp;的区别</h1><ul>
-<li><p><code>nohup</code>只是让命令忽略<code>SIGHUP</code>命令而已。</p>
-</li>
-<li><p><code>&amp;</code>则让命令后台运行，至于该命令是否能脱离终端后继续执行，则要看进程是否为守护进程，如果不是则需要使用<code>nohup</code>来帮忙。</p>
-</li>
-<li><p><code>/dev/null</code>是一个无底洞，任何东西都可以重定向到这里，但是无法打开，所以当你不关系输出和错误的时候就可以<code>nohup command &gt; /dev/null 2&gt;&amp;1 &amp;</code>。</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/Linux命令之sed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -506,6 +407,105 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5s /this/that</span><br></pre></td></tr></table></figure>
 <p>这样会把第5行的this替换为that。</p>
 <h1 id="基本的sed指令"><a href="#基本的sed指令" class="headerlink" title="基本的sed指令"></a>基本的sed指令</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/Linux命令之nohup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="This is description">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/06/02/Linux命令之nohup/" class="post-title-link" itemprop="url">Linux命令之nohup</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-06-02 00:00:00" itemprop="dateCreated datePublished" datetime="2017-06-02T00:00:00+08:00">2017-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-09-01 22:39:02" itemprop="dateModified" datetime="2018-09-01T22:39:02+08:00">2018-09-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本文主要想记录一下<code>nohup</code>命令的用途和使用方法。参考文章 <a href="http://codex.wiki/post/177286-598" target="_blank" rel="noopener">Linux-nohup-详解</a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>nohup命令的主要作用就是让 <strong>普通程序</strong> 能够在后台执行。</p>
+<p>像MySQL，Nginx等程序在设计初就做成了守护进程，所以当我们启动Nginx的时候并不需要使用nohup。</p>
+<h1 id="nohup语法"><a href="#nohup语法" class="headerlink" title="nohup语法"></a>nohup语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup Command [ Arg ... ] [　&amp; ]</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>nohup</code>默认输出附加到当前目录的<code>nohup.out</code>文件中</li>
+<li>如果当前目录的<code>nohup.out</code>不可写，则输出重定向到<code>$HOME/nohup.out</code>文件中。</li>
+</ol>
+<h1 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &amp;</span><br></pre></td></tr></table></figure>
+<p>是否<code>&amp;</code>的区别是，即使终端关闭，或者电脑死机程序是否依然运行。</p>
+<p>这种写法把标准输出和标准错误结果都输出到<code>nohup.out</code>文件中，这看似方便，但是当输出很大或者很多程序都往这一个文件写的时候会导致<code>nohup.out</code>文件很大，很排除错误造成很大不便。</p>
+<p>所以还有一类用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &gt; output</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &gt; myout.file 2 &gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p><strong>着重解释一下</strong></p>
+<ul>
+<li><code>&gt;</code>其实就是<code>1&gt;output</code>的缩写，代表的是<code>标准输出</code></li>
+</ul>
+<ol start="2">
+<li><code>2&gt; &amp;1</code>就是把<code>标准错误</code>，重定向到<code>标准输出</code>，看得出<code>2</code>代表的就是<code>标准错误</code>，<code>&lt;</code>就是重定向的意思。</li>
+<li><code>0&lt;</code>表示的是<code>标准输入</code>。</li>
+</ol>
+<p>所以这里意思是，将标准输出重定向到<code>myout.file</code>，同时将<code>标准错误</code>重定向到<code>标准输出</code>也就是<code>myout.file</code>。</p>
+<p>总的来说就是标准输出和标准错误全部都定向到<code>myout.file</code>文件中。</p>
+<h1 id="与-amp-的区别"><a href="#与-amp-的区别" class="headerlink" title="与&amp;的区别"></a>与&amp;的区别</h1><ul>
+<li><p><code>nohup</code>只是让命令忽略<code>SIGHUP</code>命令而已。</p>
+</li>
+<li><p><code>&amp;</code>则让命令后台运行，至于该命令是否能脱离终端后继续执行，则要看进程是否为守护进程，如果不是则需要使用<code>nohup</code>来帮忙。</p>
+</li>
+<li><p><code>/dev/null</code>是一个无底洞，任何东西都可以重定向到这里，但是无法打开，所以当你不关系输出和错误的时候就可以<code>nohup command &gt; /dev/null 2&gt;&amp;1 &amp;</code>。</p>
+</li>
+</ul>
+
       
     </div>
 
@@ -1250,7 +1250,7 @@
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.7.1
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://mist.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
   </div>
 
         
@@ -1271,7 +1271,7 @@
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 <script src="/js/next-boot.js"></script>
 
 

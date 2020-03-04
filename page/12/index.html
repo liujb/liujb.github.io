@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="This is description">
@@ -268,6 +268,82 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Golang开发环境配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="This is description">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/01/20/Golang开发环境配置/" class="post-title-link" itemprop="url">Golang开发环境配置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-09-03 10:13:41" itemprop="dateModified" datetime="2018-09-03T10:13:41+08:00">2018-09-03</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="install-go-env"><a href="#install-go-env" class="headerlink" title="install go env"></a>install go env</h4><ol>
+<li><code>brew install go</code> – 使用<code>homebrew</code>安装golang</li>
+<li>set GOROOT</li>
+<li>set GOPATH</li>
+<li>set PATH</li>
+</ol>
+<h4 id="zshrc-or-bashrc"><a href="#zshrc-or-bashrc" class="headerlink" title=".zshrc or .bashrc"></a>.zshrc or .bashrc</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export GOROOT=&quot;/usr/local/Cellar/go/1.4.2&quot;</span><br><span class="line">export GOPATH=&quot;/Users/liujb/code/golang&quot;</span><br><span class="line">export PATH=&quot;$PATH:$GOROOT/bin:$GOPATH/bin&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="立刻生效"><a href="#立刻生效" class="headerlink" title="立刻生效"></a>立刻生效</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source .zshrc </span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<h4 id="Go-env-is-well"><a href="#Go-env-is-well" class="headerlink" title="Go env is well"></a>Go env is well</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">~ ⌚ 0:06:28</span><br><span class="line">$ ll /usr/local/bin/go</span><br><span class="line">lrwxr-xr-x  1 liujb  admin    25B Jun 16 23:33 /usr/local/bin/go -&gt; ../Cellar/go/1.4.2/bin/go</span><br><span class="line"></span><br><span class="line">~ ⌚ 0:06:39</span><br><span class="line">$ go</span><br><span class="line">Go is a tool for managing Go source code.</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">	go command [arguments]</span><br><span class="line"></span><br><span class="line">The commands are:</span><br><span class="line"></span><br><span class="line">    build       compile packages and dependencies</span><br><span class="line">    clean       remove object files</span><br><span class="line">    env         print Go environment information</span><br><span class="line">    fix         run go tool fix on packages</span><br><span class="line">    fmt         run gofmt on package sources</span><br><span class="line">    generate    generate Go files by processing source</span><br><span class="line">    get         download and install packages and dependencies</span><br><span class="line">    install     compile and install packages and dependencies</span><br><span class="line">    list        list packages</span><br><span class="line">    run         compile and run Go program</span><br><span class="line">    test        test packages</span><br><span class="line">    tool        run specified go tool</span><br><span class="line">    version     print Go version</span><br><span class="line">    vet         run go tool vet on packages</span><br><span class="line"></span><br><span class="line">Use &quot;go help [command]&quot; for more information about a command.</span><br><span class="line"></span><br><span class="line">Additional help topics:</span><br><span class="line"></span><br><span class="line">    c           calling between Go and C</span><br><span class="line">    filetype    file types</span><br><span class="line">    gopath      GOPATH environment variable</span><br><span class="line">    importpath  import path syntax</span><br><span class="line">    packages    description of package lists</span><br><span class="line">    testflag    description of testing flags</span><br><span class="line">    testfunc    description of testing functions</span><br><span class="line"></span><br><span class="line">Use &quot;go help [topic]&quot; for more information about that topic.</span><br></pre></td></tr></table></figure>
+<h4 id="go-env"><a href="#go-env" class="headerlink" title="go env"></a>go env</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">~ ⌚ 0:06:47</span><br><span class="line">$ go env</span><br><span class="line">GOARCH=&quot;amd64&quot;</span><br><span class="line">GOBIN=&quot;&quot;</span><br><span class="line">GOCHAR=&quot;6&quot;</span><br><span class="line">GOEXE=&quot;&quot;</span><br><span class="line">GOHOSTARCH=&quot;amd64&quot;</span><br><span class="line">GOHOSTOS=&quot;darwin&quot;</span><br><span class="line">GOOS=&quot;darwin&quot;</span><br><span class="line">GOPATH=&quot;/Users/liujb/code/golang&quot;</span><br><span class="line">GORACE=&quot;&quot;</span><br><span class="line">GOROOT=&quot;/usr/local/Cellar/go/1.4.2&quot;</span><br><span class="line">GOTOOLDIR=&quot;/usr/local/Cellar/go/1.4.2/pkg/tool/darwin_amd64&quot;</span><br><span class="line">CC=&quot;clang&quot;</span><br><span class="line">GOGCCFLAGS=&quot;-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fno-common&quot;</span><br><span class="line">CXX=&quot;clang++&quot;</span><br><span class="line">CGO_ENABLED=&quot;1&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="export"><a href="#export" class="headerlink" title="export"></a>export</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">~ ⌚ 0:08:34</span><br><span class="line">$ export</span><br><span class="line">Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6buXC2rS5w/Render</span><br><span class="line">GOPATH=/Users/liujb/code/golang</span><br><span class="line">GOROOT=/usr/local/Cellar/go/1.4.2</span><br><span class="line">HOME=/Users/liujb</span><br><span class="line">ITERM_PROFILE=Default</span><br><span class="line">ITERM_SESSION_ID=w0t0p0</span><br><span class="line">LANG=en_US.UTF-8</span><br><span class="line">LC_CTYPE=en_US.UTF-8</span><br><span class="line">LESS=-R</span><br><span class="line">LOGNAME=liujb</span><br><span class="line">LSCOLORS=Gxfxcxdxbxegedabagacad</span><br><span class="line">PAGER=less</span><br><span class="line">PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/Cellar/go/1.4.2/bin:/Users/liujb/code/golang/bin</span><br><span class="line">PWD=/Users/liujb</span><br><span class="line">SECURITYSESSIONID=186a5</span><br><span class="line">SHELL=/usr/local/bin/zsh</span><br><span class="line">SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.NxNxvlHaM6/Listeners</span><br><span class="line">TERM=ansi</span><br><span class="line">TERM_PROGRAM=iTerm.app</span><br><span class="line">TMPDIR=/var/folders/4t/3vly1gmx0hb7vy_xmcybj5p00000gn/T/</span><br><span class="line">USER=liujb</span><br><span class="line">XPC_FLAGS=0x0</span><br><span class="line">XPC_SERVICE_NAME=com.googlecode.iterm2.22184</span><br><span class="line">ZSH=/Users/liujb/.oh-my-zsh</span><br><span class="line">__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0</span><br></pre></td></tr></table></figure>
+<h4 id="echo-PATH"><a href="#echo-PATH" class="headerlink" title="echo $PATH"></a>echo $PATH</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~ ⌚ 0:08:32</span><br><span class="line">$ echo $PATH</span><br><span class="line">/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/Cellar/go/1.4.2/bin:/Users/liujb/code/golang/bin</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Golang包导入介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -333,82 +409,6 @@
 </ul>
 <p><code>_</code> 操作其实只是引入该包。当导入一个包时，它所有的init()函数就会被执行，但有些时候并非真的需要使用这些包，仅仅是希望它的init()函数被执行而已。这个时候就可以使用<code>_</code>操作引用该包了。</p>
 <p>使用<code>_</code>操作引用包是无法通过包名来调用包中的导出函数，而是只是为了简单的调用其init函数()。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Golang开发环境配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="liujiangbei">
-      <meta itemprop="description" content="This is description">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liujb's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/01/20/Golang开发环境配置/" class="post-title-link" itemprop="url">Golang开发环境配置</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-09-03 10:13:41" itemprop="dateModified" datetime="2018-09-03T10:13:41+08:00">2018-09-03</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="install-go-env"><a href="#install-go-env" class="headerlink" title="install go env"></a>install go env</h4><ol>
-<li><code>brew install go</code> – 使用<code>homebrew</code>安装golang</li>
-<li>set GOROOT</li>
-<li>set GOPATH</li>
-<li>set PATH</li>
-</ol>
-<h4 id="zshrc-or-bashrc"><a href="#zshrc-or-bashrc" class="headerlink" title=".zshrc or .bashrc"></a>.zshrc or .bashrc</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export GOROOT=&quot;/usr/local/Cellar/go/1.4.2&quot;</span><br><span class="line">export GOPATH=&quot;/Users/liujb/code/golang&quot;</span><br><span class="line">export PATH=&quot;$PATH:$GOROOT/bin:$GOPATH/bin&quot;</span><br></pre></td></tr></table></figure>
-<h4 id="立刻生效"><a href="#立刻生效" class="headerlink" title="立刻生效"></a>立刻生效</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source .zshrc </span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
-<h4 id="Go-env-is-well"><a href="#Go-env-is-well" class="headerlink" title="Go env is well"></a>Go env is well</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">~ ⌚ 0:06:28</span><br><span class="line">$ ll /usr/local/bin/go</span><br><span class="line">lrwxr-xr-x  1 liujb  admin    25B Jun 16 23:33 /usr/local/bin/go -&gt; ../Cellar/go/1.4.2/bin/go</span><br><span class="line"></span><br><span class="line">~ ⌚ 0:06:39</span><br><span class="line">$ go</span><br><span class="line">Go is a tool for managing Go source code.</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">	go command [arguments]</span><br><span class="line"></span><br><span class="line">The commands are:</span><br><span class="line"></span><br><span class="line">    build       compile packages and dependencies</span><br><span class="line">    clean       remove object files</span><br><span class="line">    env         print Go environment information</span><br><span class="line">    fix         run go tool fix on packages</span><br><span class="line">    fmt         run gofmt on package sources</span><br><span class="line">    generate    generate Go files by processing source</span><br><span class="line">    get         download and install packages and dependencies</span><br><span class="line">    install     compile and install packages and dependencies</span><br><span class="line">    list        list packages</span><br><span class="line">    run         compile and run Go program</span><br><span class="line">    test        test packages</span><br><span class="line">    tool        run specified go tool</span><br><span class="line">    version     print Go version</span><br><span class="line">    vet         run go tool vet on packages</span><br><span class="line"></span><br><span class="line">Use &quot;go help [command]&quot; for more information about a command.</span><br><span class="line"></span><br><span class="line">Additional help topics:</span><br><span class="line"></span><br><span class="line">    c           calling between Go and C</span><br><span class="line">    filetype    file types</span><br><span class="line">    gopath      GOPATH environment variable</span><br><span class="line">    importpath  import path syntax</span><br><span class="line">    packages    description of package lists</span><br><span class="line">    testflag    description of testing flags</span><br><span class="line">    testfunc    description of testing functions</span><br><span class="line"></span><br><span class="line">Use &quot;go help [topic]&quot; for more information about that topic.</span><br></pre></td></tr></table></figure>
-<h4 id="go-env"><a href="#go-env" class="headerlink" title="go env"></a>go env</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">~ ⌚ 0:06:47</span><br><span class="line">$ go env</span><br><span class="line">GOARCH=&quot;amd64&quot;</span><br><span class="line">GOBIN=&quot;&quot;</span><br><span class="line">GOCHAR=&quot;6&quot;</span><br><span class="line">GOEXE=&quot;&quot;</span><br><span class="line">GOHOSTARCH=&quot;amd64&quot;</span><br><span class="line">GOHOSTOS=&quot;darwin&quot;</span><br><span class="line">GOOS=&quot;darwin&quot;</span><br><span class="line">GOPATH=&quot;/Users/liujb/code/golang&quot;</span><br><span class="line">GORACE=&quot;&quot;</span><br><span class="line">GOROOT=&quot;/usr/local/Cellar/go/1.4.2&quot;</span><br><span class="line">GOTOOLDIR=&quot;/usr/local/Cellar/go/1.4.2/pkg/tool/darwin_amd64&quot;</span><br><span class="line">CC=&quot;clang&quot;</span><br><span class="line">GOGCCFLAGS=&quot;-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fno-common&quot;</span><br><span class="line">CXX=&quot;clang++&quot;</span><br><span class="line">CGO_ENABLED=&quot;1&quot;</span><br></pre></td></tr></table></figure>
-<h4 id="export"><a href="#export" class="headerlink" title="export"></a>export</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">~ ⌚ 0:08:34</span><br><span class="line">$ export</span><br><span class="line">Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.6buXC2rS5w/Render</span><br><span class="line">GOPATH=/Users/liujb/code/golang</span><br><span class="line">GOROOT=/usr/local/Cellar/go/1.4.2</span><br><span class="line">HOME=/Users/liujb</span><br><span class="line">ITERM_PROFILE=Default</span><br><span class="line">ITERM_SESSION_ID=w0t0p0</span><br><span class="line">LANG=en_US.UTF-8</span><br><span class="line">LC_CTYPE=en_US.UTF-8</span><br><span class="line">LESS=-R</span><br><span class="line">LOGNAME=liujb</span><br><span class="line">LSCOLORS=Gxfxcxdxbxegedabagacad</span><br><span class="line">PAGER=less</span><br><span class="line">PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/Cellar/go/1.4.2/bin:/Users/liujb/code/golang/bin</span><br><span class="line">PWD=/Users/liujb</span><br><span class="line">SECURITYSESSIONID=186a5</span><br><span class="line">SHELL=/usr/local/bin/zsh</span><br><span class="line">SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.NxNxvlHaM6/Listeners</span><br><span class="line">TERM=ansi</span><br><span class="line">TERM_PROGRAM=iTerm.app</span><br><span class="line">TMPDIR=/var/folders/4t/3vly1gmx0hb7vy_xmcybj5p00000gn/T/</span><br><span class="line">USER=liujb</span><br><span class="line">XPC_FLAGS=0x0</span><br><span class="line">XPC_SERVICE_NAME=com.googlecode.iterm2.22184</span><br><span class="line">ZSH=/Users/liujb/.oh-my-zsh</span><br><span class="line">__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0</span><br></pre></td></tr></table></figure>
-<h4 id="echo-PATH"><a href="#echo-PATH" class="headerlink" title="echo $PATH"></a>echo $PATH</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~ ⌚ 0:08:32</span><br><span class="line">$ echo $PATH</span><br><span class="line">/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/Cellar/go/1.4.2/bin:/Users/liujb/code/golang/bin</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -796,81 +796,6 @@ window.resizeBy(100,50); //在原来的基础上宽度增加100像素，高度�
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Homebrew安装的MySQL启动失败/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="liujiangbei">
-      <meta itemprop="description" content="This is description">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liujb's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/01/20/Homebrew安装的MySQL启动失败/" class="post-title-link" itemprop="url">Homebrew安装的MySQL启动失败</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-08-30 22:07:41" itemprop="dateModified" datetime="2018-08-30T22:07:41+08:00">2018-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="启动数据库的时候报错"><a href="#启动数据库的时候报错" class="headerlink" title="启动数据库的时候报错"></a>启动数据库的时候报错</h4><p>MAC笔记本使用homebrew安装的mysql，有些时候重启会报如下错误，在网上找了不少的解决方案都没有得到正确解决，问题如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mysql.server start</span><br><span class="line">Starting MySQL</span><br><span class="line">.. ERROR! The server quit without updating PID file (/usr/local/var/mysql/localhost.pid).</span><br></pre></td></tr></table></figure>
-<h4 id="解决办法主要有"><a href="#解决办法主要有" class="headerlink" title="解决办法主要有"></a>解决办法主要有</h4><ol>
-<li><p>在mysql配置文件，my.cnf中添加，执行完这句话好就好使了！<br> 配置文件在<code>/usr/local/Cellar/mysql/5.6.23/my.cnf</code></p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">character-set-server=utf8</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>还有两个命令可以参考（之前这两句话都执行过）</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R _mysql:_mysql /usr/local/var/mysql</span><br><span class="line">sudo chmod -R 777 /usr/local/var/mysql/</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><em>Note by liujb 2015-05-01</em></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Homebrew使用备注/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -966,6 +891,81 @@ window.resizeBy(100,50); //在原来的基础上宽度增加100像素，高度�
 <li>而软链接则是系统新建一个链接文件，此文件指向其所要指的文件</li>
 <li>此外，软链接可对文件和文件夹。。而硬链接仅针对文件。</li>
 </ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Homebrew安装的MySQL启动失败/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="This is description">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/01/20/Homebrew安装的MySQL启动失败/" class="post-title-link" itemprop="url">Homebrew安装的MySQL启动失败</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-08-30 22:07:41" itemprop="dateModified" datetime="2018-08-30T22:07:41+08:00">2018-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="启动数据库的时候报错"><a href="#启动数据库的时候报错" class="headerlink" title="启动数据库的时候报错"></a>启动数据库的时候报错</h4><p>MAC笔记本使用homebrew安装的mysql，有些时候重启会报如下错误，在网上找了不少的解决方案都没有得到正确解决，问题如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mysql.server start</span><br><span class="line">Starting MySQL</span><br><span class="line">.. ERROR! The server quit without updating PID file (/usr/local/var/mysql/localhost.pid).</span><br></pre></td></tr></table></figure>
+<h4 id="解决办法主要有"><a href="#解决办法主要有" class="headerlink" title="解决办法主要有"></a>解决办法主要有</h4><ol>
+<li><p>在mysql配置文件，my.cnf中添加，执行完这句话好就好使了！<br> 配置文件在<code>/usr/local/Cellar/mysql/5.6.23/my.cnf</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">character-set-server=utf8</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>还有两个命令可以参考（之前这两句话都执行过）</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R _mysql:_mysql /usr/local/var/mysql</span><br><span class="line">sudo chmod -R 777 /usr/local/var/mysql/</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><em>Note by liujb 2015-05-01</em></p>
 
       
     </div>
@@ -1174,7 +1174,7 @@ window.resizeBy(100,50); //在原来的基础上宽度增加100像素，高度�
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.7.1
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://mist.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
   </div>
 
         
@@ -1195,7 +1195,7 @@ window.resizeBy(100,50); //在原来的基础上宽度增加100像素，高度�
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 <script src="/js/next-boot.js"></script>
 
 
