@@ -160,7 +160,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Javascript经典闭包问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Javascript获取最接近平均数的数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -174,7 +174,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2016/01/20/Javascript经典闭包问题/" class="post-title-link" itemprop="url">Javascript经典闭包问题</a>
+            <a href="/2016/01/20/Javascript获取最接近平均数的数/" class="post-title-link" itemprop="url">Javascript获取最接近平均数的数</a>
         </h1>
 
         <div class="post-meta">
@@ -191,7 +191,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-08-30 22:17:03" itemprop="dateModified" datetime="2018-08-30T22:17:03+08:00">2018-08-30</time>
+                <time title="Modified: 2018-09-03 10:12:58" itemprop="dateModified" datetime="2018-09-03T10:12:58+08:00">2018-09-03</time>
               </span>
 
           
@@ -205,18 +205,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong><a href="http://blog.csdn.net/nx8823520/article/details/6858126" target="_blank" rel="noopener">参考地址</a> 感谢那些给我们引导的先驱者们！</strong></p>
-<h4 id="引入：为何每次点击都弹出5？？"><a href="#引入：为何每次点击都弹出5？？" class="headerlink" title="引入：为何每次点击都弹出5？？"></a>引入：为何每次点击都弹出5？？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;    </span><br><span class="line">&lt;title&gt;闭包演示&lt;/title&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt; </span><br><span class="line">   function init() &#123;     </span><br><span class="line">       var pAry = document.getElementsByTagName(&quot;p&quot;);     </span><br><span class="line">       for( var i=0; i&lt;pAry.length; i++ ) &#123;     </span><br><span class="line">            pAry[i].onclick = function() &#123;     </span><br><span class="line">            alert(i);     </span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&lt;/script&gt;&lt;/head&gt;</span><br><span class="line">&lt;body onload=&quot;init();&quot;&gt;</span><br><span class="line">   &lt;p&gt;产品一&lt;/p&gt;</span><br><span class="line">   &lt;p&gt;产品二&lt;/p&gt;</span><br><span class="line">   &lt;p&gt;产品三&lt;/p&gt;</span><br><span class="line">   &lt;p&gt;产品四&lt;/p&gt;</span><br><span class="line">   &lt;p&gt;产品五&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">//为什么会是5呢？</span><br><span class="line">//当 i == 4 的时候，刚好满足了条件，然后再进行了一次 i++，所以  i==5 了。</span><br><span class="line">//所以当点击的时候，弹出 5。</span><br></pre></td></tr></table></figure>
-<h4 id="方法1：将变量-i-保存给在每个段落对象（p）上"><a href="#方法1：将变量-i-保存给在每个段落对象（p）上" class="headerlink" title="方法1：将变量 i 保存给在每个段落对象（p）上"></a>方法1：将变量 i 保存给在每个段落对象（p）上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function init() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       pAry[i].i = i;</span><br><span class="line">       pAry[i].onclick = function() &#123;</span><br><span class="line">           alert(this.i);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 将 i 绑定到 pAry[i] 这个对象上</span><br></pre></td></tr></table></figure>
-<h4 id="方法2：将变量-i-保存到匿名函数本身"><a href="#方法2：将变量-i-保存到匿名函数本身" class="headerlink" title="方法2：将变量 i 保存到匿名函数本身"></a>方法2：将变量 i 保存到匿名函数本身</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function init2() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       (pAry[i].onclick = function() &#123;</span><br><span class="line">           alert(arguments.callee.i);</span><br><span class="line">       &#125;).i = i;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 将 i 绑定到 (pAry[i].onclick = function() &#123;&#125; )这个对象上</span><br></pre></td></tr></table></figure>
-<h4 id="方法3：加一层闭包将-i-以函数参数的形式传递给内层函数"><a href="#方法3：加一层闭包将-i-以函数参数的形式传递给内层函数" class="headerlink" title="方法3：加一层闭包将 i 以函数参数的形式传递给内层函数"></a>方法3：加一层闭包将 i 以函数参数的形式传递给内层函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function init3() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       (function(arg) &#123;</span><br><span class="line">           pAry[i].onclick = function() &#123;</span><br><span class="line">               alert(arg);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)(i)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="方法4：加一层闭包将-i-以局部变量"><a href="#方法4：加一层闭包将-i-以局部变量" class="headerlink" title="方法4：加一层闭包将 i 以局部变量"></a>方法4：加一层闭包将 i 以局部变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function init() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       (function() &#123;</span><br><span class="line">           var tmp = i; //局部变量</span><br><span class="line">           pAry[i].onclick = function() &#123;</span><br><span class="line">               alert(tmp);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)()</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="方法5：返回一个函数作为响应事件（注意与3的细微区别）"><a href="#方法5：返回一个函数作为响应事件（注意与3的细微区别）" class="headerlink" title="方法5：返回一个函数作为响应事件（注意与3的细微区别）"></a>方法5：返回一个函数作为响应事件（注意与3的细微区别）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function init5() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       pAry[i].onclick = function(arg) &#123;</span><br><span class="line">           return function() &#123; //返回一个函数     </span><br><span class="line">               alert(arg);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;(i);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="方法6：用Function实现，实际上每产生一个函数实例就会产生一个闭包"><a href="#方法6：用Function实现，实际上每产生一个函数实例就会产生一个闭包" class="headerlink" title="方法6：用Function实现，实际上每产生一个函数实例就会产生一个闭包"></a>方法6：用Function实现，实际上每产生一个函数实例就会产生一个闭包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function init6() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       pAry[i].onclick = new Function(&quot;alert(&quot; + i + &quot;);&quot;); //new一次就产生一个函数实例    </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="方法7：用Function实现，注意与6的区别"><a href="#方法7：用Function实现，注意与6的区别" class="headerlink" title="方法7：用Function实现，注意与6的区别"></a>方法7：用Function实现，注意与6的区别</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function init7() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       pAry[i].onclick = Function(&apos;alert(&apos; + i + &apos;)&apos;)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Liujb整理</p>
-</blockquote>
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 代码片段，js数组中最接近平均值的数字</span><br><span class="line"> */</span><br><span class="line">if (dataArray.length) &#123;</span><br><span class="line">   var data = []; //最后要得到的数组</span><br><span class="line">   var sum = 0,</span><br><span class="line">       average = 0;</span><br><span class="line">    </span><br><span class="line">   //求数组的平均值</span><br><span class="line">   for (var i = 0, length = dataArray.length; i &lt; length; i++) &#123;</span><br><span class="line">       var value = parseInt(dataArray[i]);</span><br><span class="line">       sum += value;</span><br><span class="line">       data.push(value);</span><br><span class="line">   &#125;;</span><br><span class="line">   average = sum * 1.0 / dataArray.length; //平均值</span><br><span class="line">    </span><br><span class="line">   var abs_array = [], //各个项与平均值相减后的绝对值数组</span><br><span class="line">       tmp_array = [], //abs_array的一个副本，用来找位置</span><br><span class="line">       index_array = []; //索引数组容器</span><br><span class="line">   for (var i = 0; i &lt; dataArray.length; i++) &#123;</span><br><span class="line">       abs_array.push(Math.abs(average - parseInt(dataArray[i]))); //填充绝对值数组</span><br><span class="line">   &#125;;</span><br><span class="line">   tmp_array = abs_array.concat(); //副本</span><br><span class="line">   abs_array.sort(); //对相减后的绝对值数组进行排序</span><br><span class="line">    </span><br><span class="line">   /*循环绝对值副本数组，找出最小项的位置*/</span><br><span class="line">   for (var i = 0; i &lt; tmp_array.length; i++) &#123;</span><br><span class="line">       if (abs_array[0] == tmp_array[i]) &#123; //第一个肯定就是绝对值最小的，绝对值最小对应的就是最接近平均值</span><br><span class="line">           index_array.push(i); //将绝对值最小的那个项在原绝对值数组中的索引添加到索引数组中</span><br><span class="line">       &#125; else &#123;&#125;</span><br><span class="line">   &#125;;</span><br><span class="line">   /*循环索引数组，将原data数组中对应位置的项改成想要的object*/</span><br><span class="line">   for (var i = 0; i &lt; index_array.length; i++) &#123;</span><br><span class="line">       var index = index_array[i], //最接近平均值的项的索引</span><br><span class="line">           value = dataArray[index]; //最接近平均值的项</span><br><span class="line">       if (0 != parseInt(value)) &#123;</span><br><span class="line">           var obj = generateObject(value);</span><br><span class="line">           data[index] = obj; //替换数组中的指定位置的项</span><br><span class="line">       &#125; else &#123;&#125;</span><br><span class="line">   &#125;;</span><br><span class="line">   //generateChart(title, regionArray, data);</span><br><span class="line">&#125; else &#123;&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -381,6 +370,103 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Mac下Phpstrom配置xdebug调试工具/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="This is description">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/01/20/Mac下Phpstrom配置xdebug调试工具/" class="post-title-link" itemprop="url">Mac下Phpstrom配置xdebug调试工具</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-04 16:56:48" itemprop="dateModified" datetime="2020-03-04T16:56:48+08:00">2020-03-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>楼主是个半吊子全栈程序员，游走于(js包括node，html，css，php，golang，c#)等主流开发语言编写，原来对断点debug不感冒，个人认为还是比较耗费时间的，直到遇到世界上最好的语言php的数组时，经常搞混淆（根本原因还是不熟悉哈），这种情况下能断点debug并且watch变量的变化，其实也蛮有意思的。</p>
+<p>网上提到的各种方案非常多，但是质量的话良莠不齐，还是会遇到不少的问题。所以还是做个记录一方面方便自己另一方面希望能帮助到有需要的人。</p>
+<h5 id="本文假设你"><a href="#本文假设你" class="headerlink" title="本文假设你"></a>本文假设你</h5><ol>
+<li>使用的是Mac。</li>
+<li>web环境(php，httpserver)等好使。</li>
+</ol>
+<h3 id="安装xdebug"><a href="#安装xdebug" class="headerlink" title="安装xdebug"></a>安装xdebug</h3><p>php和xdebug版本巨多，安装xdebug最好的方式就是<br><a href="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ</a></p>
+<h5 id="1-利用你自己正在使用的php版本，打印出php信息，很多人mac机器上有很多php版本。"><a href="#1-利用你自己正在使用的php版本，打印出php信息，很多人mac机器上有很多php版本。" class="headerlink" title="1. 利用你自己正在使用的php版本，打印出php信息，很多人mac机器上有很多php版本。"></a>1. 利用你自己正在使用的php版本，打印出php信息，很多人mac机器上有很多php版本。</h5><ul>
+<li>创建 index.php 里面的代码为 <code>&lt;?php echo phpinfo();</code></li>
+<li>然后执行 <code>php index.php &gt; output.txt</code></li>
+<li>粘贴<code>output.txt</code>文件内容到</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-1@2x.png" alt=""></p>
+<h5 id="2-将打印出来的文本粘贴到-http-xdebug-org-wizard-php，该网址会帮你主动分析你的php版本以及所需要的xdebug。如图所示"><a href="#2-将打印出来的文本粘贴到-http-xdebug-org-wizard-php，该网址会帮你主动分析你的php版本以及所需要的xdebug。如图所示" class="headerlink" title="2. 将打印出来的文本粘贴到 http://xdebug.org/wizard.php，该网址会帮你主动分析你的php版本以及所需要的xdebug。如图所示"></a>2. 将打印出来的文本粘贴到 <a href="http://xdebug.org/wizard.php" target="_blank" rel="noopener">http://xdebug.org/wizard.php</a>，该网址会帮你主动分析你的php版本以及所需要的xdebug。如图所示</h5><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-2@2x.png" alt=""></p>
+<p>然后一步一步即可.</p>
+<h3 id="配置xdebug"><a href="#配置xdebug" class="headerlink" title="配置xdebug"></a>配置xdebug</h3><p>继上面安装xdebug之后，将生成的xdebug.so拷贝到目标位置，然后打开<code>php.ini</code>，在最后添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">zend_extension = /usr/local/Cellar/php56/5.6.11_2/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so</span><br><span class="line">xdebug.remote_autostart=on</span><br><span class="line">xdebug.remote_enable=on</span><br><span class="line">xdebug.remote_mode=&quot;req&quot;</span><br><span class="line">xdebug.remote_log=&quot;/Users/liujb/logs/xdebug.log&quot;</span><br><span class="line">xdebug.remote_host=&quot;127.0.0.1&quot; </span><br><span class="line">xdebug.remote_port=10000</span><br><span class="line">xdebug.remote_handler=&quot;dbgp&quot;</span><br><span class="line">xdebug.idekey=&quot;PhpStorm&quot;</span><br></pre></td></tr></table></figure>
+<p>再次打开<code>phpinfo()</code>可以看到</p>
+<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-2.png" alt=""></p>
+<p>这就说明xdebug配置好了</p>
+<h3 id="配置phpstorm"><a href="#配置phpstorm" class="headerlink" title="配置phpstorm"></a>配置phpstorm</h3><h4 id="配置xdebug节点"><a href="#配置xdebug节点" class="headerlink" title="配置xdebug节点"></a>配置xdebug节点</h4><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-3.png" alt=""><br><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-4.png" alt=""></p>
+<h4 id="配置servers"><a href="#配置servers" class="headerlink" title="配置servers"></a>配置servers</h4><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-5.png" alt=""></p>
+<h4 id="配置debug-configurations"><a href="#配置debug-configurations" class="headerlink" title="配置debug configurations"></a>配置debug configurations</h4><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-6.png" alt=""></p>
+<p>当时我选择了 php web application，就没有接收到</p>
+<h3 id="在浏览器配置"><a href="#在浏览器配置" class="headerlink" title="在浏览器配置"></a>在浏览器配置</h3><ol>
+<li><a href="https://chrome.google.com/webstore/detail/jetbrains-ide-support/hmhgeddbohgjknpmjagkdomcpobmllji" target="_blank" rel="noopener">chrome插件</a><br><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-8.png" alt=""></li>
+<li><a href="">firefox插件</a><br><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-4@2x.png" alt=""></li>
+</ol>
+<h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-7.png" alt=""></p>
+<h2 id="简单总结"><a href="#简单总结" class="headerlink" title="简单总结"></a>简单总结</h2><ol>
+<li>在php.ini中配置的时候要注意点，楼主当时<code>xdebug.remote_host=&quot;127.0.0.1&quot;</code> 写得是 <code>xdebug.remote_host=&quot;localhost/127.0.0.1&quot;</code></li>
+<li>debug configurations配置的时候选择的是<code>php web application</code>，应该选择 <code>php remote debug</code>.</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Mac卸载Nodejs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -520,103 +606,6 @@
 <p>本地连接</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ssh  ssh liujb@localhost</span><br><span class="line">Last login: Thu Dec 31 22:13:42 2015 from ::1</span><br></pre></td></tr></table></figure>
 <p>至于其它操作可以<a href="http://blog.csdn.net/govago/article/details/8536165" target="_blank" rel="noopener">参考本文</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Mac下Phpstrom配置xdebug调试工具/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="liujiangbei">
-      <meta itemprop="description" content="This is description">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liujb's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/01/20/Mac下Phpstrom配置xdebug调试工具/" class="post-title-link" itemprop="url">Mac下Phpstrom配置xdebug调试工具</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-04 16:56:48" itemprop="dateModified" datetime="2020-03-04T16:56:48+08:00">2020-03-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>楼主是个半吊子全栈程序员，游走于(js包括node，html，css，php，golang，c#)等主流开发语言编写，原来对断点debug不感冒，个人认为还是比较耗费时间的，直到遇到世界上最好的语言php的数组时，经常搞混淆（根本原因还是不熟悉哈），这种情况下能断点debug并且watch变量的变化，其实也蛮有意思的。</p>
-<p>网上提到的各种方案非常多，但是质量的话良莠不齐，还是会遇到不少的问题。所以还是做个记录一方面方便自己另一方面希望能帮助到有需要的人。</p>
-<h5 id="本文假设你"><a href="#本文假设你" class="headerlink" title="本文假设你"></a>本文假设你</h5><ol>
-<li>使用的是Mac。</li>
-<li>web环境(php，httpserver)等好使。</li>
-</ol>
-<h3 id="安装xdebug"><a href="#安装xdebug" class="headerlink" title="安装xdebug"></a>安装xdebug</h3><p>php和xdebug版本巨多，安装xdebug最好的方式就是<br><a href="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ</a></p>
-<h5 id="1-利用你自己正在使用的php版本，打印出php信息，很多人mac机器上有很多php版本。"><a href="#1-利用你自己正在使用的php版本，打印出php信息，很多人mac机器上有很多php版本。" class="headerlink" title="1. 利用你自己正在使用的php版本，打印出php信息，很多人mac机器上有很多php版本。"></a>1. 利用你自己正在使用的php版本，打印出php信息，很多人mac机器上有很多php版本。</h5><ul>
-<li>创建 index.php 里面的代码为 <code>&lt;?php echo phpinfo();</code></li>
-<li>然后执行 <code>php index.php &gt; output.txt</code></li>
-<li>粘贴<code>output.txt</code>文件内容到</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-1@2x.png" alt=""></p>
-<h5 id="2-将打印出来的文本粘贴到-http-xdebug-org-wizard-php，该网址会帮你主动分析你的php版本以及所需要的xdebug。如图所示"><a href="#2-将打印出来的文本粘贴到-http-xdebug-org-wizard-php，该网址会帮你主动分析你的php版本以及所需要的xdebug。如图所示" class="headerlink" title="2. 将打印出来的文本粘贴到 http://xdebug.org/wizard.php，该网址会帮你主动分析你的php版本以及所需要的xdebug。如图所示"></a>2. 将打印出来的文本粘贴到 <a href="http://xdebug.org/wizard.php" target="_blank" rel="noopener">http://xdebug.org/wizard.php</a>，该网址会帮你主动分析你的php版本以及所需要的xdebug。如图所示</h5><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-2@2x.png" alt=""></p>
-<p>然后一步一步即可.</p>
-<h3 id="配置xdebug"><a href="#配置xdebug" class="headerlink" title="配置xdebug"></a>配置xdebug</h3><p>继上面安装xdebug之后，将生成的xdebug.so拷贝到目标位置，然后打开<code>php.ini</code>，在最后添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">zend_extension = /usr/local/Cellar/php56/5.6.11_2/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so</span><br><span class="line">xdebug.remote_autostart=on</span><br><span class="line">xdebug.remote_enable=on</span><br><span class="line">xdebug.remote_mode=&quot;req&quot;</span><br><span class="line">xdebug.remote_log=&quot;/Users/liujb/logs/xdebug.log&quot;</span><br><span class="line">xdebug.remote_host=&quot;127.0.0.1&quot; </span><br><span class="line">xdebug.remote_port=10000</span><br><span class="line">xdebug.remote_handler=&quot;dbgp&quot;</span><br><span class="line">xdebug.idekey=&quot;PhpStorm&quot;</span><br></pre></td></tr></table></figure>
-<p>再次打开<code>phpinfo()</code>可以看到</p>
-<p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-2.png" alt=""></p>
-<p>这就说明xdebug配置好了</p>
-<h3 id="配置phpstorm"><a href="#配置phpstorm" class="headerlink" title="配置phpstorm"></a>配置phpstorm</h3><h4 id="配置xdebug节点"><a href="#配置xdebug节点" class="headerlink" title="配置xdebug节点"></a>配置xdebug节点</h4><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-3.png" alt=""><br><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-4.png" alt=""></p>
-<h4 id="配置servers"><a href="#配置servers" class="headerlink" title="配置servers"></a>配置servers</h4><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-5.png" alt=""></p>
-<h4 id="配置debug-configurations"><a href="#配置debug-configurations" class="headerlink" title="配置debug configurations"></a>配置debug configurations</h4><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-6.png" alt=""></p>
-<p>当时我选择了 php web application，就没有接收到</p>
-<h3 id="在浏览器配置"><a href="#在浏览器配置" class="headerlink" title="在浏览器配置"></a>在浏览器配置</h3><ol>
-<li><a href="https://chrome.google.com/webstore/detail/jetbrains-ide-support/hmhgeddbohgjknpmjagkdomcpobmllji" target="_blank" rel="noopener">chrome插件</a><br><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-8.png" alt=""></li>
-<li><a href="">firefox插件</a><br><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-4@2x.png" alt=""></li>
-</ol>
-<h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><p><img src="https://cdn.jsdelivr.net/gh/liujb/imgbed/img/QQ20150922-7.png" alt=""></p>
-<h2 id="简单总结"><a href="#简单总结" class="headerlink" title="简单总结"></a>简单总结</h2><ol>
-<li>在php.ini中配置的时候要注意点，楼主当时<code>xdebug.remote_host=&quot;127.0.0.1&quot;</code> 写得是 <code>xdebug.remote_host=&quot;localhost/127.0.0.1&quot;</code></li>
-<li>debug configurations配置的时候选择的是<code>php web application</code>，应该选择 <code>php remote debug</code>.</li>
-</ol>
 
       
     </div>

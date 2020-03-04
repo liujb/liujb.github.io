@@ -499,6 +499,77 @@ console.log(&apos; s  &apos;.trim().length);
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Javascript检测数组类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="This is description">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/01/20/Javascript检测数组类型/" class="post-title-link" itemprop="url">Javascript检测数组类型</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-08-30 22:15:40" itemprop="dateModified" datetime="2018-08-30T22:15:40+08:00">2018-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var array = [];</span><br><span class="line">var obj = &#123;&#125;;</span><br><span class="line">alert(typeof array); //object</span><br><span class="line">alert(typeof obj); //object</span><br><span class="line">alert(array instanceof Object); //true</span><br><span class="line">alert(array instanceof Array); //true</span><br><span class="line">alert(obj instanceof Object); //true</span><br><span class="line">alert(obj instanceof Array); //false</span><br><span class="line">alert(array.constructor === Object); //false</span><br><span class="line">alert(array.constructor === Array); //true</span><br><span class="line">alert(obj.constructor === Object); //true</span><br><span class="line">alert(obj.constructor === Array); //false</span><br></pre></td></tr></table></figure>
+<h5 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function is_Array(obj) &#123;</span><br><span class="line">   var ret = false;</span><br><span class="line">   if (typeof obj === &apos;object&apos;) &#123;</span><br><span class="line">       if ((obj instanceof Array) &amp;&amp; (obj.constructor === Array)) &#123;</span><br><span class="line">           ret = true;</span><br><span class="line">       &#125; else &#123;&#125;</span><br><span class="line">   &#125; else &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//ECMAScript5提供了一个新方法isArray()</span><br><span class="line">function is_Array(obj) &#123;</span><br><span class="line">   var ret = false;</span><br><span class="line">   if (typeof Array.isArray) &#123;</span><br><span class="line">       ret = Array.isArray(obj);</span><br><span class="line">   &#125; else &#123;</span><br><span class="line">       ret = Object.prototype.toString.call(obj) === &quot;[object Array]&quot;;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="方法三："><a href="#方法三：" class="headerlink" title="方法三："></a>方法三：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//根据数组的特性可以比较快捷简便的知道该对象是否为数组</span><br><span class="line">function is_Array(obj)&#123;</span><br><span class="line">   if(obj.push)&#123;</span><br><span class="line">       //只有数组有push方法</span><br><span class="line">       return true;</span><br><span class="line">   &#125;else&#123;</span><br><span class="line">       return false;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在浏览器上如果有iframe的话使用<code>instanceof</code>就会有问题</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Javascript数据类型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -576,77 +647,6 @@ console.log(&apos; s  &apos;.trim().length);
 <h4 id="检测对象是否为函数"><a href="#检测对象是否为函数" class="headerlink" title="检测对象是否为函数"></a>检测对象是否为函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var isFunc = function(obj) &#123;</span><br><span class="line">   return check(obj, &apos;Function&apos;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h4 id="检测对象是否为日期"><a href="#检测对象是否为日期" class="headerlink" title="检测对象是否为日期"></a>检测对象是否为日期</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var isDate = function(obj) &#123;</span><br><span class="line">   return check(obj, &apos;Date&apos;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h4 id="检测对象是否为正则表达式"><a href="#检测对象是否为正则表达式" class="headerlink" title="检测对象是否为正则表达式"></a>检测对象是否为正则表达式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var isReg = function(obj) &#123;</span><br><span class="line">   return check(obj, &apos;RegExp&apos;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Javascript检测数组类型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="liujiangbei">
-      <meta itemprop="description" content="This is description">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liujb's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/01/20/Javascript检测数组类型/" class="post-title-link" itemprop="url">Javascript检测数组类型</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-08-30 22:15:40" itemprop="dateModified" datetime="2018-08-30T22:15:40+08:00">2018-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var array = [];</span><br><span class="line">var obj = &#123;&#125;;</span><br><span class="line">alert(typeof array); //object</span><br><span class="line">alert(typeof obj); //object</span><br><span class="line">alert(array instanceof Object); //true</span><br><span class="line">alert(array instanceof Array); //true</span><br><span class="line">alert(obj instanceof Object); //true</span><br><span class="line">alert(obj instanceof Array); //false</span><br><span class="line">alert(array.constructor === Object); //false</span><br><span class="line">alert(array.constructor === Array); //true</span><br><span class="line">alert(obj.constructor === Object); //true</span><br><span class="line">alert(obj.constructor === Array); //false</span><br></pre></td></tr></table></figure>
-<h5 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function is_Array(obj) &#123;</span><br><span class="line">   var ret = false;</span><br><span class="line">   if (typeof obj === &apos;object&apos;) &#123;</span><br><span class="line">       if ((obj instanceof Array) &amp;&amp; (obj.constructor === Array)) &#123;</span><br><span class="line">           ret = true;</span><br><span class="line">       &#125; else &#123;&#125;</span><br><span class="line">   &#125; else &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h5 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//ECMAScript5提供了一个新方法isArray()</span><br><span class="line">function is_Array(obj) &#123;</span><br><span class="line">   var ret = false;</span><br><span class="line">   if (typeof Array.isArray) &#123;</span><br><span class="line">       ret = Array.isArray(obj);</span><br><span class="line">   &#125; else &#123;</span><br><span class="line">       ret = Object.prototype.toString.call(obj) === &quot;[object Array]&quot;;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h5 id="方法三："><a href="#方法三：" class="headerlink" title="方法三："></a>方法三：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//根据数组的特性可以比较快捷简便的知道该对象是否为数组</span><br><span class="line">function is_Array(obj)&#123;</span><br><span class="line">   if(obj.push)&#123;</span><br><span class="line">       //只有数组有push方法</span><br><span class="line">       return true;</span><br><span class="line">   &#125;else&#123;</span><br><span class="line">       return false;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在浏览器上如果有iframe的话使用<code>instanceof</code>就会有问题</p>
-</blockquote>
 
       
     </div>
@@ -851,6 +851,82 @@ console.log(arr.toString());
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Javascript经典闭包问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="liujiangbei">
+      <meta itemprop="description" content="This is description">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liujb's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/01/20/Javascript经典闭包问题/" class="post-title-link" itemprop="url">Javascript经典闭包问题</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-08-30 22:17:03" itemprop="dateModified" datetime="2018-08-30T22:17:03+08:00">2018-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong><a href="http://blog.csdn.net/nx8823520/article/details/6858126" target="_blank" rel="noopener">参考地址</a> 感谢那些给我们引导的先驱者们！</strong></p>
+<h4 id="引入：为何每次点击都弹出5？？"><a href="#引入：为何每次点击都弹出5？？" class="headerlink" title="引入：为何每次点击都弹出5？？"></a>引入：为何每次点击都弹出5？？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;    </span><br><span class="line">&lt;title&gt;闭包演示&lt;/title&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt; </span><br><span class="line">   function init() &#123;     </span><br><span class="line">       var pAry = document.getElementsByTagName(&quot;p&quot;);     </span><br><span class="line">       for( var i=0; i&lt;pAry.length; i++ ) &#123;     </span><br><span class="line">            pAry[i].onclick = function() &#123;     </span><br><span class="line">            alert(i);     </span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&lt;/script&gt;&lt;/head&gt;</span><br><span class="line">&lt;body onload=&quot;init();&quot;&gt;</span><br><span class="line">   &lt;p&gt;产品一&lt;/p&gt;</span><br><span class="line">   &lt;p&gt;产品二&lt;/p&gt;</span><br><span class="line">   &lt;p&gt;产品三&lt;/p&gt;</span><br><span class="line">   &lt;p&gt;产品四&lt;/p&gt;</span><br><span class="line">   &lt;p&gt;产品五&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">//为什么会是5呢？</span><br><span class="line">//当 i == 4 的时候，刚好满足了条件，然后再进行了一次 i++，所以  i==5 了。</span><br><span class="line">//所以当点击的时候，弹出 5。</span><br></pre></td></tr></table></figure>
+<h4 id="方法1：将变量-i-保存给在每个段落对象（p）上"><a href="#方法1：将变量-i-保存给在每个段落对象（p）上" class="headerlink" title="方法1：将变量 i 保存给在每个段落对象（p）上"></a>方法1：将变量 i 保存给在每个段落对象（p）上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function init() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       pAry[i].i = i;</span><br><span class="line">       pAry[i].onclick = function() &#123;</span><br><span class="line">           alert(this.i);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 将 i 绑定到 pAry[i] 这个对象上</span><br></pre></td></tr></table></figure>
+<h4 id="方法2：将变量-i-保存到匿名函数本身"><a href="#方法2：将变量-i-保存到匿名函数本身" class="headerlink" title="方法2：将变量 i 保存到匿名函数本身"></a>方法2：将变量 i 保存到匿名函数本身</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function init2() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       (pAry[i].onclick = function() &#123;</span><br><span class="line">           alert(arguments.callee.i);</span><br><span class="line">       &#125;).i = i;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 将 i 绑定到 (pAry[i].onclick = function() &#123;&#125; )这个对象上</span><br></pre></td></tr></table></figure>
+<h4 id="方法3：加一层闭包将-i-以函数参数的形式传递给内层函数"><a href="#方法3：加一层闭包将-i-以函数参数的形式传递给内层函数" class="headerlink" title="方法3：加一层闭包将 i 以函数参数的形式传递给内层函数"></a>方法3：加一层闭包将 i 以函数参数的形式传递给内层函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function init3() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       (function(arg) &#123;</span><br><span class="line">           pAry[i].onclick = function() &#123;</span><br><span class="line">               alert(arg);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)(i)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="方法4：加一层闭包将-i-以局部变量"><a href="#方法4：加一层闭包将-i-以局部变量" class="headerlink" title="方法4：加一层闭包将 i 以局部变量"></a>方法4：加一层闭包将 i 以局部变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function init() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       (function() &#123;</span><br><span class="line">           var tmp = i; //局部变量</span><br><span class="line">           pAry[i].onclick = function() &#123;</span><br><span class="line">               alert(tmp);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)()</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="方法5：返回一个函数作为响应事件（注意与3的细微区别）"><a href="#方法5：返回一个函数作为响应事件（注意与3的细微区别）" class="headerlink" title="方法5：返回一个函数作为响应事件（注意与3的细微区别）"></a>方法5：返回一个函数作为响应事件（注意与3的细微区别）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function init5() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       pAry[i].onclick = function(arg) &#123;</span><br><span class="line">           return function() &#123; //返回一个函数     </span><br><span class="line">               alert(arg);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;(i);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="方法6：用Function实现，实际上每产生一个函数实例就会产生一个闭包"><a href="#方法6：用Function实现，实际上每产生一个函数实例就会产生一个闭包" class="headerlink" title="方法6：用Function实现，实际上每产生一个函数实例就会产生一个闭包"></a>方法6：用Function实现，实际上每产生一个函数实例就会产生一个闭包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function init6() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       pAry[i].onclick = new Function(&quot;alert(&quot; + i + &quot;);&quot;); //new一次就产生一个函数实例    </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="方法7：用Function实现，注意与6的区别"><a href="#方法7：用Function实现，注意与6的区别" class="headerlink" title="方法7：用Function实现，注意与6的区别"></a>方法7：用Function实现，注意与6的区别</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function init7() &#123;</span><br><span class="line">   var pAry = document.getElementsByTagName(&quot;p&quot;);</span><br><span class="line">   for (var i = 0; i &lt; pAry.length; i++) &#123;</span><br><span class="line">       pAry[i].onclick = Function(&apos;alert(&apos; + i + &apos;)&apos;)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Liujb整理</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Javascript第一堂课/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -969,71 +1045,6 @@ console.log(arr.toString());
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;noscript&gt;</span><br><span class="line">&lt;p&gt;本页面需要浏览器支持（启用）JavaScript&lt;/p&gt;</span><br><span class="line">&lt;/noscript&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/20/Javascript获取最接近平均数的数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="liujiangbei">
-      <meta itemprop="description" content="This is description">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liujb's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/01/20/Javascript获取最接近平均数的数/" class="post-title-link" itemprop="url">Javascript获取最接近平均数的数</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2016-01-20T00:00:00+08:00">2016-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-09-03 10:12:58" itemprop="dateModified" datetime="2018-09-03T10:12:58+08:00">2018-09-03</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 代码片段，js数组中最接近平均值的数字</span><br><span class="line"> */</span><br><span class="line">if (dataArray.length) &#123;</span><br><span class="line">   var data = []; //最后要得到的数组</span><br><span class="line">   var sum = 0,</span><br><span class="line">       average = 0;</span><br><span class="line">    </span><br><span class="line">   //求数组的平均值</span><br><span class="line">   for (var i = 0, length = dataArray.length; i &lt; length; i++) &#123;</span><br><span class="line">       var value = parseInt(dataArray[i]);</span><br><span class="line">       sum += value;</span><br><span class="line">       data.push(value);</span><br><span class="line">   &#125;;</span><br><span class="line">   average = sum * 1.0 / dataArray.length; //平均值</span><br><span class="line">    </span><br><span class="line">   var abs_array = [], //各个项与平均值相减后的绝对值数组</span><br><span class="line">       tmp_array = [], //abs_array的一个副本，用来找位置</span><br><span class="line">       index_array = []; //索引数组容器</span><br><span class="line">   for (var i = 0; i &lt; dataArray.length; i++) &#123;</span><br><span class="line">       abs_array.push(Math.abs(average - parseInt(dataArray[i]))); //填充绝对值数组</span><br><span class="line">   &#125;;</span><br><span class="line">   tmp_array = abs_array.concat(); //副本</span><br><span class="line">   abs_array.sort(); //对相减后的绝对值数组进行排序</span><br><span class="line">    </span><br><span class="line">   /*循环绝对值副本数组，找出最小项的位置*/</span><br><span class="line">   for (var i = 0; i &lt; tmp_array.length; i++) &#123;</span><br><span class="line">       if (abs_array[0] == tmp_array[i]) &#123; //第一个肯定就是绝对值最小的，绝对值最小对应的就是最接近平均值</span><br><span class="line">           index_array.push(i); //将绝对值最小的那个项在原绝对值数组中的索引添加到索引数组中</span><br><span class="line">       &#125; else &#123;&#125;</span><br><span class="line">   &#125;;</span><br><span class="line">   /*循环索引数组，将原data数组中对应位置的项改成想要的object*/</span><br><span class="line">   for (var i = 0; i &lt; index_array.length; i++) &#123;</span><br><span class="line">       var index = index_array[i], //最接近平均值的项的索引</span><br><span class="line">           value = dataArray[index]; //最接近平均值的项</span><br><span class="line">       if (0 != parseInt(value)) &#123;</span><br><span class="line">           var obj = generateObject(value);</span><br><span class="line">           data[index] = obj; //替换数组中的指定位置的项</span><br><span class="line">       &#125; else &#123;&#125;</span><br><span class="line">   &#125;;</span><br><span class="line">   //generateChart(title, regionArray, data);</span><br><span class="line">&#125; else &#123;&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
